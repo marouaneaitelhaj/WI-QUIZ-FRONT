@@ -1,0 +1,12 @@
+<div class="w-44 m-5 h-44 relative border rounded-xl border-green-500 flex justify-center items-center">
+    <span (click)="toggleShowName()" class="absolute text-green-500 text-2xl  top-0 right-5 cursor-pointer">. . .</span>
+    <p  class="text-green-500 text-2xl text-center">{{name}}</p>
+    <ul *ngIf="!showName" class="bg-green-500 rounded bottom-0 w-full absolute shadow-slate-950">
+        <li class="text-black py-1 border-b-2 border-black w-full px-5 text-base text-center">
+            Edit
+        </li>
+        <li class="text-black py-1 border-b-2 border-black w-full px-5 text-base text-center">
+            Delete
+        </li>
+    </ul>
+</div>
