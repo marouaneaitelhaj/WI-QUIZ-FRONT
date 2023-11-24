@@ -1,3 +1,4 @@
+import { QuestionType } from "../enums/question-type";
 import { Level } from "./level";
 import { Media } from "./media";
 import { Subject } from "./subject";
@@ -7,13 +8,13 @@ export class Question {
     question: string;
     numAnswers: number;
     numCorrect: number;
-    questionType: string;
+    questionType: QuestionType;
     points: number;
     time : number;
     level : Level;
     subject : Subject;
     media: Media[];
-    constructor(id: number, question: string, numAnswers: number, numCorrect: number, questionType: string, points: number, time: number , level : Level, subject : Subject, media: Media[]) {
+    constructor(id: number, question: string, numAnswers: number, numCorrect: number, questionType: QuestionType, points: number, time: number , level : Level, subject : Subject, media: Media[]) {
         this.id = id;
         this.question = question;
         this.numAnswers = numAnswers;
