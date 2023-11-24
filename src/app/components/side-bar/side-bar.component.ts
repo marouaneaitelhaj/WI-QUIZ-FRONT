@@ -8,7 +8,6 @@ import { Component } from '@angular/core';
 export class SideBarComponent {
   show: boolean = false;
   closeSideBar() {
-    console.log('closeSideBar');
     this.show = !this.show;
   }
 }

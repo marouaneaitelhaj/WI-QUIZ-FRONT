@@ -1,27 +1,5 @@
 <div class="flex justify-center flex-wrap">
     <app-plus></app-plus>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
-    <app-subject [name]='name'></app-subject>
+    <p class="text-red-500">{{subjects[0].id}}</p>
+    <app-subject *ngFor="let subject of subjects" [name]='name'></app-subject>
 </div>
