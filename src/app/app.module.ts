@@ -7,6 +7,8 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { SubjectComponent } from './components/subject/subject.component';
 import { SubjectsComponent } from './components/subjects/subjects.component';
 import { PlusComponent } from './components/plus/plus.component';
+import { PopUpComponent } from './components/pop-up/pop-up.component';
+import { InptComponent } from './components/inpt/inpt.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { PlusComponent } from './components/plus/plus.component';
     SideBarComponent,
     SubjectComponent,
     SubjectsComponent,
-    PlusComponent
+    PlusComponent,
+    PopUpComponent,
+    InptComponent
   ],
   imports: [
     BrowserModule,
