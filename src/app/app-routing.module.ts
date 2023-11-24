@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SubjectsComponent } from './components/subjects/subjects.component';
+import { SubjectsComponent } from './pages/subjects/subjects.component';
 
 const routes: Routes = [
   { path: '', component: SubjectsComponent },
