@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from '../classes/subject';
+import { Subject } from '../models/subject';
 import axios from 'axios';
 
 @Injectable({

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Subject } from 'src/app/classes/subject';
+import { Subject } from 'src/app/models/subject';
 import { SubjectService } from 'src/app/services/subject.service';
 
 @Component({
