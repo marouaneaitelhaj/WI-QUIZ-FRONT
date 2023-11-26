@@ -5,18 +5,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SubjectPageComponent } from './Subject/subject-page/subject-page.component';
 import { SubjectCardComponent } from './Subject/subject-card/subject-card.component';
-import { SubjectComponent } from './Subject/subject/subject.component';
+import { QuestionPageComponent } from './Question/question-page/question-page.component';
+import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from './Shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     SubjectPageComponent,
     SubjectCardComponent,
-    SubjectComponent
+    QuestionPageComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
