@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { SideBarComponent } from './components/side-bar/side-bar.component';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +6,5 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  sideBarOpened : boolean = true;
-  closeSideBar(){
-    this.sideBarOpened = !this.sideBarOpened;
-  }
+  title = 'WI-QUIZ-FRONT';
 }
