@@ -6,7 +6,6 @@ import { SubjectService } from 'src/app/services/subject.service';
 @Component({
   selector: 'app-subjects',
   templateUrl: './subjects.component.html',
-  styleUrls: ['./subjects.component.css'],
   providers: [SubjectService]
 })
 export class SubjectsComponent {

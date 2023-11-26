@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
-import { PopUpComponent } from './components/pop-up/pop-up.component';
 
 @Component({
   selector: 'app-root',

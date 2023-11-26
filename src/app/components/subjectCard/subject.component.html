@@ -6,7 +6,7 @@
             class="text-black py-1 border-b-2 hover:bg-green-600 cursor-pointer border-black w-full px-5 text-base text-center">
             Show
         </li>
-        <li (click)="popUp.togglePopUp()"
+        <li (click)="openEditForm(id)"
             class="text-black py-1 border-b-2 hover:bg-green-600 cursor-pointer border-black w-full px-5 text-base text-center">
             Edit
         </li>
@@ -20,3 +20,4 @@
         </li>
     </ul>
 </div>
+<app-pop-up *ngIf="showEditForm" [inputs]="subjectSchema"></app-pop-up>

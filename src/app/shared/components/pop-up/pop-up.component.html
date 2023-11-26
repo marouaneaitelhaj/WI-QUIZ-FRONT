@@ -16,24 +16,14 @@
                     <div class="overflow-hidden sm:rounded-md">
                         <div class="px-4 py-5">
                             <div class="flex w-full flex-col">
-                                <div class="p-4 col-span-6 ">
-                                    <label for="code" class="block text-sm font-medium text-white">Code</label>
+                                <p *ngFor="let inp of inputs">{{inp}}</p>
+                                <!-- <div *ngFor="let inp of inputs" class="p-4 col-span-6 ">
+                                    <label for="code" class="block text-sm font-medium text-white">{{inp.}}</label>
                                     <input type="text" name="code" id="code"
                                         class="px-4 py-2 bg-black border  w-full  border-green-500 rounded-md  text-white"
                                         placeholder="Client Code" required>
-                                </div>
-                                <div class="p-4 col-span-6 ">
-                                    <label for="code" class="block text-sm font-medium text-white">Code</label>
-                                    <input type="text" name="code" id="code"
-                                        class="px-4 py-2 bg-black border  w-full  border-green-500 rounded-md  text-white"
-                                        placeholder="Client Code" required>
-                                </div>
-                                <div class="p-4 col-span-6 ">
-                                    <label for="code" class="block text-sm font-medium text-white">Code</label>
-                                    <input type="text" name="code" id="code"
-                                        class="px-4 py-2 bg-black border  w-full  border-green-500 rounded-md  text-white"
-                                        placeholder="Client Code" required>
-                                </div>
+                                </div> -->
+                                
                             </div>
                         </div>
                         <div class="hidden sm:block" aria-hidden="true">

@@ -1,4 +1,4 @@
 <div class="flex justify-center flex-wrap">
     <app-plus></app-plus>
-    <app-subject *ngFor="let subject of subjects.content" [name]='subject.name'></app-subject>
+    <app-subject *ngFor="let subject of subjects.content" [id]="subject.id" [name]='subject.name'></app-subject>
 </div>
