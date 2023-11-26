@@ -9,6 +9,7 @@ import { SubjectsComponent } from './pages/subjects/subjects.component';
 import { PlusComponent } from './components/plus/plus.component';
 import { PopUpComponent } from './components/pop-up/pop-up.component';
 import { InptComponent } from './components/inpt/inpt.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { InptComponent } from './components/inpt/inpt.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

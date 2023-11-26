@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Subject } from 'src/app/models/subject';
+import { SubjectResponse } from 'src/app/responses/subject-response';
 import { SubjectService } from 'src/app/services/subject.service';
 
 @Component({
@@ -9,9 +10,19 @@ import { SubjectService } from 'src/app/services/subject.service';
   providers: [SubjectService]
 })
 export class SubjectsComponent {
-  subjects: Subject[] = [];
+  subjects: SubjectResponse = new SubjectResponse([]);
   constructor(private subjectService: SubjectService) {
-    this.subjects = this.subjectService.getSubjects();
+    this.getSubjects();
+  }
+  public getSubjects(): void {
+    this.subjectService.getSubjects().subscribe(
+      (response: SubjectResponse) => {
+        this.subjects = response;
+      },
+      (error: Error) => {
+        console.log(error);
+      }
+    );
   }
   name: string = 'Angular';
   show: boolean = false;
