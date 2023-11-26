@@ -1,4 +1,4 @@
-<div class="w-44 m-5 h-44 bg-green-500">
+<div (click)="openPopUp()" class="w-44 m-5 h-44 bg-green-500">
     <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg">
         <path
@@ -6,3 +6,4 @@
             fill-rule="nonzero" />
     </svg>
 </div>
+<app-pop-up *ngIf="popUpOpened"></app-pop-up>

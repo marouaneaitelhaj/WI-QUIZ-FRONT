@@ -5,14 +5,9 @@ import { PopUpComponent } from './components/pop-up/pop-up.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers: [PopUpComponent]
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public popUp : PopUpComponent;
-  constructor(private popUpComponent: PopUpComponent) {
-    this.popUp = popUpComponent;
-  }
   sideBarOpened : boolean = true;
   closeSideBar(){
     this.sideBarOpened = !this.sideBarOpened;

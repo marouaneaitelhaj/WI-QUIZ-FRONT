@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./plus.component.css']
 })
 export class PlusComponent {
-
+   popUpOpened: boolean = false;
+  openPopUp() {
+    this.popUpOpened = true;
+  }
 }
