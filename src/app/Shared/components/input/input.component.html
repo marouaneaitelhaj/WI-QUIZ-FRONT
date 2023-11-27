@@ -3,6 +3,6 @@
         {{input.name}}
     </label>
     <input type="{{input.type}}" [placeholder]="input.label" name="{{input.name}}" id="{{input.name}}"
-        autocomplete="given-name" value="{{input.value}}"
+        autocomplete="given-name" value="{{input.value}}"  [(ngModel)]="input.value"
         class="bg-black border border-green-500 text-white text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 ">
 </div>

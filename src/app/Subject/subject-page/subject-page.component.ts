@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { SubjectResponse } from '../subject-response';
 import { SubjectService } from '../subject.service';
 import { Subject } from '../subject';
@@ -10,18 +10,19 @@ import { Subject } from '../subject';
   providers: [SubjectService]
 })
 export class SubjectPageComponent {
-  protected subjects: SubjectResponse = new SubjectResponse([]);
-  protected subject: Subject = new Subject(1, '1');
-  showPopUp: Boolean = false;
-  tooglePopUp(subject: Subject) {
-    this.showPopUp = !this.showPopUp;
-    this.subject = subject;
-  }
+  public subjects: SubjectResponse = new SubjectResponse([]);
+  public subject: Subject = new Subject(1, '1');
+  public service: SubjectService;
+  public showPopUp: Boolean = false;
   constructor(private subjectService: SubjectService) {
+    this.service = subjectService;
   }
   ngOnInit() {
     this.getSubjects();
-    
+  }
+  public tooglePopUp(subject: Subject) {
+    this.showPopUp = !this.showPopUp;
+    this.subject = subject;
   }
   public getSubjects(): void {
     this.subjectService.getSubjects().subscribe(

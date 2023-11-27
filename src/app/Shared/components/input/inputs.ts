@@ -1,10 +1,9 @@
-import { Input } from "@angular/core";
-
+import { Component, Input } from "@angular/core";
 class InputType {
     type: string;
     name: string;
     label: string;
-    @Input() value: string;
+    value: string;
     constructor(type: string, name: string, label: string, value: string) {
         this.type = type;
         this.name = name;
