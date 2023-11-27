@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { InputType } from './inputs';
 
 @Component({
   selector: 'app-input',
@@ -6,11 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./input.component.css']
 })
 export class InputComponent {
-  @Input() label: string = 'okiii';
-  @Input() name: string = 'text';
-  @Input() type: string = 'text';
-  @Input() value: string = '';
-  @Input() placeholder: string = '';
-  @Input() required: boolean = false;
-  @Input() disabled: boolean = false;
+  @Input() input: InputType = new InputType("text", "name", "label", "value");
 }

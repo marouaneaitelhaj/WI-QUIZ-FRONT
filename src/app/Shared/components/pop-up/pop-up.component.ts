@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
+import { InputType, Inputs } from '../input/inputs';
+import { Subject } from 'src/app/Subject/subject';
 
 @Component({
   selector: 'app-pop-up',
@@ -6,8 +8,14 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./pop-up.component.css']
 })
 export class PopUpComponent {
+  @Input() data: Record<string, any> = {};
+  protected inputs: InputType[] = [];
   @Input() popUpVisible: boolean = true;
   togglePopUp(): void {
     this.popUpVisible = !this.popUpVisible;
+  }
+  ngOnInit() {
+    this.inputs = new Inputs(this.data).inputs;
+    console.log(this.inputs);
   }
 }

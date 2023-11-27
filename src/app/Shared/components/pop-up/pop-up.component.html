@@ -12,12 +12,11 @@
                         <div class="border-t border-green-500"></div>
                     </div>
                 </div>
-                <form action="<%= request.getContextPath()%>/clientAdd" method="POST">
+                <div>
                     <div class="overflow-hidden sm:rounded-md">
                         <div class="px-4 py-5">
                             <div class="flex w-full flex-col">
-                                <app-input [label]="'Name'" [name]="'name'" [type]="'text'" [placeholder]="'Name'"
-                                    [required]="true" [value]="''" [disabled]="false"></app-input>
+                                <app-input *ngFor="let input of inputs" [input]="input"></app-input>
                             </div>
                         </div>
                         <div class="hidden sm:block" aria-hidden="true">
@@ -36,7 +35,7 @@
                             </button>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

@@ -21,6 +21,7 @@ export class SubjectPageComponent {
   }
   ngOnInit() {
     this.getSubjects();
+    
   }
   public getSubjects(): void {
     this.subjectService.getSubjects().subscribe(
@@ -33,7 +34,7 @@ export class SubjectPageComponent {
     );
   }
   public editSubject(subject: Subject): void {
-    console.log(this.subject);
+    // console.log(this.subject);
   }
   name: string = 'Angular';
   show: boolean = false;
