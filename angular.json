@@ -3,34 +3,9 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "WI-QUIZ-FRONT": {
+    "WI-QUIZ-TIME-FRONT": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:class": {
-          "skipTests": true
-        },
-        "@schematics/angular:component": {
-          "skipTests": true
-        },
-        "@schematics/angular:directive": {
-          "skipTests": true
-        },
-        "@schematics/angular:guard": {
-          "skipTests": true
-        },
-        "@schematics/angular:interceptor": {
-          "skipTests": true
-        },
-        "@schematics/angular:pipe": {
-          "skipTests": true
-        },
-        "@schematics/angular:resolver": {
-          "skipTests": true
-        },
-        "@schematics/angular:service": {
-          "skipTests": true
-        }
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -38,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/wi-quiz-front",
+            "outputPath": "dist/wi-quiz-time-front",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -85,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "WI-QUIZ-FRONT:build:production"
+              "browserTarget": "WI-QUIZ-TIME-FRONT:build:production"
             },
             "development": {
-              "browserTarget": "WI-QUIZ-FRONT:build:development"
+              "browserTarget": "WI-QUIZ-TIME-FRONT:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -96,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "WI-QUIZ-FRONT:build"
+            "browserTarget": "WI-QUIZ-TIME-FRONT:build"
           }
         },
         "test": {
@@ -121,6 +96,6 @@
     }
   },
   "cli": {
-    "analytics": "e01b7200-ddda-4b43-857e-fb234c5ab1ea"
+    "analytics": "868f9140-7b02-49fa-b079-da02790424c2"
   }
 }

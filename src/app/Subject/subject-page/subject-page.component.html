@@ -1,5 +1,0 @@
-<div class="flex justify-center flex-wrap">
-    <app-plus-card></app-plus-card>
-    <app-subject-card *ngFor="let subject of subjects.content" [subject]='subject' (PopUp)="tooglePopUp($event)" ></app-subject-card>
-</div>
-<app-pop-up *ngIf="showPopUp"  [service]="service" [data]="subject" ></app-pop-up>

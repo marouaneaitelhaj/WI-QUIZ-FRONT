@@ -6,8 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  sideBarOpened : boolean = true;
-  closeSideBar(){
-    this.sideBarOpened = !this.sideBarOpened;
-  }
+  title = 'WI-QUIZ-TIME-FRONT';
 }
