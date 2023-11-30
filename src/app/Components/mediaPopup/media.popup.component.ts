@@ -12,7 +12,8 @@ export class MediaPopupComponent {
   @Output() submitEvent = new EventEmitter<Media>();
   @Input() questions: Question[] = [];
   @Input() question: Question = new Question();
-  mediasType: MediaType[] = [MediaType.MP3, MediaType.MP4, MediaType.JPG, MediaType.GIF, MediaType.JPEG, MediaType.PNG];
+  mediasType = MediaType;
+  mediasTypeKeys = Object.keys(this.mediasType);
   @Input() media: Media = new Media();
   setfile(event : any){
     this.media.src = event.target.files[0];
@@ -22,8 +23,9 @@ export class MediaPopupComponent {
   }
   submit() {
     if(this.question){
-      this.media.question.id = this.question.id;
+      this.media.question = this.question;
     }
+    console.log(this.media.src);
     this.submitEvent.emit(this.media);
     this.togglePopUp();
   }

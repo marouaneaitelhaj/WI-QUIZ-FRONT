@@ -1,11 +1,11 @@
 <div class="px-4 sm:px-6 lg:px-8">
     <div class="sm:flex sm:items-center">
         <div class="sm:flex-auto">
-            <h1 class="text-xl font-semibold text-white">Subject</h1>
+            <h1 class="text-xl font-semibold text-black">Subject</h1>
         </div>
         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
             <button type="button" (click)="togglePopUp()"
-                class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-500 px-4 py-2 text-sm font-medium text-white shadow-sm ">Add
+                class="inline-flex items-center justify-center rounded-md border border-transparent bg-orange-500 px-4 py-2 text-sm font-medium text-black shadow-sm ">Add
                 subject</button>
         </div>
     </div>
@@ -14,26 +14,26 @@
             <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                 <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
                     <table class="min-w-full border divide-y divide-gray-300">
-                        <thead class="bg-black">
+                        <thead class="bg-yellow-50">
                             <tr>
                                 <th scope="col"
-                                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6">Id
+                                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-black sm:pl-6">Id
                                 </th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Name
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-black">Name
                                 </th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Top
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-black">Top
                                 </th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Action
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-black">Action
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-200 bg-black">
+                        <tbody class="divide-y divide-gray-200 bg-yellow-50">
                             <tr *ngFor="let subject of subjects">
-                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-6">
+                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
                                     {{subject.id}}</td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-white">{{subject.name}}</td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-white">{{subject.top.name}}</td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-white">
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-black">{{subject.name}}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-black">{{subject.top.name}}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-black">
                                     <span>
                                         <button type="button" (click)="togglePopUp(subject)"
                                             class="inline-flex px-5 py-2 mx-2 items-center justify-center rounded-md border ">

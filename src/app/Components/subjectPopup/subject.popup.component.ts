@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FunctionType } from 'src/app/Enums/FunctionType';
-import { Subject } from 'src/app/Models/Models';
+import { Subject, TopSubject } from 'src/app/Models/Models';
 @Component({
   selector: 'app-subject-popup',
   templateUrl: './subject.popup.component.html',
@@ -11,7 +11,7 @@ export class SubjectPopupComponent {
   @Output() submitEvent = new EventEmitter<Subject>();
   @Input() subjects: Subject[] = [];
   @Input() subject: Subject = new Subject();
-  @Input() top: Subject = new Subject();
+  @Input() top: TopSubject = new TopSubject();
   ngOnInit(): void {
     if (this.subject.top)
       this.top = this.subject.top;

@@ -1,57 +1,50 @@
 import { QuestionType } from "../Enums/QuestionType";
 import { MediaType } from "../Enums/MediaType";
 class Level {
-    id!: number;
-    description!: string;
-    maxPoints!: number;
-    minPoints!: number;
-    questions!: Question[];
-    constructor(id?: number) {
-        this.id = id || 0;
-    }
+    id: number = 0;
+    description: string = "";
+    maxPoints: number = 0;
+    minPoints: number = 0;
+    questions: Question[] = [];
 }
 class Response {
-    id!: number;
-    response!: string;
+    id: number = 0;
+    response: string = "";
 }
 
 
 
 class Media {
-    id!: number;
-    src!: File;
-    mediaType!: MediaType;
-    question!: Question;
-    constructor(id?: number) {
-        this.question = new Question();
-        this.question.id = id || 0;
-    }
+    id: number = 0;
+    src: File = new File([], "");
+    type: MediaType = MediaType.JPG;
+    question: Question = new Question();
 }
 
 class Question {
-    id!: number;
-    question!: string;
-    numberOfAnswers!: number;
-    numberOfCorrectAnswers!: number;
-    questionType!: QuestionType;
-    points!: number;
-    time!: number;
-    level!: Level;
-    subject!: Subject;
-    media!: Media[];
-    constructor(id?: number) {
-        this.subject = new Subject(id);
-        this.level = new Level(id);
-    }
+    id: number = 0;
+    question: string = "";
+    numberOfAnswers: number = 0;
+    numberOfCorrectAnswers: number = 0;
+    questionType: QuestionType = QuestionType.SINGLE_CHOICE;
+    points: number = 0;
+    time: number = 0;
+    level: Level = new Level();
+    subject: Subject = new Subject();
+    media: Media[] = [];
 }
+class TopSubject {
+    id: number = 0;
+    name: string = "";
+    subs: Subject[] = [];
+    questions: Question[] = [];
+
+} 
 class Subject {
-    id!: number;
-    name!: string;
-    top!: Subject;
-    subs!: Subject[];
-    questions!: Question[];
-    constructor(id?: number) {
-        this.id = id || 0;
-    }
+    id: number = 0;
+    name: string = "";
+    top: TopSubject = new TopSubject();
+    subs: Subject[] = [];
+    questions: Question[] = [];
 }
-export { Subject, Question, Media, Level, Response };
+export { Subject,TopSubject, Question, Media, Level, Response };

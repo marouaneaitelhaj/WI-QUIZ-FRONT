@@ -32,10 +32,10 @@ export class QuestionPopupComponent {
   }
   submit() {
     if (this.level.id) {
-      this.question.level = new Level(parseInt(this.level.id.toString()));
+      this.question.level = this.level;
     }
     if (this.subject.id) {
-      this.question.subject = new Subject(parseInt(this.subject.id.toString()));
+      this.question.subject = this.subject;
     }
     this.submitEvent.emit(this.question);
     this.togglePopUp();

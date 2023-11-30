@@ -23,7 +23,7 @@ export class QuestionPageComponent {
   subjectService :SubjectService;
   subjects: Subject[] = [];
   message: string = "";
-  question: Question = new Question(0);
+  question: Question = new Question();
   functionType: FunctionType = FunctionType.save;
   constructor(service: QuestionService, levelService: LevelService,subjectService:SubjectService) {
     this.service = service;

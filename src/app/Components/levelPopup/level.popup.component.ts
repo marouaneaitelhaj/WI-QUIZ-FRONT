@@ -11,11 +11,6 @@ export class LevelPopupComponent {
   @Output() submitEvent = new EventEmitter<Level>();
   @Input() levels: Level[] = [];
   @Input() level: Level = new Level();
-  @Input() top: Level = new Level();
-  ngOnInit(): void {
-    // if (this.level.top)
-    //   this.top = this.level.top;
-  }
   togglePopUp() {
     this.show.emit(false);
   }

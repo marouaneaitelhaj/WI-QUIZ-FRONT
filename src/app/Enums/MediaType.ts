@@ -1,8 +1,8 @@
 export enum MediaType {
-    MP3 = "MP3",
     MP4 = "MP4",
-    JPG = "JPG",
-    GIF = "GIF",
-    JPEG = "JPEG",
+    MP3 = "MP3",
     PNG = "PNG",
+    JPG = "JPG",
+    JPEG = "JPEG",
+    GIF = "GIF",
 }
