@@ -1,9 +1,4 @@
-<div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-    <div class="fixed inset-0 bg-yellow-50 bg-opacity-75 transition-opacity"></div>
-    <div class="fixed inset-0 z-10 overflow-y-auto">
-        <div id="addOverlay" class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-            <div
-                class="relative border border-orange-500 transform overflow-hidden rounded-lg bg-yellow-50 text-left shadow-xl transition-all sm:w-full sm:max-w-lg">
+<app-modal>
                 <div class="text-center pt-5 block font-semibold text-2xl self-start text-black">
                     <h1 class="leading-relaxed">
                         {{response.id != 0 ? 'Edit' : 'Add'}}
@@ -46,7 +41,4 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+            </app-modal>
