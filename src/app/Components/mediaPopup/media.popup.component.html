@@ -5,7 +5,10 @@
             <div
                 class="relative border border-orange-500 transform overflow-hidden rounded-lg bg-yellow-50 text-left shadow-xl transition-all sm:w-full sm:max-w-lg">
                 <div class="text-center pt-5 block font-semibold text-2xl self-start text-black">
-                    <h1 class="leading-relaxed">Add Client</h1>
+                    <h1 class="leading-relaxed">
+                        {{media.id != 0 ? 'Edit' : 'Add'}}
+                        Media
+                    </h1>
                 </div>
                 <div class="hidden sm:block" aria-hidden="true">
                     <div class="py-5">
