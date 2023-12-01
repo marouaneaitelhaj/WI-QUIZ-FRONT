@@ -20,6 +20,7 @@ import { ResponsePageComponent } from './Pages/response-page/response-page.compo
 import { HaytamComponent } from './Pages/haytam/haytam.component';
 import { Media } from './Models/Models';
 import { MediaPageComponent } from './Pages/media-page/media-page.component';
+import { ModalComponent } from './Components/modal/modal.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { MediaPageComponent } from './Pages/media-page/media-page.component';
     LevelPageComponent,
     ResponsePageComponent,
     MediaPopupComponent,
-    MediaPageComponent
+    MediaPageComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
