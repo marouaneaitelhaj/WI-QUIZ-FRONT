@@ -16,33 +16,43 @@
                 <div class="flex w-full flex-col">
                     <div class="w-full px-5 py-7">
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
-                            Description
+                            Success Result
                         </label>
-                        <!-- <input type="text" name="name" id="name" autocomplete="given-name"
-                            [(ngModel)]="quiz.description"
-                            class="bg-yellow-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 "> -->
+                        <input type="text" name="name" id="name" autocomplete="given-name"
+                            [(ngModel)]="quiz.successResult"
+                            class="bg-yellow-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
+                    </div>
+                    <div class="w-full px-5 py-7">
+                        <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
+                            Answers access
+                        </label>
+                        <input type="number" name="name" id="name" autocomplete="given-name"
+                            [(ngModel)]="quiz.answersAccess"
+                            class="bg-yellow-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                     </div>
                 </div>
-
                 <div class="flex w-full flex-col">
                     <div class="w-full px-5 py-7">
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
-                            Max Points
+                            Result access after test
                         </label>
-                        <!-- <input type="number" name="name" id="name" autocomplete="given-name"
-                            [(ngModel)]="quiz.maxPoints"
-                            class="bg-yellow-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 "> -->
+                        <input type="checkbox" name="name" id="name" autocomplete="given-name"
+                            [(ngModel)]="quiz.resultAccessAfterTest"
+                            class="bg-yellow-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                     </div>
-                </div>
-
-                <div class="flex w-full flex-col">
                     <div class="w-full px-5 py-7">
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
-                            Min Points
+                            Chances
                         </label>
-                        <!-- <input type="number" name="name" id="name" autocomplete="given-name"
-                            [(ngModel)]="quiz.minPoints"
-                            class="bg-yellow-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 "> -->
+                        <input type="number" name="name" id="name" autocomplete="given-name" [(ngModel)]="quiz.chances"
+                            class="bg-yellow-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
+                    </div>
+                    <div class="w-full px-5 py-7">
+                        <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
+                            Comments
+                        </label>
+                        <input type="text" name="name" id="name" autocomplete="given-name" [(ngModel)]="quiz.comments"
+                            class="bg-yellow-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                     </div>
                 </div>
             </div>
