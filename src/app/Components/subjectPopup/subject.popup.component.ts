@@ -11,18 +11,10 @@ export class SubjectPopupComponent {
   @Output() submitEvent = new EventEmitter<Subject>();
   @Input() subjects: Subject[] = [];
   @Input() subject: Subject = new Subject();
-  @Input() top: TopSubject = new TopSubject();
-  ngOnInit(): void {
-    if (this.subject.top)
-      this.top = this.subject.top;
-  }
   togglePopUp() {
     this.show.emit(false);
   }
   submit() {
-    if (this.top.id) {
-      this.subject.top = this.top;
-    }
     this.submitEvent.emit(this.subject);
     this.togglePopUp();
   }

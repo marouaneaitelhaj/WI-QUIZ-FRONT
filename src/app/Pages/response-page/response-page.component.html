@@ -51,5 +51,5 @@
         </div>
     </div>
 </div>
-<app-response-popup  *ngIf="showPopup" [response]="response" (submitEvent)="submit($event)" (show)="showPopup=!showPopup" [responses]="responses"></app-response-popup>
+<app-response-popup  *ngIf="showPopup" [response]="response" (submitEvent)="submit($event)" (show)="showPopup=!showPopup"></app-response-popup>
 <app-alert *ngIf="showAlert" [needConfirm]="needConfirm" (confirmed)="delete(response, $event)" [message]="message" (showAlert)="showAlert=!showAlert"></app-alert>

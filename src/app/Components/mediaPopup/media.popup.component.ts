@@ -11,7 +11,6 @@ export class MediaPopupComponent {
   @Output() show = new EventEmitter<boolean>();
   @Output() submitEvent = new EventEmitter<Media>();
   @Input() questions: Question[] = [];
-  @Input() question: Question = new Question();
   mediasType = MediaType;
   mediasTypeKeys = Object.keys(this.mediasType);
   @Input() media: Media = new Media();
@@ -22,10 +21,6 @@ export class MediaPopupComponent {
     this.show.emit(false);
   }
   submit() {
-    if(this.question){
-      this.media.question = this.question;
-    }
-    console.log(this.media.src);
     this.submitEvent.emit(this.media);
     this.togglePopUp();
   }

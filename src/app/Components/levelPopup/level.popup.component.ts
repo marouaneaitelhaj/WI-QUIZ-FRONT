@@ -15,9 +15,6 @@ export class LevelPopupComponent {
     this.show.emit(false);
   }
   submit() {
-    // if (this.top.id) {
-    //   this.level.top = this.top;
-    // }
     this.submitEvent.emit(this.level);
     this.togglePopUp();
   }
