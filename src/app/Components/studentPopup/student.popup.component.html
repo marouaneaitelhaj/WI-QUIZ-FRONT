@@ -1,0 +1,66 @@
+<app-modal>
+    <div class="text-center pt-5 block font-semibold text-2xl self-start text-black">
+        <h1 class="leading-relaxed">
+            {{student.id != 0 ? 'Edit' : 'Add'}}
+            Student
+        </h1>
+    </div>
+    <div class="hidden sm:block" aria-hidden="true">
+        <div class="py-5">
+            <div class="border-t border-orange-500"></div>
+        </div>
+    </div>
+    <div>
+        <div class="overflow-hidden sm:rounded-md">
+            <div class="px-4 py-5">
+                <div class="flex w-full flex-col">
+                    <div class="w-full px-5 py-7">
+                        <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
+                            Description
+                        </label>
+                        <!-- <input type="text" name="name" id="name" autocomplete="given-name"
+                            [(ngModel)]="student.description"
+                            class="bg-yellow-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 "> -->
+                    </div>
+                </div>
+
+                <div class="flex w-full flex-col">
+                    <div class="w-full px-5 py-7">
+                        <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
+                            Max Points
+                        </label>
+                        <!-- <input type="number" name="name" id="name" autocomplete="given-name"
+                            [(ngModel)]="student.maxPoints"
+                            class="bg-yellow-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 "> -->
+                    </div>
+                </div>
+
+                <div class="flex w-full flex-col">
+                    <div class="w-full px-5 py-7">
+                        <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
+                            Min Points
+                        </label>
+                        <!-- <input type="number" name="name" id="name" autocomplete="given-name"
+                            [(ngModel)]="student.minPoints"
+                            class="bg-yellow-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 "> -->
+                    </div>
+                </div>
+            </div>
+            <div class="hidden sm:block" aria-hidden="true">
+                <div class="py-5">
+                    <div class="border-t border-orange-500"></div>
+                </div>
+            </div>
+            <div class="px-4 pb-3 text-right sm:px-6 flex justify-around">
+                <button (click)="togglePopUp()" type="button" id="closeAddForm"
+                    class="inline-flex justify-center rounded-md border border-transparent bg-white py-2 px-4 text-sm font-medium text-black shadow-sm ">
+                    Cancel
+                </button>
+                <button type="submit" (click)="submit()"
+                    class="inline-flex justify-center rounded-md border border-transparent bg-orange-500 py-2 px-4 text-sm font-medium text-black shadow-sm ">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</app-modal>

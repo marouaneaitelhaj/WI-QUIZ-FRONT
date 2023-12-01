@@ -19,6 +19,10 @@ import { LevelPageComponent } from './Pages/level-page/level-page.component';
 import { ResponsePageComponent } from './Pages/response-page/response-page.component';
 import { MediaPageComponent } from './Pages/media-page/media-page.component';
 import { ModalComponent } from './Components/modal/modal.component';
+import { StudentPageComponent } from './Pages/student-page/student-page.component';
+import { QuizPageComponent } from './Pages/quiz-page/quiz-page.component';
+import { QuizPopupComponent } from './Components/quizPopup/quiz.popup.component';
+import { StudentPopupComponent } from './Components/studentPopup/student.popup.component';
 
 
 @NgModule({
@@ -37,7 +41,11 @@ import { ModalComponent } from './Components/modal/modal.component';
     ResponsePageComponent,
     MediaPopupComponent,
     MediaPageComponent,
-    ModalComponent
+    ModalComponent,
+    QuizPageComponent,
+    StudentPopupComponent,
+    QuizPopupComponent,
+    StudentPageComponent,
   ],
   imports: [
     BrowserModule,
