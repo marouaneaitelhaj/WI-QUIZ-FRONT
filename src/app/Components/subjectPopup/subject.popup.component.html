@@ -18,7 +18,7 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Write the name of the subject
                         </label>
-                        <input type="text"  id="name" autocomplete="given-name" [(ngModel)]="subject.name"
+                        <input type="text"    [(ngModel)]="subject.name"
                             class="bg-yellow-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Write the name of the subject
                         </label>
-                        <select type="text"  id="name" autocomplete="given-name" [(ngModel)]="subject.top.id"
+                        <select type="text"    [(ngModel)]="subject.top.id"
                             class="bg-yellow-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                             <option *ngFor="let top of subjects" value="{{top.id}}">{{top.name}}</option>
                         </select>
