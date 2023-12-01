@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FunctionType } from 'src/app/Enums/FunctionType';
-import { Level } from 'src/app/Models/Models';
 import { MyResponse } from 'src/app/Response/Response';
 import { LevelService } from 'src/app/Services/level.service';
+import Level from 'src/app/Models/Level';
 
 @Component({
   selector: 'app-level-page',

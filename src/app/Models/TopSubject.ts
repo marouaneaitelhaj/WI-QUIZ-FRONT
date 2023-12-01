@@ -6,5 +6,4 @@ export default class TopSubject {
     name: string = "";
     subs: Subject[] = [];
     questions: Question[] = [];
-
 }

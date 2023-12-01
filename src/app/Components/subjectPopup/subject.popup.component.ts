@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FunctionType } from 'src/app/Enums/FunctionType';
-import { Subject, TopSubject } from 'src/app/Models/Models';
+import Subject from 'src/app/Models/Subject';
 @Component({
   selector: 'app-subject-popup',
   templateUrl: './subject.popup.component.html',

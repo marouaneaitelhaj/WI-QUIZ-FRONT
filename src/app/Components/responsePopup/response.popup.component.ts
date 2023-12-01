@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FunctionType } from 'src/app/Enums/FunctionType';
-import { Response } from 'src/app/Models/Models';
+import Response from 'src/app/Models/Response';
 @Component({
   selector: 'app-response-popup',
   templateUrl: './response.popup.component.html',

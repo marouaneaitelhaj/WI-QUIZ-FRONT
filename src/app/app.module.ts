@@ -17,7 +17,6 @@ import { QuestionPopupComponent } from './Components/questionPopup/question.popu
 import { QuestionPageComponent } from './Pages/question-page/question-page.component';
 import { LevelPageComponent } from './Pages/level-page/level-page.component';
 import { ResponsePageComponent } from './Pages/response-page/response-page.component';
-import { Media } from './Models/Models';
 import { MediaPageComponent } from './Pages/media-page/media-page.component';
 import { ModalComponent } from './Components/modal/modal.component';
 

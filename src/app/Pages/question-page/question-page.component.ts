@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FunctionType } from 'src/app/Enums/FunctionType';
-import { Level, Question, Subject } from 'src/app/Models/Models';
+import Level from 'src/app/Models/Level';
+import Subject from 'src/app/Models/Subject';
+import Question from 'src/app/Models/Question';
 import { MyResponse } from 'src/app/Response/Response';
 import { LevelService } from 'src/app/Services/level.service';
 import { QuestionService } from 'src/app/Services/question.service';

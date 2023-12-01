@@ -1,7 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FunctionType } from 'src/app/Enums/FunctionType';
 import { QuestionType } from 'src/app/Enums/QuestionType';
-import { Level, Question, Subject } from 'src/app/Models/Models';
+import Level from 'src/app/Models/Level';
+import Subject from 'src/app/Models/Subject';
+import Question from 'src/app/Models/Question';
 import { MyResponse } from 'src/app/Response/Response';
 @Component({
   selector: 'app-question-popup',

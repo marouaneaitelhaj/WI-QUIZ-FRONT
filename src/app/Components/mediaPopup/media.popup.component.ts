@@ -1,7 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FunctionType } from 'src/app/Enums/FunctionType';
 import { MediaType } from 'src/app/Enums/MediaType';
-import { Media, Question } from 'src/app/Models/Models';
+import Media from 'src/app/Models/Media';
+import Question from 'src/app/Models/Question';
 @Component({
   selector: 'app-media-popup',
   templateUrl: './media.popup.component.html',

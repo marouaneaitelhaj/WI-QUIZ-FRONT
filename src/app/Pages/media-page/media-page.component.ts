@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FunctionType } from 'src/app/Enums/FunctionType';
-import { Media, Question } from 'src/app/Models/Models';
 import { MyResponse } from 'src/app/Response/Response';
 import { MediaService } from 'src/app/Services/media.service';
 import { QuestionService } from 'src/app/Services/question.service';
+import Media from 'src/app/Models/Media';
+import Question from 'src/app/Models/Question';
 
 @Component({
   selector: 'app-media-page',

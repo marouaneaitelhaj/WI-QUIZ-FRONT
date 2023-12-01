@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FunctionType } from 'src/app/Enums/FunctionType';
-import { Response } from 'src/app/Models/Models';
+import Response from 'src/app/Models/Response';
 import { MyResponse } from 'src/app/Response/Response';
 import { ResponseService } from 'src/app/Services/response.service';
 

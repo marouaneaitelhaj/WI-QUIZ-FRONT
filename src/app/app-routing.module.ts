@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SubjectPageComponent } from './Pages/subject-page/subject-page.component';
 import { MediaPageComponent } from './Pages/media-page/media-page.component';
-import { Level } from './Models/Models';
 import { LevelPageComponent } from './Pages/level-page/level-page.component';
 import { ResponsePageComponent } from './Pages/response-page/response-page.component';
 import { QuestionPageComponent } from './Pages/question-page/question-page.component';
