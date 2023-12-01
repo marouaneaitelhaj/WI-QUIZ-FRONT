@@ -31,7 +31,6 @@ export class QuestionPageComponent {
     this.subjectService = subjectService;
   }
   ngOnInit(): void {
-    console.log(this.question);
     this.service.findAll().subscribe((data: MyResponse<Question>) => {
       this.questions = data.content;
     });

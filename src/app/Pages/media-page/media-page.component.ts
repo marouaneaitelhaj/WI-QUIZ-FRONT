@@ -50,6 +50,8 @@ export class MediaPageComponent {
     });
   }
   submit(media: Media) {
+    this.message = "Please wait...";
+    this.showAlert = true;
     this.service.upload(media.src).subscribe((data: any) => {
       this.media.src = data.url;
       if (this.functionType == FunctionType.save) {

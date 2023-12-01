@@ -23,6 +23,8 @@
                                 </th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-black">Top
                                 </th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-black">Subs
+                                </th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-black">Action
                                 </th>
                             </tr>
@@ -33,6 +35,11 @@
                                     {{subject.id}}</td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-black">{{subject.name}}</td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-black">{{subject.top.name}}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-black">
+                                    <ul>
+                                        <li *ngFor="let sub of subject.subs">{{sub.name}}</li>
+                                    </ul>    
+                                </td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-black">
                                     <span>
                                         <button type="button" (click)="togglePopUp(subject)"

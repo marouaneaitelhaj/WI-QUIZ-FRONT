@@ -12,8 +12,6 @@ class Response {
     response: string = "";
 }
 
-
-
 class Media {
     id: number = 0;
     src: File = new File([], "");
@@ -39,7 +37,7 @@ class TopSubject {
     subs: Subject[] = [];
     questions: Question[] = [];
 
-} 
+}
 class Subject {
     id: number = 0;
     name: string = "";
@@ -47,4 +45,4 @@ class Subject {
     subs: Subject[] = [];
     questions: Question[] = [];
 }
-export { Subject,TopSubject, Question, Media, Level, Response };
+export { Subject, TopSubject, Question, Media, Level, Response };
