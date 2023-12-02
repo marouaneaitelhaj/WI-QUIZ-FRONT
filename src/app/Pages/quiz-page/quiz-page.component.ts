@@ -3,28 +3,36 @@ import { FunctionType } from 'src/app/Enums/FunctionType';
 import { MyResponse } from 'src/app/Response/Response';
 import { QuizService } from 'src/app/Services/quiz.service';
 import Quiz from 'src/app/Models/Quiz';
+import Teacher from 'src/app/Models/Teacher';
+import { TeacherService } from 'src/app/Services/teacher.service';
 
 @Component({
   selector: 'app-quiz-page',
   templateUrl: './quiz-page.component.html',
   styleUrls: ['./quiz-page.component.css'],
-  providers: [QuizService]
+  providers: [QuizService, TeacherService]
 })
 export class QuizPageComponent {
   service: QuizService;
+  teacherService: TeacherService;
   showPopup: boolean = false;
   needConfirm: boolean = false;
   showAlert: boolean = false;
+  teachers: Teacher[] = [];
   quizs: Quiz[] = [];
   message: string = "";
   quiz: Quiz = new Quiz();
   functionType: FunctionType = FunctionType.save;
-  constructor(service: QuizService) {
+  constructor(service: QuizService, teacherService: TeacherService) {
     this.service = service;
+    this.teacherService = teacherService;
   }
   ngOnInit(): void {
     this.service.findAll().subscribe((data: MyResponse<Quiz>) => {
       this.quizs = data.content;
+    });
+    this.teacherService.findAll().subscribe((data: MyResponse<Teacher>) => {
+      this.teachers = data.content;
     });
   }
   togglePopUp(quiz?: Quiz) {
