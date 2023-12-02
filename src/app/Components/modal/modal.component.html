@@ -2,8 +2,8 @@
     <div class="fixed inset-0 bg-yellow-50 bg-opacity-75 transition-opacity"></div>
     <div class="fixed inset-0 z-10 overflow-y-auto">
         <div id="addOverlay" class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-            <div
-                class="relative border border-orange-500 transform overflow-hidden rounded-lg bg-yellow-50 text-left shadow-xl transition-all sm:w-full sm:max-w-lg">
+            <div style="max-height: 30rem;"
+                class="relative overflow-scroll border border-orange-500 transform overflow-x-hidden rounded-lg bg-yellow-50 text-left shadow-xl transition-all sm:w-full sm:max-w-lg">
                 <ng-content></ng-content>
             </div>
         </div>
