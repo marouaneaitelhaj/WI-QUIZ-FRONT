@@ -23,6 +23,11 @@ import { StudentPageComponent } from './Pages/student-page/student-page.componen
 import { QuizPageComponent } from './Pages/quiz-page/quiz-page.component';
 import { QuizPopupComponent } from './Components/quizPopup/quiz.popup.component';
 import { StudentPopupComponent } from './Components/studentPopup/student.popup.component';
+import {StoreModule} from '@ngrx/store';
+import { PlayquizComponent } from './Pages/playquiz/playquiz.component';
+import { QuestionofquizPageComponent } from './Pages/questionofquiz-page/questionofquiz-page.component.css-page.component';
+import { QuestionofquizPopupComponent } from './Components/questionofquizPopup/questionofquiz.popup.component';
+// import {myReducer} from './ngrx/myreducer.reducer';
 
 
 @NgModule({
@@ -46,6 +51,9 @@ import { StudentPopupComponent } from './Components/studentPopup/student.popup.c
     StudentPopupComponent,
     QuizPopupComponent,
     StudentPageComponent,
+    PlayquizComponent,
+    QuestionofquizPageComponent,
+    QuestionofquizPopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +61,7 @@ import { StudentPopupComponent } from './Components/studentPopup/student.popup.c
     HttpClientModule,
     CommonModule,
     FormsModule,
+    // StoreModule.forRoot({message : myReducer})
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,14 @@
+<div class="w-full flex justify-center align-middle bg-white">
+    <div class="bg-yellow-50 m-5 flex w-1/12 flex-col">
+        <div class="flex justify-center align-middle p-3"
+            *ngFor="let questionOfQuiz of quiz.questionOfQuizs; let i = index">
+            <span class="bg-white p-3 rounded">Q
+                <span>{{i+1}}</span></span>
+        </div>
+        <div></div>
+    </div>
+    <div class="bg-yellow-50 m-5 w-11/12">
+        <div class="flex">
+        </div>
+    </div>
+</div>

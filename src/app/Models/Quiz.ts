@@ -1,3 +1,5 @@
+import Question from "./Question";
+import Questionofquiz from "./Questionofquiz";
 import Teacher from "./Teacher";
 
 export default class Quiz {
@@ -8,4 +10,5 @@ export default class Quiz {
     numberOfChances: number = 0;
     comment: string = "";
     teacher: Teacher = new Teacher();
+    questionOfQuizs : Questionofquiz[] = [];
 }

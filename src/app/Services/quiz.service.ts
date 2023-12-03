@@ -22,4 +22,7 @@ export class QuizService {
   public delete(id: number): Observable<MyResponse<Quiz>> {
     return this.http.delete<MyResponse<Quiz>>(this.url + "/" + id);
   }
+  public findById(id: number): Observable<Quiz> {
+    return this.http.get<Quiz>(this.url + "/" + id);
+  }
 }
