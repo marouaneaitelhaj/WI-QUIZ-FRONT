@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import Question from 'src/app/Models/Question';
 import Quiz from 'src/app/Models/Quiz';
 import Response from 'src/app/Models/Response';
 import { MyResponse } from 'src/app/Response/Response';
@@ -14,6 +15,8 @@ import { QuizService } from 'src/app/Services/quiz.service';
 export class PlayquizComponent {
   id: number = 0;
   quiz: Quiz = new Quiz();
+  selectedImage : number = 0;
+  question: Question = new Question();
   constructor(private route: ActivatedRoute, private quizService: QuizService) { }
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -21,7 +24,8 @@ export class PlayquizComponent {
     });
     this.quizService.findById(this.id).subscribe((data: Quiz) => {
       this.quiz = data;
-      console.log(data);
+      this.question = this.quiz.questionOfQuizs[0].question;
+      console.log(this.question);
     });
   }
 }
