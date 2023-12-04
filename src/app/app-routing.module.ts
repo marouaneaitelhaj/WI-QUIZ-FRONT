@@ -10,6 +10,7 @@ import { StudentPageComponent } from './Pages/student-page/student-page.componen
 import { QuizPageComponent } from './Pages/quiz-page/quiz-page.component';
 import { PlayquizComponent } from './Pages/playquiz/playquiz.component';
 import { QuestionofquizPageComponent } from './Pages/questionofquiz-page/questionofquiz-page.component.css-page.component';
+import { ValidationPageComponent } from './Pages/validation-page/validation-page.component';
 
 const routes: Routes = [
   { path: '', component: SubjectPageComponent },
@@ -22,7 +23,7 @@ const routes: Routes = [
   { path: 'quiz', component: QuizPageComponent },
   { path: 'questionofquiz', component: QuestionofquizPageComponent },
   { path: 'quiz/:id/play', component: PlayquizComponent},
-  {path: 'Validation', component: ValidationPageComponent},
+  {path: 'validation', component: ValidationPageComponent},
 ];
 
 @NgModule({

@@ -27,6 +27,8 @@ import {StoreModule} from '@ngrx/store';
 import { PlayquizComponent } from './Pages/playquiz/playquiz.component';
 import { QuestionofquizPageComponent } from './Pages/questionofquiz-page/questionofquiz-page.component.css-page.component';
 import { QuestionofquizPopupComponent } from './Components/questionofquizPopup/questionofquiz.popup.component';
+import { ValidationPageComponent } from './Pages/validation-page/validation-page.component';
+import { ValidationPopupComponent } from './Components/validationPopup/validation.popup.component';
 // import {myReducer} from './ngrx/myreducer.reducer';
 
 
@@ -54,6 +56,8 @@ import { QuestionofquizPopupComponent } from './Components/questionofquizPopup/q
     PlayquizComponent,
     QuestionofquizPageComponent,
     QuestionofquizPopupComponent,
+    ValidationPageComponent,
+    ValidationPopupComponent
   ],
   imports: [
     BrowserModule,
