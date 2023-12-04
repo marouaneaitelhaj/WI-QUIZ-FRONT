@@ -9,11 +9,20 @@
     </div>
     <div class="bg-yellow-50 m-5 w-11/12 h-96 justify-center align-middle flex">
         <div class="flex w-full p-5 justify-center align-middle">
-            <div class="w-2/5 justify-center flex">
-                <p class="text-2xl font-bold">{{question.question}}</p>
+            <div class="w-2/5 align-middle flex flex-col">
+                <p class="text-2xl text-center font-bold">{{question.question}}</p>
+                <div>
+                    <div *ngFor="let response of question.validations; let i = index">
+                        <div class="flex justify-center align-middle">
+                            <input type="radio" name="response" id="response{{i}}" class="m-2">
+                            <label for="response{{i}}" class="m-2">{{response.response.response}}</label>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="w-3/5 border border-black relative flex flex-row justify-center align-middle ">
-                <button (click)="selectedImage = (selectedImage === 0) ? question.media.length - 1 : selectedImage - 1" type="button"
+                <button (click)="selectedImage = (selectedImage === 0) ? question.media.length - 1 : selectedImage - 1"
+                    type="button"
                     class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
                     data-carousel-prev>
                     <span
@@ -26,7 +35,8 @@
                         <span class="sr-only">Previous</span>
                     </span>
                 </button>
-                <button (click)="selectedImage = (selectedImage === question.media.length - 1) ? 0 : selectedImage + 1" type="button"
+                <button (click)="selectedImage = (selectedImage === question.media.length - 1) ? 0 : selectedImage + 1"
+                    type="button"
                     class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
                     data-carousel-next>
                     <span
@@ -46,4 +56,3 @@
             </div>
         </div>
     </div>
-</div>
