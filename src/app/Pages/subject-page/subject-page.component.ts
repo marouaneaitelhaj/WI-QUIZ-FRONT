@@ -44,13 +44,16 @@ export class SubjectPageComponent {
   }
   submit(subject: Subject) {
     if (this.functionType == FunctionType.save) {
+      if (subject.top.id == 0) {
+        // subject.top = null;
+      }
       this.service.save(subject).subscribe((data: MyResponse<Subject>) => {
         this.findAll();
         this.message = data.message;
         this.showAlert = true;
       }, (error) => {
         this.findAll();
-        this.message = error;
+        this.message = error.error.error;
         this.showAlert = true;
       });
     } else {
@@ -60,7 +63,7 @@ export class SubjectPageComponent {
         this.showAlert = true;
       }, (error) => {
         this.findAll();
-        this.message = error;
+        this.message = error.error.error;
         this.showAlert = true;
       });
     }
@@ -74,7 +77,7 @@ export class SubjectPageComponent {
         this.needConfirm = false;
       }, (error) => {
         this.findAll();
-        this.message = error;
+        this.message = error.error.error;
         this.showAlert = true;
         this.needConfirm = false;
       });

@@ -19,6 +19,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="flex justify-center align-middle">
+                    <button type="button"
+                        class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                        Next
+                    </button>
+                </div>
             </div>
             <div class="w-3/5 border border-black relative flex flex-row justify-center align-middle ">
                 <button (click)="selectedImage = (selectedImage === 0) ? question.media.length - 1 : selectedImage - 1"
@@ -56,3 +62,4 @@
             </div>
         </div>
     </div>
+</div>

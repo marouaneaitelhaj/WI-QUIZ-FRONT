@@ -66,7 +66,7 @@ export class QuestionPageComponent {
         this.showAlert = true;
       }, (error) => {
         this.findAll();
-        this.message = error;
+        this.message = error.error.error;
         this.showAlert = true;
       });
     } else {
@@ -76,7 +76,7 @@ export class QuestionPageComponent {
         this.showAlert = true;
       }, (error) => {
         this.findAll();
-        this.message = error;
+        this.message = error.error.error;
         this.showAlert = true;
       });
     }
@@ -90,7 +90,7 @@ export class QuestionPageComponent {
         this.needConfirm = false;
       }, (error) => {
         this.findAll();
-        this.message = error;
+        this.message = error.error.error;
         this.showAlert = true;
         this.needConfirm = false;
       });

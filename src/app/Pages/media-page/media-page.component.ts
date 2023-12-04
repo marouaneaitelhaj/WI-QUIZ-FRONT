@@ -62,7 +62,7 @@ export class MediaPageComponent {
           this.showAlert = true;
         }, (error) => {
           this.findAll();
-          this.message = error;
+          this.message = error.error.error;
           this.showAlert = true;
         });
       } else {
@@ -72,7 +72,7 @@ export class MediaPageComponent {
           this.showAlert = true;
         }, (error) => {
           this.findAll();
-          this.message = error;
+          this.message = error.error.error;
           this.showAlert = true;
         });
       }
@@ -87,7 +87,7 @@ export class MediaPageComponent {
         this.needConfirm = false;
       }, (error) => {
         this.findAll();
-        this.message = error;
+        this.message = error.error.error;
         this.showAlert = true;
         this.needConfirm = false;
       });

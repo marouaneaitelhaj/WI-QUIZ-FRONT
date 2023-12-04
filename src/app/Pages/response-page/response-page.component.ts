@@ -50,7 +50,7 @@ export class ResponsePageComponent {
         this.showAlert = true;
       }, (error) => {
         this.findAll();
-        this.message = error;
+        this.message = error.error.error;
         this.showAlert = true;
       });
     } else {
@@ -60,7 +60,7 @@ export class ResponsePageComponent {
         this.showAlert = true;
       }, (error) => {
         this.findAll();
-        this.message = error;
+        this.message = error.error.error;
         this.showAlert = true;
       });
     }
@@ -74,7 +74,7 @@ export class ResponsePageComponent {
         this.needConfirm = false;
       }, (error) => {
         this.findAll();
-        this.message = error;
+        this.message = error.error.error;
         this.showAlert = true;
         this.needConfirm = false;
       });
