@@ -21,7 +21,8 @@ const routes: Routes = [
   { path: 'student', component: StudentPageComponent },
   { path: 'quiz', component: QuizPageComponent },
   { path: 'questionofquiz', component: QuestionofquizPageComponent },
-  { path: 'quiz/:id/play', component: PlayquizComponent}
+  { path: 'quiz/:id/play', component: PlayquizComponent},
+  {path: 'Validation', component: ValidationPageComponent},
 ];
 
 @NgModule({

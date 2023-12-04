@@ -2,6 +2,7 @@ import Subject from "./Subject";
 import { QuestionType } from "../Enums/QuestionType";
 import Level from "./Level";
 import Media from "./Media";
+import Validation from "./Validation";
 
 export default class Question {
     id: number = 0;
@@ -14,4 +15,5 @@ export default class Question {
     level: Level = new Level();
     subject: Subject = new Subject();
     media: Media[] = [];
+    validations: Validation[] = [];
 }
