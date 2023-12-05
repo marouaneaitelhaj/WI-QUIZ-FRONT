@@ -14,13 +14,13 @@
                 <div>
                     <div *ngFor="let response of question.validations; let i = index">
                         <div class="flex justify-center align-middle">
-                            <input type="radio" name="response" id="response{{i}}" class="m-2">
+                            <input type="radio" name="response" id="response{{i}}" class="m-2" (click)="setResponse(response)" >
                             <label for="response{{i}}" class="m-2">{{response.response.response}}</label>
                         </div>
                     </div>
                 </div>
                 <div class="flex justify-center align-middle">
-                    <button type="button"
+                    <button type="button" (click)="nextquestion()"
                         class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
                         Next
                     </button>
@@ -63,3 +63,4 @@
         </div>
     </div>
 </div>
+<app-alert *ngIf="showAlert" [needConfirm]="needConfirm" (confirmed)="questionNumber=0" [message]="message" (showAlert)="showAlert=!showAlert"></app-alert>
