@@ -25,7 +25,13 @@ export class PlayquizComponent {
   question: Question = new Question();
   answers: Answer[] = [];
   constructor(private route: ActivatedRoute, private quizService: QuizService) { }
+  playAudio(): void {
+    const audio = new Audio();
+    audio.src = "http://res.cloudinary.com/dvr7oyo77/video/upload/v1701783476/uhpikguqvmlfwtey5pyt.mp3";
+    audio.play();
+  }
   ngOnInit(): void {
+    // play audio after 3 seconds
     this.route.params.subscribe(params => {
       this.id = params['id'];
     });
@@ -36,13 +42,16 @@ export class PlayquizComponent {
     });
   }
   nextquestion() {
+    // setTimeout(() => {
+    //   this.playAudio();
+    // }, 3000);
     if (this.questionNumber == this.quiz.questionOfQuizs.length - 1) {
       this.showAlert = true;
-      this.message = "آخرین سوال است";
       var result = 0;
       this.answers.forEach((answer: Answer) => {
         if (answer.validation.correct == true) {
           result = result + answer.validation.points;
+          this.message = "You have " + result + " points";
         }
       });
       console.log(result);
@@ -51,8 +60,14 @@ export class PlayquizComponent {
       this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
     }
   }
-  setResponse(response : Validation){
+  setResponse(response: Validation) {
     this.answers[this.questionNumber] = new Answer();
     this.answers[this.questionNumber].validation = response;
+  }
+  resest(event: boolean) {
+    this.showAlert = event;
+    this.questionNumber = 0;
+    this.answers = [];
+    this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
   }
 }
