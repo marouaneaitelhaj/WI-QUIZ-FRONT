@@ -14,9 +14,11 @@ export class SubjectService {
     return this.http.get<MyResponse<Subject>>(this.url);
   }
   public save(subject: Subject): Observable<MyResponse<Subject>> {
+
     return this.http.post<MyResponse<Subject>>(this.url, subject);
   }
   public update(subject: Subject): Observable<MyResponse<Subject>> {
+    console.log(subject);
     return this.http.put<MyResponse<Subject>>(this.url + "/" + subject.id, subject);
   }
   public delete(id: number): Observable<MyResponse<Subject>> {

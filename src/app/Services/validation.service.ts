@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import Validation from '../Models/Validation';
 import { MyResponse } from '../Response/Response';
 @Injectable({
@@ -10,6 +10,11 @@ export class ValidationService {
   private url = 'http://localhost:8080/validation';
   constructor(private http: HttpClient) {
   }
+
+  // public validations = new BehaviorSubject<Validation[]>([]);
+  // readonly currentValidations = this.validations.asObservable();
+
+
   public findAll(): Observable<MyResponse<Validation>> {
     return this.http.get<MyResponse<Validation>>(this.url);
   }
