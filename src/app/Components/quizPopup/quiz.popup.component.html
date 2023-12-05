@@ -55,6 +55,7 @@
                         </label>
                         <select type="number" [(ngModel)]="quiz.teacher.id"
                             class="bg-yellow-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
+                            <option value="0">No teacher</option>
                             <option *ngFor="let teacher of teachers" value="{{teacher.id}}">{{teacher.lastName + ' ' +
                                 teacher.firstName}}
                             </option>
