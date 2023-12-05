@@ -34,7 +34,7 @@
                                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
                                     {{subject.id}}</td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-black">{{subject.name}}</td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-black">{{subject.top?.name}}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-black">{{subject?.top?.name}}</td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-black">
                                     <ul>
                                         <li class="text-xs" *ngFor="let sub of subject.subs">{{sub.name}}</li>

@@ -44,9 +44,6 @@ export class SubjectPageComponent {
   }
   submit(subject: Subject) {
     if (this.functionType == FunctionType.save) {
-      if (subject.top.id == 0) {
-        // subject.top = null;
-      }
       this.service.save(subject).subscribe((data: MyResponse<Subject>) => {
         this.findAll();
         this.message = data.message;
