@@ -7,6 +7,7 @@ import { QuestionService } from 'src/app/Services/question.service';
 import { ResponseService } from 'src/app/Services/response.service';
 import Question from 'src/app/Models/Question';
 import Response from 'src/app/Models/Response';
+import AlertProps from 'src/app/Components/alert/alertProps';
 
 @Component({
   selector: 'app-validation-page',
@@ -15,10 +16,9 @@ import Response from 'src/app/Models/Response';
 })
 export class ValidationPageComponent {
   showPopup: boolean = false;
-  needConfirm: boolean = false;
-  showAlert: boolean = false;
+  
   validations: Validation[] = [];
-  message: string = "";
+  alertprops: AlertProps = new AlertProps();
   validation: Validation = new Validation();
   functionType: FunctionType = FunctionType.save;
   constructor(private service: ValidationService) {
@@ -45,12 +45,12 @@ export class ValidationPageComponent {
       this.service.delete(validation.id);
     } else if (confirmed == null) {
       this.validation = validation;
-      this.showAlert = true;
-      this.needConfirm = true;
+      this.alertprops.showAlert = true;
+      this.alertprops.needConfirm = true;
     } else {
       this.validation = validation;
-      this.showAlert = false;
-      this.needConfirm = false;
+      this.alertprops.showAlert = false;
+      this.alertprops.needConfirm = false;
     }
   }
   ngAfterContentInit() {

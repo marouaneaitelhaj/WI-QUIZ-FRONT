@@ -64,4 +64,4 @@
     </div>
 </div>
 <app-student-popup  *ngIf="showPopup" [student]="student" (submitEvent)="submit($event)" (show)="showPopup=!showPopup"></app-student-popup>
-<app-alert *ngIf="showAlert" [needConfirm]="needConfirm" (confirmed)="delete(student, $event)" [message]="message" (showAlert)="showAlert=!showAlert"></app-alert>
+<app-alert  (confirmed)="delete(student, $event)" ></app-alert>

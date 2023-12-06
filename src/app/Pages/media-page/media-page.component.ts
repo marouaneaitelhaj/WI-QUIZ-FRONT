@@ -5,6 +5,7 @@ import { MediaService } from 'src/app/Services/media.service';
 import { QuestionService } from 'src/app/Services/question.service';
 import Media from 'src/app/Models/Media';
 import Question from 'src/app/Models/Question';
+import AlertProps from 'src/app/Components/alert/alertProps';
 
 @Component({
   selector: 'app-media-page',
@@ -14,10 +15,9 @@ import Question from 'src/app/Models/Question';
 })
 export class MediaPageComponent {
   showPopup: boolean = false;
-  needConfirm: boolean = false;
-  showAlert: boolean = false;
+  
   medias: Media[] = [];
-  message: string = "";
+  alertprops: AlertProps = new AlertProps();
   media: Media = new Media();
   functionType: FunctionType = FunctionType.save;
   constructor(private service: MediaService) {
@@ -33,8 +33,8 @@ export class MediaPageComponent {
     this.showPopup = !this.showPopup;
   }
   submit(media: Media) {
-    this.message = "Please wait...";
-    this.showAlert = true;
+    this.alertprops.message = "Please wait...";
+    this.alertprops.showAlert = true;
     this.service.upload(media.src).subscribe((data: any) => {
       this.media.src = data.url;
       if (this.functionType == FunctionType.save) {
@@ -49,12 +49,12 @@ export class MediaPageComponent {
       this.service.delete(media.id)
     } else if (confirmed == null) {
       this.media = media;
-      this.showAlert = true;
-      this.needConfirm = true;
+      this.alertprops.showAlert = true;
+      this.alertprops.needConfirm = true;
     } else {
       this.media = media;
-      this.showAlert = false;
-      this.needConfirm = false;
+      this.alertprops.showAlert = false;
+      this.alertprops.needConfirm = false;
     }
   }
   ngAfterContentInit() {

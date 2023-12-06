@@ -56,4 +56,4 @@
     </div>
 </div>
 <app-media-popup  *ngIf="showPopup" [media]="media" (submitEvent)="submit($event)" (show)="showPopup=!showPopup"></app-media-popup>
-<app-alert *ngIf="showAlert" [needConfirm]="needConfirm" (confirmed)="delete(media, $event)" [message]="message" (showAlert)="showAlert=!showAlert"></app-alert>
+<app-alert (confirmed)="delete(media, $event)"></app-alert>

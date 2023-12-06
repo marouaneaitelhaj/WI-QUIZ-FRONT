@@ -52,4 +52,4 @@
     </div>
 </div>
 <app-response-popup  *ngIf="showPopup" [response]="response" (submitEvent)="submit($event)" (show)="showPopup=!showPopup"></app-response-popup>
-<app-alert *ngIf="showAlert" [needConfirm]="needConfirm" (confirmed)="delete(response, $event)" [message]="message" (showAlert)="showAlert=!showAlert"></app-alert>
+<app-alert  (confirmed)="delete(response, $event)" ></app-alert>

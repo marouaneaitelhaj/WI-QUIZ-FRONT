@@ -7,6 +7,7 @@ import Question from 'src/app/Models/Question';
 import Quiz from 'src/app/Models/Quiz';
 import { QuestionService } from 'src/app/Services/question.service';
 import { QuizService } from 'src/app/Services/quiz.service';
+import AlertProps from 'src/app/Components/alert/alertProps';
 
 @Component({
   selector: 'app-questionofquiz-page',
@@ -15,12 +16,11 @@ import { QuizService } from 'src/app/Services/quiz.service';
 })
 export class QuestionofquizPageComponent {
   showPopup: boolean = false;
-  needConfirm: boolean = false;
-  showAlert: boolean = false;
+  
   questionofquizs: Questionofquiz[] = [];
   questions : Question[] = [];
   quizzes : Quiz[] = [];
-  message: string = "";
+  alertprops: AlertProps = new AlertProps();
   questionofquiz: Questionofquiz = new Questionofquiz();
   functionType: FunctionType = FunctionType.save;
   constructor(private service: QuestionofquizService) {
@@ -50,12 +50,12 @@ export class QuestionofquizPageComponent {
       this.service.delete(questionofquiz.id)
     } else if (confirmed == null) {
       this.questionofquiz = questionofquiz;
-      this.showAlert = true;
-      this.needConfirm = true;
+      this.alertprops.showAlert = true;
+      this.alertprops.needConfirm = true;
     } else {
       this.questionofquiz = questionofquiz;
-      this.showAlert = false;
-      this.needConfirm = false;
+      this.alertprops.showAlert = false;
+      this.alertprops.needConfirm = false;
     }
   }
   ngAfterContentInit() {

@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import AlertProps from 'src/app/Components/alert/alertProps';
 import Answer from 'src/app/Models/Answer';
 import Question from 'src/app/Models/Question';
 import Quiz from 'src/app/Models/Quiz';
@@ -14,9 +15,7 @@ import { QuizService } from 'src/app/Services/quiz.service';
   styleUrls: ['./playquiz.component.css'],
 })
 export class PlayquizComponent {
-  showAlert: boolean = false;
-  needConfirm: boolean = false;
-  message: string = "rak nadi";
+  alertprops: AlertProps = new AlertProps();
   id: number = 0;
   questionNumber: number = 0;
   quiz: Quiz = new Quiz();
@@ -44,12 +43,12 @@ export class PlayquizComponent {
   nextquestion() {
     clearInterval(this.interval);
     if (this.questionNumber == this.quiz.questionOfQuizs.length - 1) {
-      this.showAlert = true;
+      this.alertprops.showAlert = true;
       var result = 0;
       this.answers.forEach((answer: Answer) => {
         if (answer.validation.correct == true) {
           result = result + answer.validation.points;
-          this.message = "You have " + result + " points";
+          this.alertprops.message = "You have " + result + " points";
         }
       });
     } else {
@@ -64,7 +63,7 @@ export class PlayquizComponent {
     this.chrono(this.question.time);
   }
   resest(event: boolean) {
-    this.showAlert = event;
+    this.alertprops.showAlert = event;
     this.questionNumber = 0;
     this.answers = [];
     this.question = this.quiz.questionOfQuizs[this.questionNumber].question;

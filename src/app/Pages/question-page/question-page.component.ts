@@ -7,6 +7,7 @@ import { MyResponse } from 'src/app/Response/Response';
 import { LevelService } from 'src/app/Services/level.service';
 import { QuestionService } from 'src/app/Services/question.service';
 import { SubjectService } from 'src/app/Services/subject.service';
+import AlertProps from 'src/app/Components/alert/alertProps';
 
 @Component({
   selector: 'app-question-page',
@@ -20,7 +21,7 @@ export class QuestionPageComponent {
   showAlert: boolean = false;
   questions: Question[] = [];
   subjects: Subject[] = [];
-  message: string = "";
+  alertprops: AlertProps = new AlertProps();
   question: Question = new Question();
   functionType: FunctionType = FunctionType.save;
   constructor(private service: QuestionService) {
@@ -47,12 +48,12 @@ export class QuestionPageComponent {
       this.service.delete(question.id)
     } else if (confirmed == null) {
       this.question = question;
-      this.showAlert = true;
-      this.needConfirm = true;
+      this.alertprops.showAlert = true;
+      this.alertprops.needConfirm = true;
     } else {
       this.question = question;
-      this.showAlert = false;
-      this.needConfirm = false;
+      this.alertprops.showAlert = false;
+      this.alertprops.needConfirm = false;
     }
   }
   ngAfterContentInit() {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import AlertProps from 'src/app/Components/alert/alertProps';
 import { FunctionType } from 'src/app/Enums/FunctionType';
 import Response from 'src/app/Models/Response';
 import { MyResponse } from 'src/app/Response/Response';
@@ -11,10 +12,9 @@ import { ResponseService } from 'src/app/Services/response.service';
 })
 export class ResponsePageComponent {
   showPopup: boolean = false;
-  needConfirm: boolean = false;
-  showAlert: boolean = false;
+  
   responses: Response[] = [];
-  message: string = "";
+  alertprops: AlertProps = new AlertProps();
   response: Response = new Response();
   functionType: FunctionType = FunctionType.save;
   constructor(private service: ResponseService) {
@@ -41,12 +41,12 @@ export class ResponsePageComponent {
       this.service.delete(response.id);
     } else if (confirmed == null) {
       this.response = response;
-      this.showAlert = true;
-      this.needConfirm = true;
+      this.alertprops.showAlert = true;
+      this.alertprops.needConfirm = true;
     } else {
       this.response = response;
-      this.showAlert = false;
-      this.needConfirm = false;
+      this.alertprops.showAlert = false;
+      this.alertprops.needConfirm = false;
     }
   }
   ngAfterContentInit() {

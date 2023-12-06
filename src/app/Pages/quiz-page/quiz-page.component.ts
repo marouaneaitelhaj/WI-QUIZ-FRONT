@@ -3,6 +3,7 @@ import { FunctionType } from 'src/app/Enums/FunctionType';
 import { MyResponse } from 'src/app/Response/Response';
 import { QuizService } from 'src/app/Services/quiz.service';
 import Quiz from 'src/app/Models/Quiz';
+import AlertProps from 'src/app/Components/alert/alertProps';
 
 @Component({
   selector: 'app-quiz-page',
@@ -11,10 +12,9 @@ import Quiz from 'src/app/Models/Quiz';
 })
 export class QuizPageComponent {
   showPopup: boolean = false;
-  needConfirm: boolean = false;
-  showAlert: boolean = false;
+  
   quizs: Quiz[] = [];
-  message: string = "";
+  alertprops: AlertProps = new AlertProps();
   quiz: Quiz = new Quiz();
   functionType: FunctionType = FunctionType.save;
   constructor(private service: QuizService) {
@@ -41,12 +41,12 @@ export class QuizPageComponent {
       this.service.delete(quiz.id)
     } else if (confirmed == null) {
       this.quiz = quiz;
-      this.showAlert = true;
-      this.needConfirm = true;
+      this.alertprops.showAlert = true;
+      this.alertprops.needConfirm = true;
     } else {
       this.quiz = quiz;
-      this.showAlert = false;
-      this.needConfirm = false;
+      this.alertprops.showAlert = false;
+      this.alertprops.needConfirm = false;
     }
   }
   ngAfterContentInit() {

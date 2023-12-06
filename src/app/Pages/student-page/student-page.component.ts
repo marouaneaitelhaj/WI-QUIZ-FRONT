@@ -3,6 +3,7 @@ import { FunctionType } from 'src/app/Enums/FunctionType';
 import { MyResponse } from 'src/app/Response/Response';
 import { StudentService } from 'src/app/Services/student.service';
 import Student from 'src/app/Models/Student';
+import AlertProps from 'src/app/Components/alert/alertProps';
 
 @Component({
   selector: 'app-student-page',
@@ -11,10 +12,9 @@ import Student from 'src/app/Models/Student';
 })
 export class StudentPageComponent {
   showPopup: boolean = false;
-  needConfirm: boolean = false;
-  showAlert: boolean = false;
+  
   students: Student[] = [];
-  message: string = "";
+  alertprops: AlertProps = new AlertProps();
   student: Student = new Student();
   functionType: FunctionType = FunctionType.save;
   constructor(private service: StudentService) {
@@ -41,12 +41,12 @@ export class StudentPageComponent {
       this.service.delete(student.id)
     } else if (confirmed == null) {
       this.student = student;
-      this.showAlert = true;
-      this.needConfirm = true;
+      this.alertprops.showAlert = true;
+      this.alertprops.needConfirm = true;
     } else {
       this.student = student;
-      this.showAlert = false;
-      this.needConfirm = false;
+      this.alertprops.showAlert = false;
+      this.alertprops.needConfirm = false;
     }
   }
   ngAfterContentInit() {

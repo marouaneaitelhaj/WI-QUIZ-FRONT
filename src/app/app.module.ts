@@ -25,7 +25,7 @@ import { QuizPopupComponent } from './Components/quizPopup/quiz.popup.component'
 import { StudentPopupComponent } from './Components/studentPopup/student.popup.component';
 import {StoreModule} from '@ngrx/store';
 import { PlayquizComponent } from './Pages/playquiz/playquiz.component';
-import { QuestionofquizPageComponent } from './Pages/questionofquiz-page/questionofquiz-page.component.css-page.component';
+import { QuestionofquizPageComponent } from './Pages/questionofquiz-page/questionofquiz-page.component';
 import { QuestionofquizPopupComponent } from './Components/questionofquizPopup/questionofquiz.popup.component';
 import { ValidationPageComponent } from './Pages/validation-page/validation-page.component';
 import { ValidationPopupComponent } from './Components/validationPopup/validation.popup.component';

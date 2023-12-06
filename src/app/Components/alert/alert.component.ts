@@ -1,4 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import AlertProps from './alertProps';
+import { AlertService } from './alert.service';
 
 @Component({
   selector: 'app-alert',
@@ -6,11 +8,18 @@ import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core
   styleUrls: ['./alert.component.css']
 })
 export class AlertComponent {
-  @Input() message: string = "";
   @Output() showAlert = new EventEmitter<boolean>();
   @Output() confirmed = new EventEmitter<boolean>();
-  @Input() needConfirm: boolean = false;
+  alertProps: AlertProps = new AlertProps();
   confirm(b: boolean) {
     this.confirmed.emit(b);
+  }
+  constructor(private alertService : AlertService) { }
+  ngAfterContentInit() {
+    this.alertService.alertprops.subscribe(
+      (alertprops) => {
+        this.alertProps = alertprops;
+      }
+    );
   }
 }
