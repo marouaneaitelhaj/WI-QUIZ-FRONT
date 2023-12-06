@@ -12,7 +12,6 @@ import { SubjectService } from 'src/app/Services/subject.service';
   selector: 'app-question-page',
   templateUrl: './question-page.component.html',
   styleUrls: ['./question-page.component.css'],
-  providers: [QuestionService, LevelService, SubjectService]
 })
 export class QuestionPageComponent {
   service: QuestionService;

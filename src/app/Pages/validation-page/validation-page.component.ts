@@ -12,7 +12,6 @@ import Response from 'src/app/Models/Response';
   selector: 'app-validation-page',
   templateUrl: './validation-page.component.html',
   styleUrls: ['./validation-page.component.css'],
-  providers: [ValidationService, QuestionService, ResponseService]
 })
 export class ValidationPageComponent {
   service: ValidationService;

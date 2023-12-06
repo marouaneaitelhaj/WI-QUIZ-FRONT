@@ -8,7 +8,6 @@ import { ResponseService } from 'src/app/Services/response.service';
   selector: 'app-response-page',
   templateUrl: './response-page.component.html',
   styleUrls: ['./response-page.component.css'],
-  providers: [ResponseService]
 })
 export class ResponsePageComponent {
   service: ResponseService;

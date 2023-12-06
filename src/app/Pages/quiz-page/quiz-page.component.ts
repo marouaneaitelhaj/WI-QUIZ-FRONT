@@ -10,7 +10,6 @@ import { TeacherService } from 'src/app/Services/teacher.service';
   selector: 'app-quiz-page',
   templateUrl: './quiz-page.component.html',
   styleUrls: ['./quiz-page.component.css'],
-  providers: [QuizService, TeacherService]
 })
 export class QuizPageComponent {
   service: QuizService;

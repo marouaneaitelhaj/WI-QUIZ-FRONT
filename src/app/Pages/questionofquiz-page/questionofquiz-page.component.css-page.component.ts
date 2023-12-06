@@ -12,7 +12,6 @@ import { QuizService } from 'src/app/Services/quiz.service';
   selector: 'app-questionofquiz-page',
   templateUrl: './questionofquiz-page.component.html',
   styleUrls: ['./questionofquiz-page.component.css'],
-  providers: [QuestionofquizService, QuestionService, QuizService]
 })
 export class QuestionofquizPageComponent {
   service: QuestionofquizService;

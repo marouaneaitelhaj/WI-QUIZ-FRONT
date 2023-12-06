@@ -8,7 +8,6 @@ import { SubjectService } from 'src/app/Services/subject.service';
   selector: 'app-subject-page',
   templateUrl: './subject-page.component.html',
   styleUrls: ['./subject-page.component.css'],
-  providers: [SubjectService]
 })
 export class SubjectPageComponent {
   service: SubjectService;

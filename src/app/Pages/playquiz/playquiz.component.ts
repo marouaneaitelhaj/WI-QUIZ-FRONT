@@ -12,7 +12,6 @@ import { QuizService } from 'src/app/Services/quiz.service';
   selector: 'app-playquiz',
   templateUrl: './playquiz.component.html',
   styleUrls: ['./playquiz.component.css'],
-  providers: [QuizService]
 })
 export class PlayquizComponent {
   showAlert: boolean = false;

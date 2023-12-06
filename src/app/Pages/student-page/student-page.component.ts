@@ -8,7 +8,6 @@ import Student from 'src/app/Models/Student';
   selector: 'app-student-page',
   templateUrl: './student-page.component.html',
   styleUrls: ['./student-page.component.css'],
-  providers: [StudentService]
 })
 export class StudentPageComponent {
   service: StudentService;

@@ -8,7 +8,6 @@ import Level from 'src/app/Models/Level';
   selector: 'app-level-page',
   templateUrl: './level-page.component.html',
   styleUrls: ['./level-page.component.css'],
-  providers: [LevelService]
 })
 export class LevelPageComponent {
   service: LevelService;
