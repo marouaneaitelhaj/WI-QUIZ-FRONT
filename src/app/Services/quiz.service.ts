@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import Quiz from '../Models/Quiz';
 import { MyResponse } from '../Response/Response';
 @Injectable({
@@ -10,6 +10,7 @@ export class QuizService {
   private url = 'http://localhost:8080/quiz';
   constructor(private http: HttpClient) {
   }
+  public quizes = new Subject<Quiz[]>();
   public findAll(): Observable<MyResponse<Quiz>> {
     return this.http.get<MyResponse<Quiz>>(this.url);
   }

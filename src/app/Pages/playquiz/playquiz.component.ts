@@ -53,7 +53,6 @@ export class PlayquizComponent {
           this.message = "You have " + result + " points";
         }
       });
-      console.log(result);
     } else {
       this.questionNumber++;
       this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
