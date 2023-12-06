@@ -8,11 +8,12 @@ import { AlertService } from './alert.service';
   styleUrls: ['./alert.component.css']
 })
 export class AlertComponent {
-  @Output() showAlert = new EventEmitter<boolean>();
   @Output() confirmed = new EventEmitter<boolean>();
   alertProps: AlertProps = new AlertProps();
   confirm(b: boolean) {
     this.confirmed.emit(b);
+    this.alertProps.showAlert = false;
+    this.alertService.alertprops.next(this.alertProps);
   }
   constructor(private alertService : AlertService) { }
   ngAfterContentInit() {
