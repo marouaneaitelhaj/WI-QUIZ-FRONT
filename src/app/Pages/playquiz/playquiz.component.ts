@@ -14,7 +14,7 @@ import { QuizService } from 'src/app/Services/quiz.service';
   styleUrls: ['./playquiz.component.css'],
   providers: [QuizService]
 })
-export class PlayquizComponent implements OnChanges {
+export class PlayquizComponent {
   showAlert: boolean = false;
   needConfirm: boolean = false;
   message: string = "rak nadi";
@@ -24,6 +24,8 @@ export class PlayquizComponent implements OnChanges {
   selectedImage: number = 0;
   question: Question = new Question();
   answers: Answer[] = [];
+  lefTime: number = 0;
+  interval: any;
   constructor(private route: ActivatedRoute, private quizService: QuizService) { }
   playAudio(): void {
     const audio = new Audio();
@@ -37,10 +39,11 @@ export class PlayquizComponent implements OnChanges {
     this.quizService.findById(this.id).subscribe((data: Quiz) => {
       this.quiz = data;
       this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
-      console.log(this.question);
+      this.chrono(this.question.time);
     });
   }
   nextquestion() {
+    clearInterval(this.interval);
     if (this.questionNumber == this.quiz.questionOfQuizs.length - 1) {
       this.showAlert = true;
       var result = 0;
@@ -54,11 +57,13 @@ export class PlayquizComponent implements OnChanges {
     } else {
       this.questionNumber++;
       this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
+      this.chrono(this.question.time);
     }
   }
   setResponse(response: Validation) {
     this.answers[this.questionNumber] = new Answer();
     this.answers[this.questionNumber].validation = response;
+    this.chrono(this.question.time);
   }
   resest(event: boolean) {
     this.showAlert = event;
@@ -66,7 +71,14 @@ export class PlayquizComponent implements OnChanges {
     this.answers = [];
     this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
+  chrono(time: number) {
+    this.lefTime = time;
+    this.interval = setInterval(() => {
+      this.lefTime--;
+      if (this.lefTime == 0) {
+        this.nextquestion();
+        clearInterval(this.interval);
+      }
+    }, 1000);
   }
 }

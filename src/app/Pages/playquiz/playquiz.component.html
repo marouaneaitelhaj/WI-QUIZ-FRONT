@@ -7,15 +7,16 @@
         </div>
         <div></div>
     </div>
-    <div class="relative bg-orange-50 m-5 w-11/12 h-96 justify-center align-middle flex" >
-        <span class="absolute  right-4 top-4 z-50 bg-white rounded-full p-4">36</span>
+    <div class="relative bg-orange-50 m-5 w-11/12 h-96 justify-center align-middle flex">
+        <span class="absolute  right-4 top-4 z-50 bg-white rounded-full p-4">{{lefTime}}</span>
         <div class="flex w-full p-5 justify-center align-middle">
             <div class="w-2/5 align-middle flex flex-col">
                 <p class="text-2xl text-center font-bold">{{question.question}}</p>
                 <div>
                     <div *ngFor="let response of question.validations; let i = index">
                         <div class="flex justify-center align-middle">
-                            <input type="radio" name="response" id="response{{i}}" class="m-2" (click)="setResponse(response)" >
+                            <input type="radio" name="response" id="response{{i}}" class="m-2"
+                                (click)="setResponse(response)">
                             <label for="response{{i}}" class="m-2">{{response.response.response}}</label>
                         </div>
                     </div>
@@ -64,4 +65,5 @@
         </div>
     </div>
 </div>
-<app-alert-message *ngIf="showAlert" [needConfirm]="needConfirm" (confirmed)="resest($event)" [message]="message" (showAlert)="showAlert=!showAlert"></app-alert-message>
+<app-alert-message *ngIf="showAlert" [needConfirm]="needConfirm" (confirmed)="resest($event)" [message]="message"
+    (showAlert)="showAlert=!showAlert"></app-alert-message>
