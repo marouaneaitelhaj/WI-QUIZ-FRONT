@@ -10,7 +10,6 @@ import Student from 'src/app/Models/Student';
   styleUrls: ['./student-page.component.css'],
 })
 export class StudentPageComponent {
-  service: StudentService;
   showPopup: boolean = false;
   needConfirm: boolean = false;
   showAlert: boolean = false;
@@ -18,11 +17,7 @@ export class StudentPageComponent {
   message: string = "";
   student: Student = new Student();
   functionType: FunctionType = FunctionType.save;
-  constructor(service: StudentService) {
-    this.service = service;
-  }
-  ngOnInit(): void {
-    this.service.findAll()
+  constructor(private service: StudentService) {
   }
   togglePopUp(student?: Student) {
     if (student) {
@@ -33,9 +28,6 @@ export class StudentPageComponent {
       this.student = new Student();
     }
     this.showPopup = !this.showPopup;
-  }
-  findAll() {
-    this.service.findAll()
   }
   submit(student: Student) {
     if (this.functionType == FunctionType.save) {
@@ -56,5 +48,12 @@ export class StudentPageComponent {
       this.showAlert = false;
       this.needConfirm = false;
     }
+  }
+  ngAfterContentInit() {
+    this.service.students.subscribe(
+      (students) => {
+        this.students = students;
+      }
+    );
   }
 }

@@ -14,9 +14,6 @@ import Response from 'src/app/Models/Response';
   styleUrls: ['./validation-page.component.css'],
 })
 export class ValidationPageComponent {
-  service: ValidationService;
-  questionService: QuestionService;
-  responseService: ResponseService;
   showPopup: boolean = false;
   needConfirm: boolean = false;
   showAlert: boolean = false;
@@ -24,17 +21,7 @@ export class ValidationPageComponent {
   message: string = "";
   validation: Validation = new Validation();
   functionType: FunctionType = FunctionType.save;
-  questions  : Question[] = [];
-  responses : Response[] = [];
-  constructor(service: ValidationService, questionService: QuestionService, responseService: ResponseService) {
-    this.service = service;
-    this.questionService = questionService;
-    this.responseService = responseService;
-  }
-  ngOnInit(): void {
-    this.service.findAll();
-    this.questionService.findAll();
-    this.responseService.findAll();
+  constructor(private service: ValidationService) {
   }
   togglePopUp(validation?: Validation) {
     if (validation) {
@@ -45,9 +32,6 @@ export class ValidationPageComponent {
       this.validation = new Validation();
     }
     this.showPopup = !this.showPopup;
-  }
-  findAll() {
-    this.service.findAll();
   }
   submit(validation: Validation) {
     if (this.functionType == FunctionType.save) {
@@ -68,5 +52,12 @@ export class ValidationPageComponent {
       this.showAlert = false;
       this.needConfirm = false;
     }
+  }
+  ngAfterContentInit() {
+    this.service.validations.subscribe(
+      (validations) => {
+        this.validations = validations;
+      }
+    );
   }
 }
