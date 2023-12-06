@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import Questionofquiz from '../Models/Questionofquiz';
 import { MyResponse } from '../Response/Response';
 @Injectable({
@@ -9,17 +9,41 @@ import { MyResponse } from '../Response/Response';
 export class QuestionofquizService {
   private url = 'http://localhost:8080/questionofquiz';
   constructor(private http: HttpClient) {
+    this.findAll();
   }
-  public findAll(): Observable<MyResponse<Questionofquiz>> {
-    return this.http.get<MyResponse<Questionofquiz>>(this.url);
+  public questionofquizs = new BehaviorSubject<Questionofquiz[]>([]);
+  public findAll(): void {
+    this.http.get<MyResponse<Questionofquiz>>(this.url).subscribe(
+      (response) => {
+        this.questionofquizs.next(response.content);
+      }
+    );
   }
-  public save(questionofquiz: Questionofquiz): Observable<MyResponse<Questionofquiz>> {
-    return this.http.post<MyResponse<Questionofquiz>>(this.url, questionofquiz);
+  public save(questionofquiz: Questionofquiz): void {
+    this.http.post<MyResponse<Questionofquiz>>(this.url, questionofquiz).subscribe(
+      (response) => {
+        this.questionofquizs.next(this.questionofquizs.getValue().concat([response.data]));
+      }
+    );
   }
-  public update(questionofquiz: Questionofquiz): Observable<MyResponse<Questionofquiz>> {
-    return this.http.put<MyResponse<Questionofquiz>>(this.url + "/" + questionofquiz.id, questionofquiz);
+  public update(questionofquiz: Questionofquiz): void {
+    this.http.put<MyResponse<Questionofquiz>>(this.url + "/" + questionofquiz.id, questionofquiz).subscribe(
+      (response) => {
+        const questionofquizs = this.questionofquizs.getValue();
+        const index = questionofquizs.findIndex((s) => s.id === questionofquiz.id);
+        questionofquizs[index] = response.data;
+        this.questionofquizs.next(questionofquizs);
+      }
+    )
   }
-  public delete(id: number): Observable<MyResponse<Questionofquiz>> {
-    return this.http.delete<MyResponse<Questionofquiz>>(this.url + "/" + id);
+  public delete(id: number): void {
+    this.http.delete<MyResponse<Questionofquiz>>(this.url + "/" + id).subscribe(
+      (response) => {
+        const questionofquizs = this.questionofquizs.getValue();
+        const index = questionofquizs.findIndex((s) => s.id === id);
+        questionofquizs.splice(index, 1);
+        this.questionofquizs.next(questionofquizs);
+      }
+    )
   }
 }

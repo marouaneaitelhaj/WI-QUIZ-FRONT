@@ -14,33 +14,16 @@ import { SubjectService } from 'src/app/Services/subject.service';
   styleUrls: ['./question-page.component.css'],
 })
 export class QuestionPageComponent {
-  service: QuestionService;
   showPopup: boolean = false;
   needConfirm: boolean = false;
   levels: Level[] = [];
   showAlert: boolean = false;
-  levelService: LevelService;
   questions: Question[] = [];
-  subjectService :SubjectService;
   subjects: Subject[] = [];
   message: string = "";
   question: Question = new Question();
   functionType: FunctionType = FunctionType.save;
-  constructor(service: QuestionService, levelService: LevelService,subjectService:SubjectService) {
-    this.service = service;
-    this.levelService = levelService;
-    this.subjectService = subjectService;
-  }
-  ngOnInit(): void {
-    this.service.findAll().subscribe((data: MyResponse<Question>) => {
-      this.questions = data.content;
-    });
-    this.levelService.findAll().subscribe((data: MyResponse<Level>) => {
-      this.levels = data.content;
-    });
-    this.subjectService.findAll().subscribe((data: MyResponse<Subject>) => {
-      this.subjects = data.content;
-    });
+  constructor(private service: QuestionService) {
   }
   togglePopUp(question?: Question) {
     if (question) {
@@ -52,47 +35,16 @@ export class QuestionPageComponent {
     }
     this.showPopup = !this.showPopup;
   }
-  findAll() {
-    this.service.findAll().subscribe((data: MyResponse<Question>) => {
-      this.questions = data.content;
-    });
-  }
   submit(question: Question) {
     if (this.functionType == FunctionType.save) {
-      this.service.save(question).subscribe((data: MyResponse<Question>) => {
-        this.findAll();
-        this.message = data.message;
-        this.showAlert = true;
-      }, (error) => {
-        this.findAll();
-        this.message = error.error.error;
-        this.showAlert = true;
-      });
+      this.service.save(question)
     } else {
-      this.service.update(question).subscribe((data: MyResponse<Question>) => {
-        this.findAll();
-        this.message = data.message;
-        this.showAlert = true;
-      }, (error) => {
-        this.findAll();
-        this.message = error.error.error;
-        this.showAlert = true;
-      });
+      this.service.update(question)
     }
   }
   delete(question: Question, confirmed?: boolean) {
     if (confirmed ) {
-      this.service.delete(question.id).subscribe((data: MyResponse<Question>) => {
-        this.findAll();
-        this.message = data.message;
-        this.showAlert = true;
-        this.needConfirm = false;
-      }, (error) => {
-        this.findAll();
-        this.message = error.error.error;
-        this.showAlert = true;
-        this.needConfirm = false;
-      });
+      this.service.delete(question.id)
     } else if (confirmed == null) {
       this.question = question;
       this.showAlert = true;
@@ -102,5 +54,12 @@ export class QuestionPageComponent {
       this.showAlert = false;
       this.needConfirm = false;
     }
+  }
+  ngAfterContentInit() {
+    this.service.questions.subscribe(
+      (questions) => {
+        this.questions = questions;
+      }
+    );
   }
 }

@@ -1,5 +1,5 @@
 export interface MyResponse<T> {
     content: T[];
-    t: T;
+    data: T;
     message: string;
 }

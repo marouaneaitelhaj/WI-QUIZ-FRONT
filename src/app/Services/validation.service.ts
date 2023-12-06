@@ -9,22 +9,45 @@ import { MyResponse } from '../Response/Response';
 export class ValidationService {
   private url = 'http://localhost:8080/validation';
   constructor(private http: HttpClient) {
+    this.findAll();
   }
 
-  // public validations = new BehaviorSubject<Validation[]>([]);
+  public validations = new BehaviorSubject<Validation[]>([]);
   // readonly currentValidations = this.validations.asObservable();
 
 
-  public findAll(): Observable<MyResponse<Validation>> {
-    return this.http.get<MyResponse<Validation>>(this.url);
+  public findAll(): void {
+    this.http.get<MyResponse<Validation>>(this.url).subscribe(
+      (response) => {
+        this.validations.next(response.content);
+      }
+    )
   }
-  public save(validation: Validation): Observable<MyResponse<Validation>> {
-    return this.http.post<MyResponse<Validation>>(this.url, validation);
+  public save(validation: Validation): void {
+    this.http.post<MyResponse<Validation>>(this.url, validation).subscribe(
+      (response) => {
+        this.validations.next(this.validations.getValue().concat([response.data]));
+      }
+    )
   }
-  public update(validation: Validation): Observable<MyResponse<Validation>> {
-    return this.http.put<MyResponse<Validation>>(this.url + "/" + validation.id, validation);
+  public update(validation: Validation): void {
+    this.http.put<MyResponse<Validation>>(this.url + "/" + validation.id, validation).subscribe(
+      (response) => {
+        const validations = this.validations.getValue();
+        const index = validations.findIndex((s) => s.id === validation.id);
+        validations[index] = response.data;
+        this.validations.next(validations);
+      }
+    )
   }
-  public delete(id: number): Observable<MyResponse<Validation>> {
-    return this.http.delete<MyResponse<Validation>>(this.url + "/" + id);
+  public delete(id: number): void {
+    this.http.delete<MyResponse<Validation>>(this.url + "/" + id).subscribe(
+      (response) => {
+        const validations = this.validations.getValue();
+        const index = validations.findIndex((s) => s.id === id);
+        validations.splice(index, 1);
+        this.validations.next(validations);
+      }
+    )
   }
 }

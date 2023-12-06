@@ -32,15 +32,9 @@ export class ValidationPageComponent {
     this.responseService = responseService;
   }
   ngOnInit(): void {
-    this.service.findAll().subscribe((data: MyResponse<Validation>) => {
-      this.validations = data.content;
-    });
-    this.questionService.findAll().subscribe((data: MyResponse<Question>) => {
-      this.questions = data.content;
-    });
-    this.responseService.findAll().subscribe((data: MyResponse<Response>) => {
-      this.responses = data.content;
-    });
+    this.service.findAll();
+    this.questionService.findAll();
+    this.responseService.findAll();
   }
   togglePopUp(validation?: Validation) {
     if (validation) {
@@ -53,46 +47,18 @@ export class ValidationPageComponent {
     this.showPopup = !this.showPopup;
   }
   findAll() {
-    this.service.findAll().subscribe((data: MyResponse<Validation>) => {
-      this.validations = data.content;
-    });
+    this.service.findAll();
   }
   submit(validation: Validation) {
     if (this.functionType == FunctionType.save) {
-      this.service.save(validation).subscribe((data: MyResponse<Validation>) => {
-        this.findAll();
-        this.message = data.message;
-        this.showAlert = true;
-      }, (error) => {
-        this.findAll();
-        this.message = error.error.error;
-        this.showAlert = true;
-      });
+      this.service.save(validation);
     } else {
-      this.service.update(validation).subscribe((data: MyResponse<Validation>) => {
-        this.findAll();
-        this.message = data.message;
-        this.showAlert = true;
-      }, (error) => {
-        this.findAll();
-        this.message = error.error.error;
-        this.showAlert = true;
-      });
+      this.service.update(validation);
     }
   }
   delete(validation: Validation, confirmed?: boolean) {
     if (confirmed) {
-      this.service.delete(validation.id).subscribe((data: MyResponse<Validation>) => {
-        this.findAll();
-        this.message = data.message;
-        this.showAlert = true;
-        this.needConfirm = false;
-      }, (error) => {
-        this.findAll();
-        this.message = error.error.error;
-        this.showAlert = true;
-        this.needConfirm = false;
-      });
+      this.service.delete(validation.id);
     } else if (confirmed == null) {
       this.validation = validation;
       this.showAlert = true;

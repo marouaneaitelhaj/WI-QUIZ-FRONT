@@ -14,9 +14,6 @@ import { QuizService } from 'src/app/Services/quiz.service';
   styleUrls: ['./questionofquiz-page.component.css'],
 })
 export class QuestionofquizPageComponent {
-  service: QuestionofquizService;
-  questionService: QuestionService;
-  quizService: QuizService;
   showPopup: boolean = false;
   needConfirm: boolean = false;
   showAlert: boolean = false;
@@ -26,21 +23,7 @@ export class QuestionofquizPageComponent {
   message: string = "";
   questionofquiz: Questionofquiz = new Questionofquiz();
   functionType: FunctionType = FunctionType.save;
-  constructor(service: QuestionofquizService, questionService: QuestionService, quizService: QuizService) {
-    this.service = service;
-    this.questionService = questionService;
-    this.quizService = quizService;
-  }
-  ngOnInit(): void {
-    this.service.findAll().subscribe((data: MyResponse<Questionofquiz>) => {
-      this.questionofquizs = data.content;
-    });
-    this.questionService.findAll().subscribe((data: MyResponse<Question>) => {
-      this.questions = data.content;
-    });
-    this.quizService.findAll().subscribe((data: MyResponse<Quiz>) => {
-      this.quizzes = data.content;
-    });
+  constructor(private service: QuestionofquizService) {
   }
   togglePopUp(questionofquiz?: Questionofquiz) {
     if (questionofquiz) {
@@ -53,46 +36,18 @@ export class QuestionofquizPageComponent {
     this.showPopup = !this.showPopup;
   }
   findAll() {
-    this.service.findAll().subscribe((data: MyResponse<Questionofquiz>) => {
-      this.questionofquizs = data.content;
-    });
+    this.service.findAll()
   }
   submit(questionofquiz: Questionofquiz) {
     if (this.functionType == FunctionType.save) {
-      this.service.save(questionofquiz).subscribe((data: MyResponse<Questionofquiz>) => {
-        this.findAll();
-        this.message = data.message;
-        this.showAlert = true;
-      }, (error) => {
-        this.findAll();
-        this.message = error.error.error;
-        this.showAlert = true;
-      });
+      this.service.save(questionofquiz)
     } else {
-      this.service.update(questionofquiz).subscribe((data: MyResponse<Questionofquiz>) => {
-        this.findAll();
-        this.message = data.message;
-        this.showAlert = true;
-      }, (error) => {
-        this.findAll();
-        this.message = error.error.error;
-        this.showAlert = true;
-      });
+      this.service.update(questionofquiz)
     }
   }
   delete(questionofquiz: Questionofquiz, confirmed?: boolean) {
     if (confirmed) {
-      this.service.delete(questionofquiz.id).subscribe((data: MyResponse<Questionofquiz>) => {
-        this.findAll();
-        this.message = data.message;
-        this.showAlert = true;
-        this.needConfirm = false;
-      }, (error) => {
-        this.findAll();
-        this.message = error.error.error;
-        this.showAlert = true;
-        this.needConfirm = false;
-      });
+      this.service.delete(questionofquiz.id)
     } else if (confirmed == null) {
       this.questionofquiz = questionofquiz;
       this.showAlert = true;
@@ -102,5 +57,12 @@ export class QuestionofquizPageComponent {
       this.showAlert = false;
       this.needConfirm = false;
     }
+  }
+  ngAfterContentInit() {
+    this.service.questionofquizs.subscribe(
+      (questionofquizs) => {
+        this.questionofquizs = questionofquizs;
+      }
+    );
   }
 }

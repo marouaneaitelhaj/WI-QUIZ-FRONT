@@ -74,7 +74,7 @@
         </div>
     </div>
 </div>
-<app-quiz-popup *ngIf="showPopup" [quiz]="quiz" [teachers]="teachers" (submitEvent)="submit($event)" (show)="showPopup=!showPopup"
+<app-quiz-popup *ngIf="showPopup" [quiz]="quiz" (submitEvent)="submit($event)" (show)="showPopup=!showPopup"
     [quizs]="quizs"></app-quiz-popup>
 <app-alert *ngIf="showAlert" [needConfirm]="needConfirm" (confirmed)="delete(quiz, $event)" [message]="message"
     (showAlert)="showAlert=!showAlert"></app-alert>

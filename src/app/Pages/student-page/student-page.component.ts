@@ -22,9 +22,7 @@ export class StudentPageComponent {
     this.service = service;
   }
   ngOnInit(): void {
-    this.service.findAll().subscribe((data: MyResponse<Student>) => {
-      this.students = data.content;
-    });
+    this.service.findAll()
   }
   togglePopUp(student?: Student) {
     if (student) {
@@ -37,46 +35,18 @@ export class StudentPageComponent {
     this.showPopup = !this.showPopup;
   }
   findAll() {
-    this.service.findAll().subscribe((data: MyResponse<Student>) => {
-      this.students = data.content;
-    });
+    this.service.findAll()
   }
   submit(student: Student) {
     if (this.functionType == FunctionType.save) {
-      this.service.save(student).subscribe((data: MyResponse<Student>) => {
-        this.findAll();
-        this.message = data.message;
-        this.showAlert = true;
-      }, (error) => {
-        this.findAll();
-        this.message = error.error.error;
-        this.showAlert = true;
-      });
+      this.service.save(student)
     } else {
-      this.service.update(student).subscribe((data: MyResponse<Student>) => {
-        this.findAll();
-        this.message = data.message;
-        this.showAlert = true;
-      }, (error) => {
-        this.findAll();
-        this.message = error.error.error;
-        this.showAlert = true;
-      });
+      this.service.update(student)
     }
   }
   delete(student: Student, confirmed?: boolean) {
     if (confirmed) {
-      this.service.delete(student.id).subscribe((data: MyResponse<Student>) => {
-        this.findAll();
-        this.message = data.message;
-        this.showAlert = true;
-        this.needConfirm = false;
-      }, (error) => {
-        this.findAll();
-        this.message = error.error.error;
-        this.showAlert = true;
-        this.needConfirm = false;
-      });
+      this.service.delete(student.id)
     } else if (confirmed == null) {
       this.student = student;
       this.showAlert = true;

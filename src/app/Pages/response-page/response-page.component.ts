@@ -10,7 +10,6 @@ import { ResponseService } from 'src/app/Services/response.service';
   styleUrls: ['./response-page.component.css'],
 })
 export class ResponsePageComponent {
-  service: ResponseService;
   showPopup: boolean = false;
   needConfirm: boolean = false;
   showAlert: boolean = false;
@@ -18,13 +17,7 @@ export class ResponsePageComponent {
   message: string = "";
   response: Response = new Response();
   functionType: FunctionType = FunctionType.save;
-  constructor(service: ResponseService) {
-    this.service = service;
-  }
-  ngOnInit(): void {
-    this.service.findAll().subscribe((data: MyResponse<Response>) => {
-      this.responses = data.content;
-    });
+  constructor(private service: ResponseService) {
   }
   togglePopUp(response?: Response) {
     if (response) {
@@ -36,47 +29,16 @@ export class ResponsePageComponent {
     }
     this.showPopup = !this.showPopup;
   }
-  findAll() {
-    this.service.findAll().subscribe((data: MyResponse<Response>) => {
-      this.responses = data.content;
-    });
-  }
   submit(response: Response) {
     if (this.functionType == FunctionType.save) {
-      this.service.save(response).subscribe((data: MyResponse<Response>) => {
-        this.findAll();
-        this.message = data.message;
-        this.showAlert = true;
-      }, (error) => {
-        this.findAll();
-        this.message = error.error.error;
-        this.showAlert = true;
-      });
+      this.service.save(response)
     } else {
-      this.service.update(response).subscribe((data: MyResponse<Response>) => {
-        this.findAll();
-        this.message = data.message;
-        this.showAlert = true;
-      }, (error) => {
-        this.findAll();
-        this.message = error.error.error;
-        this.showAlert = true;
-      });
+      this.service.update(response)
     }
   }
   delete(response: Response, confirmed?: boolean) {
     if (confirmed) {
-      this.service.delete(response.id).subscribe((data: MyResponse<Response>) => {
-        this.findAll();
-        this.message = data.message;
-        this.showAlert = true;
-        this.needConfirm = false;
-      }, (error) => {
-        this.findAll();
-        this.message = error.error.error;
-        this.showAlert = true;
-        this.needConfirm = false;
-      });
+      this.service.delete(response.id);
     } else if (confirmed == null) {
       this.response = response;
       this.showAlert = true;
@@ -86,5 +48,12 @@ export class ResponsePageComponent {
       this.showAlert = false;
       this.needConfirm = false;
     }
+  }
+  ngAfterContentInit() {
+    this.service.responses.subscribe(
+      (responses) => {
+        this.responses = responses;
+      }
+    );
   }
 }

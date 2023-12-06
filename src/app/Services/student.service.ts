@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import Student from '../Models/Student';
 import { MyResponse } from '../Response/Response';
 @Injectable({
@@ -9,17 +9,41 @@ import { MyResponse } from '../Response/Response';
 export class StudentService {
   private url = 'http://localhost:8080/student';
   constructor(private http: HttpClient) {
+    this.findAll();
   }
-  public findAll(): Observable<MyResponse<Student>> {
-    return this.http.get<MyResponse<Student>>(this.url);
+  public students = new BehaviorSubject<Student[]>([]);
+  public findAll(): void {
+    this.http.get<MyResponse<Student>>(this.url).subscribe(
+      (response) => {
+        this.students.next(response.content);
+      }
+    )
   }
-  public save(student: Student): Observable<MyResponse<Student>> {
-    return this.http.post<MyResponse<Student>>(this.url, student);
+  public save(student: Student): void {
+    this.http.post<MyResponse<Student>>(this.url, student).subscribe(
+      (response) => {
+        this.students.next(this.students.getValue().concat([response.data]));
+      }
+    )
   }
-  public update(student: Student): Observable<MyResponse<Student>> {
-    return this.http.put<MyResponse<Student>>(this.url + "/" + student.id, student);
+  public update(student: Student): void {
+    this.http.put<MyResponse<Student>>(this.url + "/" + student.id, student).subscribe(
+      (response) => {
+        const students = this.students.getValue();
+        const index = students.findIndex((s) => s.id === student.id);
+        students[index] = response.data;
+        this.students.next(students);
+      }
+    )
   }
-  public delete(id: number): Observable<MyResponse<Student>> {
-    return this.http.delete<MyResponse<Student>>(this.url + "/" + id);
+  public delete(id: number): void {
+    this.http.delete<MyResponse<Student>>(this.url + "/" + id).subscribe(
+      (response) => {
+        const students = this.students.getValue();
+        const index = students.findIndex((s) => s.id === id);
+        students.splice(index, 1);
+        this.students.next(students);
+      }
+    )
   }
 }

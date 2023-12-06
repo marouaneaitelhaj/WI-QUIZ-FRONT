@@ -5,6 +5,8 @@ import Level from 'src/app/Models/Level';
 import Subject from 'src/app/Models/Subject';
 import Question from 'src/app/Models/Question';
 import { MyResponse } from 'src/app/Response/Response';
+import { LevelService } from 'src/app/Services/level.service';
+import { SubjectService } from 'src/app/Services/subject.service';
 @Component({
   selector: 'app-question-popup',
   templateUrl: './question.popup.component.html',
@@ -14,8 +16,8 @@ export class QuestionPopupComponent {
   @Output() show = new EventEmitter<boolean>();
   @Output() submitEvent = new EventEmitter<Question>();
   @Input() question: Question = new Question();
-  @Input() levels: Level[] = [];
-  @Input() subjects: Subject[] = [];
+  levels: Level[] = [];
+  subjects: Subject[] = [];
   keysOfQuestionTypes = Object.keys(QuestionType);
   togglePopUp() {
     this.show.emit(false);
@@ -23,5 +25,18 @@ export class QuestionPopupComponent {
   submit() {
     this.submitEvent.emit(this.question);
     this.togglePopUp();
+  }
+  constructor(private levelService: LevelService,private subjectService:SubjectService) {}
+  ngAfterContentInit() {
+    this.levelService.levels.subscribe(
+      (levels) => {
+        this.levels = levels;
+      }
+    );
+    this.subjectService.subjects.subscribe(
+      (subjects) => {
+        this.subjects = subjects;
+      }
+    );
   }
 }

@@ -13,27 +13,14 @@ import Question from 'src/app/Models/Question';
   providers: [MediaService,QuestionService ]
 })
 export class MediaPageComponent {
-  service: MediaService;
-  questionService: QuestionService;
   showPopup: boolean = false;
   needConfirm: boolean = false;
   showAlert: boolean = false;
   medias: Media[] = [];
-  questions: Question[] = [];
   message: string = "";
   media: Media = new Media();
   functionType: FunctionType = FunctionType.save;
-  constructor(service: MediaService, questionService:QuestionService) {
-    this.service = service;
-    this.questionService = questionService;
-  }
-  ngOnInit(): void {
-    this.service.findAll().subscribe((data: MyResponse<Media>) => {
-      this.medias = data.content;
-    });
-    this.questionService.findAll().subscribe((data: MyResponse<Question>) => {
-      this.questions = data.content;
-    });
+  constructor(private service: MediaService) {
   }
   togglePopUp(media?: Media) {
     if (media) {
@@ -45,52 +32,21 @@ export class MediaPageComponent {
     }
     this.showPopup = !this.showPopup;
   }
-  findAll() {
-    this.service.findAll().subscribe((data: MyResponse<Media>) => {
-      this.medias = data.content;
-    });
-  }
   submit(media: Media) {
     this.message = "Please wait...";
     this.showAlert = true;
     this.service.upload(media.src).subscribe((data: any) => {
       this.media.src = data.url;
       if (this.functionType == FunctionType.save) {
-        this.service.save(media).subscribe((data: MyResponse<Media>) => {
-          this.findAll();
-          this.message = data.message;
-          this.showAlert = true;
-        }, (error) => {
-          this.findAll();
-          this.message = error.error.error;
-          this.showAlert = true;
-        });
+        this.service.save(media)
       } else {
-        this.service.update(media).subscribe((data: MyResponse<Media>) => {
-          this.findAll();
-          this.message = data.message;
-          this.showAlert = true;
-        }, (error) => {
-          this.findAll();
-          this.message = error.error.error;
-          this.showAlert = true;
-        });
+        this.service.update(media)
       }
     }, (error) => {});
   }
   delete(media: Media, confirmed?: boolean) {
     if (confirmed ) {
-      this.service.delete(media.id).subscribe((data: MyResponse<Media>) => {
-        this.findAll();
-        this.message = data.message;
-        this.showAlert = true;
-        this.needConfirm = false;
-      }, (error) => {
-        this.findAll();
-        this.message = error.error.error;
-        this.showAlert = true;
-        this.needConfirm = false;
-      });
+      this.service.delete(media.id)
     } else if (confirmed == null) {
       this.media = media;
       this.showAlert = true;
@@ -100,5 +56,12 @@ export class MediaPageComponent {
       this.showAlert = false;
       this.needConfirm = false;
     }
+  }
+  ngAfterContentInit() {
+    this.service.medias.subscribe(
+      (medias) => {
+        this.medias = medias;
+      }
+    );
   }
 }

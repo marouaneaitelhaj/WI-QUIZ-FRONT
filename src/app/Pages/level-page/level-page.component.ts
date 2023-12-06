@@ -10,7 +10,6 @@ import Level from 'src/app/Models/Level';
   styleUrls: ['./level-page.component.css'],
 })
 export class LevelPageComponent {
-  service: LevelService;
   showPopup: boolean = false;
   needConfirm: boolean = false;
   showAlert: boolean = false;
@@ -18,13 +17,7 @@ export class LevelPageComponent {
   message: string = "";
   level: Level = new Level();
   functionType: FunctionType = FunctionType.save;
-  constructor(service: LevelService) {
-    this.service = service;
-  }
-  ngOnInit(): void {
-    this.service.findAll().subscribe((data: MyResponse<Level>) => {
-      this.levels = data.content;
-    });
+  constructor(private service: LevelService) {
   }
   togglePopUp(level?: Level) {
     if (level) {
@@ -36,47 +29,16 @@ export class LevelPageComponent {
     }
     this.showPopup = !this.showPopup;
   }
-  findAll() {
-    this.service.findAll().subscribe((data: MyResponse<Level>) => {
-      this.levels = data.content;
-    });
-  }
   submit(level: Level) {
     if (this.functionType == FunctionType.save) {
-      this.service.save(level).subscribe((data: MyResponse<Level>) => {
-        this.findAll();
-        this.message = data.message;
-        this.showAlert = true;
-      }, (error) => {
-        this.findAll();
-        this.message = error.error.error;
-        this.showAlert = true;
-      });
+      this.service.save(level)
     } else {
-      this.service.update(level).subscribe((data: MyResponse<Level>) => {
-        this.findAll();
-        this.message = data.message;
-        this.showAlert = true;
-      }, (error) => {
-        this.findAll();
-        this.message = error.error.error;
-        this.showAlert = true;
-      });
+      this.service.update(level)
     }
   }
   delete(level: Level, confirmed?: boolean) {
     if (confirmed) {
-      this.service.delete(level.id).subscribe((data: MyResponse<Level>) => {
-        this.findAll();
-        this.message = data.message;
-        this.showAlert = true;
-        this.needConfirm = false;
-      }, (error) => {
-        this.findAll();
-        this.message = error.error.error;
-        this.showAlert = true;
-        this.needConfirm = false;
-      });
+      this.service.delete(level.id)
     } else if (confirmed == null) {
       this.level = level;
       this.showAlert = true;
@@ -86,5 +48,12 @@ export class LevelPageComponent {
       this.showAlert = false;
       this.needConfirm = false;
     }
+  }
+  ngAfterContentInit() {
+    this.service.levels.subscribe(
+      (levels) => {
+        this.levels = levels;
+      }
+    );
   }
 }
