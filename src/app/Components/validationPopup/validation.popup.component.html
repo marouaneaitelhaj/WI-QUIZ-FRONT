@@ -28,7 +28,6 @@
                         </label>
                         <select type="number"    [(ngModel)]="validation.question.id"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
-                            <option value="0">No question</option>
                             <option *ngFor="let question of questions" value="{{question.id}}">{{question.question}}
                             </option>
                         </select>
@@ -39,7 +38,6 @@
                         </label>
                         <select type="number"    [(ngModel)]="validation.response.id"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
-                            <option value="0">No response</option>
                             <option *ngFor="let response of responses" value="{{response.id}}">{{response.response}}
                             </option>
                         </select>

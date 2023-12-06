@@ -29,7 +29,6 @@ import { QuestionofquizPageComponent } from './Pages/questionofquiz-page/questio
 import { QuestionofquizPopupComponent } from './Components/questionofquizPopup/questionofquiz.popup.component';
 import { ValidationPageComponent } from './Pages/validation-page/validation-page.component';
 import { ValidationPopupComponent } from './Components/validationPopup/validation.popup.component';
-import { Alertmessage } from './Components/alertmessage/alertmessage.component';
 // import {myReducer} from './ngrx/myreducer.reducer';
 
 
@@ -59,7 +58,6 @@ import { Alertmessage } from './Components/alertmessage/alertmessage.component';
     QuestionofquizPopupComponent,
     ValidationPageComponent,
     ValidationPopupComponent,
-    Alertmessage
   ],
   imports: [
     BrowserModule,

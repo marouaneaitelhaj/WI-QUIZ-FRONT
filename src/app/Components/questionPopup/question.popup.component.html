@@ -44,7 +44,6 @@
                         <select type="text"   
                             [(ngModel)]="question.questionType"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
-                            <option value="0">No question type</option>
                             <option *ngFor="let questionType of keysOfQuestionTypes" value="{{questionType}}">
                                 {{questionType}}</option>
                         </select>
@@ -71,7 +70,6 @@
                         <select type="number"   
                             [(ngModel)]="question.level.id"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
-                            <option value="0">No level</option>
                             <option *ngFor="let level of levels" value="{{level.id}}">{{level.description}}
                             </option>
                         </select>
@@ -83,7 +81,6 @@
                         <select type="number"   
                             [(ngModel)]="question.subject.id"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
-                            <option value="0">No subject</option>
                             <option *ngFor="let subject of subjects" value="{{subject.id}}">{{subject.name}}
                             </option>
                         </select>

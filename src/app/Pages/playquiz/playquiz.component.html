@@ -65,5 +65,5 @@
         </div>
     </div>
 </div>
-<app-alert-message *ngIf="showAlert" [needConfirm]="needConfirm" (confirmed)="resest($event)" [message]="message"
-    (showAlert)="showAlert=!showAlert"></app-alert-message>
+<app-alert *ngIf="showAlert" [needConfirm]="needConfirm" (confirmed)="resest($event)" [message]="message"
+    (showAlert)="showAlert=!showAlert"></app-alert>
