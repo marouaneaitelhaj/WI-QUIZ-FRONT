@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import Answer from 'src/app/Models/Answer';
 import Question from 'src/app/Models/Question';
@@ -14,7 +14,7 @@ import { QuizService } from 'src/app/Services/quiz.service';
   styleUrls: ['./playquiz.component.css'],
   providers: [QuizService]
 })
-export class PlayquizComponent {
+export class PlayquizComponent implements OnChanges {
   showAlert: boolean = false;
   needConfirm: boolean = false;
   message: string = "rak nadi";
@@ -31,7 +31,6 @@ export class PlayquizComponent {
     audio.play();
   }
   ngOnInit(): void {
-    // play audio after 3 seconds
     this.route.params.subscribe(params => {
       this.id = params['id'];
     });
@@ -42,9 +41,6 @@ export class PlayquizComponent {
     });
   }
   nextquestion() {
-    // setTimeout(() => {
-    //   this.playAudio();
-    // }, 3000);
     if (this.questionNumber == this.quiz.questionOfQuizs.length - 1) {
       this.showAlert = true;
       var result = 0;
@@ -69,5 +65,8 @@ export class PlayquizComponent {
     this.questionNumber = 0;
     this.answers = [];
     this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
   }
 }
