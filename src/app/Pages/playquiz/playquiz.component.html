@@ -12,16 +12,13 @@
         <div></div>
     </div>
     <div class="relative bg-orange-50 m-5 w-11/12 h-96 justify-center align-middle flex">
-        <span class="absolute  right-4 top-4 z-50 bg-white rounded-full p-4">{{lefTime}}</span>
+        <span class="absolute  right-4 top-4 z-20 bg-white rounded-full p-4">{{lefTime}}</span>
         <div class="flex w-full p-5 justify-center align-middle">
             <div class="w-2/5 align-middle flex flex-col justify-center">
                 <p class="text-2xl text-center font-bold">{{question.question}}</p>
                 <div>
                     <div *ngFor="let response of question.validations; let i = index">
                         <div class="flex justify-center align-middle">
-                            <!-- <input type="radio" name="response" id="response{{i}}" class="m-2"
-                                (click)="setResponse(response)">
-                            <label for="response{{i}}" class="m-2">{{response.response.response}}</label> -->
                             <span (click)="setResponse(response)"
                                 [class.bg-yellow-50]="answers[questionNumber] && answers[questionNumber].validation && answers[questionNumber].validation.response && answers[questionNumber].validation.response.response === response.response.response"
                                 [class.bg-white]="!answers[questionNumber] || !answers[questionNumber].validation || !answers[questionNumber].validation.response || answers[questionNumber].validation.response.response !== response.response.response"

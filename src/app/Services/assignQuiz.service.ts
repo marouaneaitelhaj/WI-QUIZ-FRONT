@@ -49,4 +49,7 @@ export class AssignQuizService {
       }
     )
   }
+  public findById(id: number): Observable<AssignQuiz> {
+    return this.http.get<AssignQuiz>(this.url + "/" + id);
+  }
 }

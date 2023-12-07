@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'student', component: StudentPageComponent },
   { path: 'quiz', component: QuizPageComponent },
   { path: 'questionofquiz', component: QuestionofquizPageComponent },
-  { path: 'quiz/:id/play', component: PlayquizComponent},
+  { path: 'play/:id', component: PlayquizComponent},
   {path: 'validation', component: ValidationPageComponent},
   { path: 'assignquiz', component: AssignQuizPageComponent }
 ];

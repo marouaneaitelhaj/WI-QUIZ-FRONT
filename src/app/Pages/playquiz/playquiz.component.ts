@@ -3,12 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertService } from 'src/app/Components/alert/alert.service';
 import AlertProps from 'src/app/Components/alert/alertProps';
 import Answer from 'src/app/Models/Answer';
+import AssignQuiz from 'src/app/Models/AssignQuiz';
 import Question from 'src/app/Models/Question';
 import Quiz from 'src/app/Models/Quiz';
 import Response from 'src/app/Models/Response';
 import Validation from 'src/app/Models/Validation';
 import { MyResponse } from 'src/app/Response/Response';
 import { AnswerService } from 'src/app/Services/answer.service';
+import { AssignQuizService } from 'src/app/Services/assignQuiz.service';
 import { QuizService } from 'src/app/Services/quiz.service';
 
 @Component({
@@ -24,23 +26,25 @@ export class PlayquizComponent {
   answers: Answer[] = [];
   lefTime: number = 0;
   interval: any;
-  constructor(private route: ActivatedRoute, private quizService: QuizService, private answerService: AnswerService, private alertService: AlertService) { }
+  constructor(private route: ActivatedRoute, private assignQuizService: AssignQuizService, private quizService: QuizService, private answerService: AnswerService, private alertService: AlertService) { }
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.quizService.findById(params['id']).subscribe((data: Quiz) => {
-        this.quiz = data;
-        this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
-        this.chrono(this.question.time);
+      this.assignQuizService.findById(params['id']).subscribe((assignQuiz: AssignQuiz) => {
+        this.quiz = assignQuiz.quiz;
+        this.quizService.findById(this.quiz.id).subscribe((quiz: Quiz) => {
+          this.quiz = quiz;
+          console.log(this.quiz.numberOfChances, assignQuiz.chance, this.quiz.numberOfChances <= assignQuiz.chance);
+          if (this.quiz.numberOfChances <= assignQuiz.chance) {
+            this.alertService.showWarning("you have no more chances")
+          } else {
+            this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
+            this.chrono(this.question.time);
+          }
+        });
       });
     });
   }
   nextquestion() {
-    // if (this.questionNumber == this.quiz.questionOfQuizs.length - 1) {
-    //   var result = 0;
-    //   this.answers.forEach((answer: Answer) => {
-    //         console.log(answer);
-    //   });
-    // } else {
     this.alertService.showMsg("saving .....!")
     this.answerService.save(this.answers[this.questionNumber]).subscribe(
       (response: MyResponse<Answer>) => {
@@ -60,7 +64,6 @@ export class PlayquizComponent {
         }
       }
     )
-    // }
   }
   setResponse(response: Validation) {
     this.answers[this.questionNumber] = new Answer();

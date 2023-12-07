@@ -9,6 +9,9 @@ export class AlertService {
     public showMsg(msg: string) {
         this.alertprops.next(new AlertProps(msg, false, true));
     }
+    public showWarning(msg: string) {
+        this.alertprops.next(new AlertProps(msg, false, true, true));
+    }
     public showConfirm(msg: string) {
         this.alertprops.next(new AlertProps(msg, true, true));
     }
