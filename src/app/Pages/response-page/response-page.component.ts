@@ -42,7 +42,7 @@ export class ResponsePageComponent {
       this.service.delete(response.id);
     } else if (confirmed == null) {
       this.response = response;
-      this.alertService.showMsg("Are you sure you want to delete this response?");
+      this.alertService.showConfirm("Are you sure you want to delete this response?");
     } else {
       this.response = response;
       this.alertService.hide()

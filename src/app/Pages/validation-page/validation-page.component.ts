@@ -46,7 +46,7 @@ export class ValidationPageComponent {
       this.service.delete(validation.id);
     } else if (confirmed == null) {
       this.validation = validation;
-      this.alertService.showMsg("Are you sure you want to delete this validation?");
+      this.alertService.showConfirm("Are you sure you want to delete this validation?");
     } else {
       this.validation = validation;
       this.alertService.hide()

@@ -47,7 +47,7 @@ export class MediaPageComponent {
       this.service.delete(media.id)
     } else if (confirmed == null) {
       this.media = media;
-      this.alertService.showMsg("Are you sure you want to delete this media?");
+      this.alertService.showConfirm("Are you sure you want to delete this media?");
     } else {
       this.media = media;
       this.alertService.hide()

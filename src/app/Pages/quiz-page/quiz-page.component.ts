@@ -42,7 +42,7 @@ export class QuizPageComponent {
       this.service.delete(quiz.id)
     } else if (confirmed == null) {
       this.quiz = quiz;
-      this.alertService.showMsg("Are you sure you want to delete this quiz?");
+      this.alertService.showConfirm("Are you sure you want to delete this quiz?");
     } else {
       this.quiz = quiz;
       this.alertService.hide()

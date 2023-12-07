@@ -51,7 +51,7 @@ export class QuestionofquizPageComponent {
       this.service.delete(questionofquiz.id)
     } else if (confirmed == null) {
       this.questionofquiz = questionofquiz;
-      this.alertService.showMsg("Are you sure you want to delete this questionofquiz?");
+      this.alertService.showConfirm("Are you sure you want to delete this questionofquiz?");
     } else {
       this.questionofquiz = questionofquiz;
       this.alertService.hide()

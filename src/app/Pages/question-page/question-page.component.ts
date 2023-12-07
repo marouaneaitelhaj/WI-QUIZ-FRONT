@@ -49,7 +49,7 @@ export class QuestionPageComponent {
       this.service.delete(question.id)
     } else if (confirmed == null) {
       this.question = question;
-      this.alertService.showMsg("Are you sure you want to delete this question?");
+      this.alertService.showConfirm("Are you sure you want to delete this question?");
     } else {
       this.question = question;
       this.alertService.hide()

@@ -41,7 +41,7 @@ export class LevelPageComponent {
       this.service.delete(level.id)
     } else if (confirmed == null) {
       this.level = level;
-      this.alertService.showMsg("Are you sure you want to delete this level?");
+      this.alertService.showConfirm("Are you sure you want to delete this level?");
     } else {
       this.level = level;
       this.alertService.hide()

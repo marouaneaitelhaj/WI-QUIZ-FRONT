@@ -42,7 +42,7 @@ export class StudentPageComponent {
       this.service.delete(student.id)
     } else if (confirmed == null) {
       this.student = student;
-      this.alertService.showMsg("Are you sure you want to delete this student?");
+      this.alertService.showConfirm("Are you sure you want to delete this student?");
     } else {
       this.student = student;
       this.alertService.hide()
