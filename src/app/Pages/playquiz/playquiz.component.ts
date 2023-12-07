@@ -25,11 +25,13 @@ export class PlayquizComponent {
   question: Question = new Question();
   answers: Answer[] = [];
   lefTime: number = 0;
+  assignedQuiz: AssignQuiz = new AssignQuiz();
   interval: any;
   constructor(private route: ActivatedRoute, private assignQuizService: AssignQuizService, private quizService: QuizService, private answerService: AnswerService, private alertService: AlertService) { }
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.assignQuizService.findById(params['id']).subscribe((assignQuiz: AssignQuiz) => {
+        this.assignedQuiz = assignQuiz;
         this.quiz = assignQuiz.quiz;
         this.quizService.findById(this.quiz.id).subscribe((quiz: Quiz) => {
           this.quiz = quiz;
@@ -68,6 +70,7 @@ export class PlayquizComponent {
   setResponse(response: Validation) {
     this.answers[this.questionNumber] = new Answer();
     this.answers[this.questionNumber].validation = response;
+    this.answers[this.questionNumber].assignQuiz = this.assignedQuiz;
     console.log(this.answers[this.questionNumber].validation.response.response);
   }
   resest(event: boolean) {
