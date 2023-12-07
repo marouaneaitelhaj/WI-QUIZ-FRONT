@@ -26,6 +26,10 @@ export class MediaService {
     this.http.post<MyResponse<Media>>(this.url, media).subscribe(
       (response) => {
         this.medias.next(this.medias.getValue().concat([response.data]));
+        this.alertService.showMsg(response.message);
+      },
+      (error) => {
+        this.alertService.showMsg(error.error.message);
       }
     )
   }
@@ -36,6 +40,10 @@ export class MediaService {
         const index = medias.findIndex((s) => s.id === media.id);
         medias[index] = response.data;
         this.medias.next(medias);
+        this.alertService.showMsg(response.message);
+      },
+      (error) => {
+        this.alertService.showMsg(error.error.message);
       }
     )
   }
@@ -46,6 +54,10 @@ export class MediaService {
         const index = medias.findIndex((s) => s.id === id);
         medias.splice(index, 1);
         this.medias.next(medias);
+        this.alertService.showMsg(response.message);
+      },
+      (error) => {
+        this.alertService.showMsg(error.error.message);
       }
     )
   }

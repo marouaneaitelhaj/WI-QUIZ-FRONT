@@ -24,6 +24,9 @@ export class LevelService {
     this.http.post<MyResponse<Level>>(this.url, level).subscribe(
       (response) => {
         this.levels.next(this.levels.getValue().concat([response.data]));
+      },
+      (error) => {
+        this.alertService.showMsg(error.error.message);
       }
     );
   }
@@ -34,6 +37,10 @@ export class LevelService {
         const index = levels.findIndex((s) => s.id === level.id);
         levels[index] = response.data;
         this.levels.next(levels);
+        this.alertService.showMsg(response.message);
+      },
+      (error) => {
+        this.alertService.showMsg(error.error.message);
       }
     );
   }
@@ -44,6 +51,10 @@ export class LevelService {
         const index = levels.findIndex((s) => s.id === id);
         levels.splice(index, 1);
         this.levels.next(levels);
+        this.alertService.showMsg(response.message);
+      },
+      (error) => {
+        this.alertService.showMsg(error.error.message);
       }
     );
   }

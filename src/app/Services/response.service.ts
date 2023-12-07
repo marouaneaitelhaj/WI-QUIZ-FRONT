@@ -24,6 +24,10 @@ export class ResponseService {
     this.http.post<MyResponse<Response>>(this.url, response).subscribe(
       (response) => {
         this.responses.next(this.responses.getValue().concat([response.data]));
+        this.alertService.showMsg("Response saved successfully");
+      },
+      (error) => {
+        this.alertService.showMsg("Failed to save response");
       }
     );
   }
@@ -34,6 +38,10 @@ export class ResponseService {
         const index = responses.findIndex((s) => s.id === response.id);
         responses[index] = rs.data;
         this.responses.next(responses);
+        this.alertService.showMsg("Response updated successfully");
+      },
+      (error) => {
+        this.alertService.showMsg("Failed to update response");
       }
     );
   }
@@ -44,6 +52,10 @@ export class ResponseService {
         const index = responses.findIndex((s) => s.id === id);
         responses.splice(index, 1);
         this.responses.next(responses);
+        this.alertService.showMsg("Response deleted successfully");
+      },
+      (error) => {
+        this.alertService.showMsg("Failed to delete response");
       }
     );
   }

@@ -24,6 +24,10 @@ export class QuestionofquizService {
     this.http.post<MyResponse<Questionofquiz>>(this.url, questionofquiz).subscribe(
       (response) => {
         this.questionofquizs.next(this.questionofquizs.getValue().concat([response.data]));
+        this.alertService.showMsg("Questionofquiz saved successfully");
+      },
+      (error) => {
+        this.alertService.showMsg("Failed to save questionofquiz");
       }
     );
   }
@@ -34,6 +38,10 @@ export class QuestionofquizService {
         const index = questionofquizs.findIndex((s) => s.id === questionofquiz.id);
         questionofquizs[index] = response.data;
         this.questionofquizs.next(questionofquizs);
+        this.alertService.showMsg("Questionofquiz updated successfully");
+      },
+      (error) => {
+        this.alertService.showMsg("Failed to update questionofquiz");
       }
     )
   }
@@ -44,6 +52,10 @@ export class QuestionofquizService {
         const index = questionofquizs.findIndex((s) => s.id === id);
         questionofquizs.splice(index, 1);
         this.questionofquizs.next(questionofquizs);
+        this.alertService.showMsg("Questionofquiz deleted successfully");
+      },
+      (error) => {
+        this.alertService.showMsg("Failed to delete questionofquiz");
       }
     )
   }

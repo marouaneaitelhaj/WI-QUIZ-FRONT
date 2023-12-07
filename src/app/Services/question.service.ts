@@ -24,6 +24,10 @@ export class QuestionService {
     this.http.post<MyResponse<Question>>(this.url, question).subscribe(
       (response) => {
         this.questions.next(this.questions.getValue().concat([response.data]));
+        this.alertService.showMsg("Question saved successfully");
+      },
+      (error) => {
+        this.alertService.showMsg("Failed to save question");
       }
     )
   }
@@ -34,6 +38,10 @@ export class QuestionService {
         const index = questions.findIndex((s) => s.id === question.id);
         questions[index] = response.data;
         this.questions.next(questions);
+        this.alertService.showMsg("Question updated successfully");
+      },
+      (error) => {
+        this.alertService.showMsg("Failed to update question");
       }
     )
   }
@@ -44,6 +52,10 @@ export class QuestionService {
         const index = questions.findIndex((s) => s.id === id);
         questions.splice(index, 1);
         this.questions.next(questions);
+        this.alertService.showMsg("Question deleted successfully");
+      },
+      (error) => {
+        this.alertService.showMsg("Failed to delete question");
       }
     )
   }
