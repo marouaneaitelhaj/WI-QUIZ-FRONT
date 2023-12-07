@@ -35,7 +35,7 @@ export class PlayquizComponent {
           this.quiz = quiz;
           console.log(this.quiz.numberOfChances, assignQuiz.chance, this.quiz.numberOfChances <= assignQuiz.chance);
           if (this.quiz.numberOfChances <= assignQuiz.chance) {
-            this.alertService.showWarning("you have no more chances")
+            this.alertService.showWarning("you have no more chances", "/assignquiz")
           } else {
             this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
             this.chrono(this.question.time);
