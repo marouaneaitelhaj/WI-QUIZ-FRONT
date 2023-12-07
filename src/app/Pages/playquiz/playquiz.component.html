@@ -15,9 +15,14 @@
                 <div>
                     <div *ngFor="let response of question.validations; let i = index">
                         <div class="flex justify-center align-middle">
-                            <input type="radio" name="response" id="response{{i}}" class="m-2"
+                            <!-- <input type="radio" name="response" id="response{{i}}" class="m-2"
                                 (click)="setResponse(response)">
-                            <label for="response{{i}}" class="m-2">{{response.response.response}}</label>
+                            <label for="response{{i}}" class="m-2">{{response.response.response}}</label> -->
+                            <span (click)="setResponse(response)"
+                                class="bg-white cursor-pointer my-2 px-10 py-2 rounded-full border"
+                                [ngClass]="{'bg-green-500': answers[questionNumber].validation === response}">
+                                {{response.response.response}}
+                            </span>
                         </div>
                     </div>
                 </div>
