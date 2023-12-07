@@ -19,10 +19,12 @@
                                 (click)="setResponse(response)">
                             <label for="response{{i}}" class="m-2">{{response.response.response}}</label> -->
                             <span (click)="setResponse(response)"
-                                class="bg-white cursor-pointer my-2 px-10 py-2 rounded-full border"
-                                [ngClass]="{'bg-green-500': answers[questionNumber].validation === response}">
-                                {{response.response.response}}
+                                [class.bg-yellow-50]="answers[questionNumber]?.validation?.response?.response === response.response.response"
+                                [class.bg-white]="answers[questionNumber]?.validation?.response?.response !== response.response.response"
+                                class="cursor-pointer my-2 px-10 py-2 rounded-full border">
+                                {{ response.response.response }}
                             </span>
+
                         </div>
                     </div>
                 </div>
@@ -34,34 +36,6 @@
                 </div>
             </div>
             <div class="w-3/5 border border-black relative flex flex-row justify-center align-middle ">
-                <button (click)="selectedImage = (selectedImage === 0) ? question.media.length - 1 : selectedImage - 1"
-                    type="button"
-                    class="absolute top-0 start-0 z-20 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                    data-carousel-prev>
-                    <span
-                        class="inline-flex items-center border border-black justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M5 1 1 5l4 4" />
-                        </svg>
-                        <span class="sr-only">Previous</span>
-                    </span>
-                </button>
-                <button (click)="selectedImage = (selectedImage === question.media.length - 1) ? 0 : selectedImage + 1"
-                    type="button"
-                    class="absolute top-0 end-0 z-20 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                    data-carousel-next>
-                    <span
-                        class="inline-flex items-center border border-black justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 9 4-4-4-4" />
-                        </svg>
-                        <span class="sr-only">Next</span>
-                    </span>
-                </button>
                 <div class="w-full flex justify-center align-middle" *ngFor="let media of question.media; let i = index"
                     [ngClass]="{'hidden': i !== selectedImage}">
                     <img src="{{media.src}}" class="w-full h-auto object-cover">

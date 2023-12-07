@@ -2,7 +2,7 @@ import Quiz from "./Quiz";
 import Student from "./Student";
 
 export default class AssignQuiz {
-    id: number = 0;
+    id: number = 3;
     student : Student = new Student();
     quiz : Quiz = new Quiz();
     score : number = 0;

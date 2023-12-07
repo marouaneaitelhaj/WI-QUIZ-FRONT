@@ -8,6 +8,7 @@ import Quiz from 'src/app/Models/Quiz';
 import Response from 'src/app/Models/Response';
 import Validation from 'src/app/Models/Validation';
 import { MyResponse } from 'src/app/Response/Response';
+import { AnswerService } from 'src/app/Services/answer.service';
 import { QuizService } from 'src/app/Services/quiz.service';
 
 @Component({
@@ -16,53 +17,55 @@ import { QuizService } from 'src/app/Services/quiz.service';
   styleUrls: ['./playquiz.component.css'],
 })
 export class PlayquizComponent {
-  
-  id: number = 0;
-  questionNumber: number = 0;
   quiz: Quiz = new Quiz();
+  questionNumber: number = 0;
   selectedImage: number = 0;
   question: Question = new Question();
   answers: Answer[] = [];
   lefTime: number = 0;
   interval: any;
-  constructor(private route: ActivatedRoute, private quizService: QuizService, private alertService: AlertService) { }
-  playAudio(): void {
-    const audio = new Audio();
-    audio.src = "http://res.cloudinary.com/dvr7oyo77/video/upload/v1701783476/uhpikguqvmlfwtey5pyt.mp3";
-    audio.play();
-  }
-  ngAfterViewInit(): void {
-    this.quizService.playedQuiz.subscribe((quiz) => {
-      this.quiz = quiz;
-      this.question = quiz.questionOfQuizs[this.questionNumber].question;
-      this.chrono(this.question.time);
-    });
-  }
+  constructor(private route: ActivatedRoute, private quizService: QuizService, private answerService: AnswerService, private alertService: AlertService) { }
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.id = params['id'];
+      this.quizService.findById(params['id']).subscribe((data: Quiz) => {
+        this.quiz = data;
+        this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
+        this.chrono(this.question.time);
+      });
     });
-    this.quizService.findById(this.id)
   }
   nextquestion() {
-    clearInterval(this.interval);
-    if (this.questionNumber == this.quiz.questionOfQuizs.length - 1) {
-      var result = 0;
-      this.answers.forEach((answer: Answer) => {
-        if (answer.validation.correct == true) {
-          result = result + answer.validation.points;
+    // if (this.questionNumber == this.quiz.questionOfQuizs.length - 1) {
+    //   var result = 0;
+    //   this.answers.forEach((answer: Answer) => {
+    //         console.log(answer);
+    //   });
+    // } else {
+    this.alertService.showMsg("saving .....!")
+    this.answerService.save(this.answers[this.questionNumber]).subscribe(
+      (response: MyResponse<Answer>) => {
+        this.alertService.hide();
+        this.answers[this.questionNumber] = response.data;
+        if (this.questionNumber == this.quiz.questionOfQuizs.length - 1) {
+          var result = 0;
+          this.answers.forEach((answer: Answer) => {
+            console.log(answer.validation.points);
+            result += answer.validation.points
+          });
+          this.alertService.showMsg("your score is " + result);
+        } else {
+          this.questionNumber++;
+          this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
+          this.chrono(this.question.time);
         }
-      });
-    } else {
-      this.questionNumber++;
-      this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
-      this.chrono(this.question.time);
-    }
+      }
+    )
+    // }
   }
   setResponse(response: Validation) {
     this.answers[this.questionNumber] = new Answer();
     this.answers[this.questionNumber].validation = response;
-    this.chrono(this.question.time);
+    console.log(this.answers[this.questionNumber].validation.response.response);
   }
   resest(event: boolean) {
     this.questionNumber = 0;
@@ -70,13 +73,22 @@ export class PlayquizComponent {
     this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
   }
   chrono(time: number) {
+    clearInterval(this.interval);
     this.lefTime = time;
     this.interval = setInterval(() => {
       this.lefTime--;
+
       if (this.lefTime == 0) {
         this.nextquestion();
         clearInterval(this.interval);
       }
     }, 1000);
+  }
+  nextImage() {
+    if (this.selectedImage == this.question.media.length - 1) {
+      this.selectedImage = 0;
+    } else {
+      this.selectedImage++;
+    }
   }
 }

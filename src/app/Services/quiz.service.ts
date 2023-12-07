@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import Quiz from '../Models/Quiz';
 import { MyResponse } from '../Response/Response';
 import { AlertService } from '../Components/alert/alert.service';
+import Question from '../Models/Question';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +14,6 @@ export class QuizService {
     this.findAll();
   }
   public quizzes = new BehaviorSubject<Quiz[]>([]);
-  public playedQuiz = new BehaviorSubject<Quiz>(new Quiz());
   public findAll(): void {
     this.http.get<MyResponse<Quiz>>(this.url).subscribe(
       (response) => {
@@ -60,11 +60,7 @@ export class QuizService {
       }
     )
   }
-  public findById(id: number): void {
-    this.http.get<Quiz>(this.url + "/" + id).subscribe(
-      (response) => {
-        this.playedQuiz.next(response);
-      }
-    )
+  public findById(id: number): Observable<Quiz> {
+    return this.http.get<Quiz>(this.url + "/" + id);
   }
 }
