@@ -23,6 +23,8 @@
                                 </th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-black">Quiz
                                 </th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-black">Quiz max chances
+                                </th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-black">Score
                                 </th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-black">Chance
@@ -39,7 +41,10 @@
                                     {{assignQuiz.id}}</td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-black">
                                     {{assignQuiz.student.firstName + " "+assignQuiz.student.lastName }}</td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-black">{{assignQuiz.quiz.comment}}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-black">{{assignQuiz.quiz.comment}}
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-black">{{assignQuiz.quiz.numberOfChances}}
+                                </td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-black">{{assignQuiz.score}}</td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-black">{{assignQuiz.chance}}</td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-black">{{assignQuiz.notes}}</td>
@@ -54,6 +59,11 @@
                                         <button type="button" (click)="delete(assignQuiz)"
                                             class="inline-flex px-5 py-2 mx-2 items-center justify-center rounded-md border ">
                                             Delete</button>
+                                    </span>
+                                    <span>
+                                        <button type="button" routerLink="/quiz/{{assignQuiz.quiz.id}}/play"
+                                            class="inline-flex px-5 py-2 mx-2 items-center justify-center rounded-md border ">
+                                            Play</button>
                                     </span>
                                 </td>
                             </tr>

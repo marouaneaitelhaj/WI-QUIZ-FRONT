@@ -11,6 +11,7 @@ import { QuizPageComponent } from './Pages/quiz-page/quiz-page.component';
 import { PlayquizComponent } from './Pages/playquiz/playquiz.component';
 import { QuestionofquizPageComponent } from './Pages/questionofquiz-page/questionofquiz-page.component';
 import { ValidationPageComponent } from './Pages/validation-page/validation-page.component';
+import { AssignQuizPageComponent } from './Pages/assignQuiz-page/assignQuiz-page.component';
 
 const routes: Routes = [
   { path: '', component: SubjectPageComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'questionofquiz', component: QuestionofquizPageComponent },
   { path: 'quiz/:id/play', component: PlayquizComponent},
   {path: 'validation', component: ValidationPageComponent},
+  { path: 'assignquiz', component: AssignQuizPageComponent }
 ];
 
 @NgModule({

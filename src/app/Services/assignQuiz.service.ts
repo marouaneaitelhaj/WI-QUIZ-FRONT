@@ -8,8 +8,9 @@ import { AlertService } from '../Components/alert/alert.service';
   providedIn: 'root'
 })
 export class AssignQuizService {
-  private url = 'http://localhost:8080/assignQuiz';
+  private url = 'http://localhost:8080/assignquiz';
   constructor(private http: HttpClient, private alertService: AlertService) {
+    this.findAll();
   }
   public assignQuizs = new BehaviorSubject<AssignQuiz[]>([]);
   public findAll(): void {
