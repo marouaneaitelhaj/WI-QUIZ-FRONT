@@ -5,7 +5,6 @@ import { MediaService } from 'src/app/Services/media.service';
 import { QuestionService } from 'src/app/Services/question.service';
 import Media from 'src/app/Models/Media';
 import Question from 'src/app/Models/Question';
-import AlertProps from 'src/app/Components/alert/alertProps';
 
 @Component({
   selector: 'app-media-page',

@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import AssignQuiz from '../Models/AssignQuiz';
 import { MyResponse } from '../Response/Response';
+import { AlertService } from '../Components/alert/alert.service';
 @Injectable({
   providedIn: 'root'
 })
 export class AssignQuizService {
   private url = 'http://localhost:8080/assignQuiz';
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private alertService: AlertService) {
   }
   public findAll(): Observable<MyResponse<AssignQuiz>> {
     return this.http.get<MyResponse<AssignQuiz>>(this.url);

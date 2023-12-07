@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import Quiz from '../Models/Quiz';
 import { MyResponse } from '../Response/Response';
+import { AlertService } from '../Components/alert/alert.service';
 @Injectable({
   providedIn: 'root'
 })
 export class QuizService {
   private url = 'http://localhost:8080/quiz';
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private alertService: AlertService) {
     this.findAll();
   }
   public quizzes = new BehaviorSubject<Quiz[]>([]);

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import Media from '../Models/Media';
 import { MyResponse } from '../Response/Response';
+import { AlertService } from '../Components/alert/alert.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,7 +11,7 @@ export class MediaService {
   private url = 'http://localhost:8080/media';
   private cloudinaryUrl = 'https://api.cloudinary.com/v1_1/dvr7oyo77/upload';
   private auth = 'NTk3ODkzMDk2MjY4ODkwMTQy.GyDHOZ.Y6Fl5asbIOKvfbflLSQSvQWbfGGDS8ELoN2z8c'
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private alertService: AlertService) {
     this.findAll();
   }
   public medias = new BehaviorSubject<Media[]>([]);

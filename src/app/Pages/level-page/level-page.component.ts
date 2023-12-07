@@ -3,7 +3,6 @@ import { FunctionType } from 'src/app/Enums/FunctionType';
 import { MyResponse } from 'src/app/Response/Response';
 import { LevelService } from 'src/app/Services/level.service';
 import Level from 'src/app/Models/Level';
-import AlertProps from 'src/app/Components/alert/alertProps';
 import { AlertService } from 'src/app/Components/alert/alert.service';
 
 @Component({
