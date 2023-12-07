@@ -20,28 +20,28 @@ export class SubjectService {
       }
     );
   }
-  public save(subject: Subject): any {
+  public save(subject: Subject): void {
     this.http.post<MyResponse<Subject>>(this.url, subject).subscribe(
       (response) => {
         this.subjects.next(this.subjects.getValue().concat([response.data]));
-        return response.message;
+        this.alertService.showMsg(response.message);
       },
       (error) => {
-        return error.error.message;
+        this.alertService.showMsg(error.error.message);
       },
     );
   }
-  public update(subject: Subject): any {
+  public update(subject: Subject): void {
     this.http.put<MyResponse<Subject>>(this.url + "/" + subject.id, subject).subscribe(
       (response) => {
         const subjects = this.subjects.getValue();
         const index = subjects.findIndex((s) => s.id === subject.id);
         subjects[index] = response.data;
         this.subjects.next(subjects);
-        return response.message;
+        this.alertService.showMsg(response.message);
       },
       (error) => {
-        return error.error.message;
+        this.alertService.showMsg(error.error.message);
       }
     );
   }
@@ -52,6 +52,7 @@ export class SubjectService {
         const index = subjects.findIndex((s) => s.id === id);
         subjects.splice(index, 1);
         this.subjects.next(subjects);
+        this.alertService.showMsg(response.message);
       }
     );
   }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AlertService } from 'src/app/Components/alert/alert.service';
 import { FunctionType } from 'src/app/Enums/FunctionType';
 import Subject from 'src/app/Models/Subject';
 import { MyResponse } from 'src/app/Response/Response';
@@ -10,13 +11,11 @@ import { SubjectService } from 'src/app/Services/subject.service';
   styleUrls: ['./subject-page.component.css'],
 })
 export class SubjectPageComponent {
-  service: SubjectService;
   showPopup: boolean = false;
   subjects: Subject[] = [];
   subject: Subject = new Subject();
   functionType: FunctionType = FunctionType.save;
-  constructor(service: SubjectService) {
-    this.service = service;
+  constructor(private service: SubjectService, private alertService: AlertService) {
   }
   togglePopUp(subject?: Subject) {
     if (subject) {
@@ -40,8 +39,10 @@ export class SubjectPageComponent {
       this.service.delete(subject.id)
     } else if (confirmed == null) {
       this.subject = subject;
+      this.alertService.showConfirm("Are you sure you want to delete this subject?")
     } else {
       this.subject = subject;
+      this.alertService.hide();
     }
   }
   ngAfterContentInit() {
