@@ -31,20 +31,22 @@ export class PlayquizComponent {
     audio.src = "http://res.cloudinary.com/dvr7oyo77/video/upload/v1701783476/uhpikguqvmlfwtey5pyt.mp3";
     audio.play();
   }
+  ngAfterViewInit(): void {
+    this.quizService.playedQuiz.subscribe((quiz) => {
+      this.quiz = quiz;
+      this.question = quiz.questionOfQuizs[this.questionNumber].question;
+      this.chrono(this.question.time);
+    });
+  }
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.id = params['id'];
     });
-    this.quizService.findById(this.id).subscribe((data: Quiz) => {
-      this.quiz = data;
-      this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
-      this.chrono(this.question.time);
-    });
+    this.quizService.findById(this.id)
   }
   nextquestion() {
     clearInterval(this.interval);
     if (this.questionNumber == this.quiz.questionOfQuizs.length - 1) {
-      
       var result = 0;
       this.answers.forEach((answer: Answer) => {
         if (answer.validation.correct == true) {
@@ -63,7 +65,6 @@ export class PlayquizComponent {
     this.chrono(this.question.time);
   }
   resest(event: boolean) {
-    
     this.questionNumber = 0;
     this.answers = [];
     this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
