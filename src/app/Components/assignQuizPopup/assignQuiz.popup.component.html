@@ -1,8 +1,8 @@
 <app-modal>
     <div class="text-center pt-5 block font-semibold text-2xl self-start text-black">
         <h1 class="leading-relaxed">
-            {{validation.id != 0 ? 'Edit' : 'Add'}}
-            Validation
+            {{assignQuiz.id != 0 ? 'Edit' : 'Add'}}
+            AssignQuiz
         </h1>
     </div>
     <div class="hidden sm:block" aria-hidden="true">
@@ -15,38 +15,48 @@
             <div class="px-4 py-5">
                 <div class="flex w-full flex-col">
                     <div class="w-full px-2 py-2">
-                        <label for="number" class="block mb-2 text-sm font-medium text-black dark:text-black">
-                            Points
+                        <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
+                            Student
+                        </label>
+                        <select     [(ngModel)]="assignQuiz.student.id"
+                            class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
+                            <option *ngFor="let student of students" value="{{student.id}}">{{student.firstName + " "+student.lastName}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="w-full px-2 py-2">
+                        <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
+                            Quiz
+                        </label>
+                        <select     [(ngModel)]="assignQuiz.quiz.id"
+                            class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
+                            <option *ngFor="let quiz of quizes" value="{{quiz.id}}">{{quiz.comment}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="w-full px-2 py-2">
+                        <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
+                            Score
                         </label>
                         <input type="number"   
-                            [(ngModel)]="validation.points"
+                            [(ngModel)]="assignQuiz.score"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                     </div>
                     <div class="w-full px-2 py-2">
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
-                            Question
+                            Chance
                         </label>
-                        <select     [(ngModel)]="validation.question.id"
+                        <input type="number"   
+                            [(ngModel)]="assignQuiz.chance"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
-                            <option *ngFor="let question of questions" value="{{question.id}}">{{question.question}}
-                            </option>
-                        </select>
                     </div>
                     <div class="w-full px-2 py-2">
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
-                            Response
+                            Notes
                         </label>
-                        <select     [(ngModel)]="validation.response.id"
+                        <input type="number"   
+                            [(ngModel)]="assignQuiz.notes"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
-                            <option *ngFor="let response of responses" value="{{response.id}}">{{response.response}}
-                            </option>
-                        </select>
-                    </div>
-                    <div class="w-full px-2 py-2">
-                        <input id="default-checkbox" type="checkbox" [(ngModel)]="validation.correct"
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="default-checkbox"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Correct</label>
                     </div>
                 </div>
             </div>

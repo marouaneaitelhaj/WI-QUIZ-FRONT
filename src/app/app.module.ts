@@ -29,6 +29,8 @@ import { QuestionofquizPageComponent } from './Pages/questionofquiz-page/questio
 import { QuestionofquizPopupComponent } from './Components/questionofquizPopup/questionofquiz.popup.component';
 import { ValidationPageComponent } from './Pages/validation-page/validation-page.component';
 import { ValidationPopupComponent } from './Components/validationPopup/validation.popup.component';
+import { AssignQuizPageComponent } from './Pages/assignQuiz-page/assignQuiz-page.component';
+import { AssignQuizPopupComponent } from './Components/assignQuizPopup/assignQuiz.popup.component';
 // import {myReducer} from './ngrx/myreducer.reducer';
 
 
@@ -58,6 +60,8 @@ import { ValidationPopupComponent } from './Components/validationPopup/validatio
     QuestionofquizPopupComponent,
     ValidationPageComponent,
     ValidationPopupComponent,
+    AssignQuizPageComponent,
+    AssignQuizPopupComponent
   ],
   imports: [
     BrowserModule,

@@ -18,7 +18,7 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Question
                         </label>
-                        <select type="number" [(ngModel)]="questionofquiz.question.id"
+                        <select  [(ngModel)]="questionofquiz.question.id"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                             <option *ngFor="let question of questions" value="{{question.id}}">{{question.question}}
                             </option>
@@ -28,7 +28,7 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Quiz
                         </label>
-                        <select type="number" [(ngModel)]="questionofquiz.quiz.id"
+                        <select  [(ngModel)]="questionofquiz.quiz.id"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                             <option *ngFor="let quiz of quizzes" value="{{quiz.id}}">{{quiz.comment}}
                             </option>

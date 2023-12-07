@@ -2,15 +2,19 @@
     <div class="bg-orange-50 m-5 flex w-1/12 flex-col">
         <div class="flex justify-center align-middle p-3"
             *ngFor="let questionOfQuiz of quiz.questionOfQuizs; let i = index">
-            <span class="bg-white p-3 rounded">Q
+            <span *ngIf="i>=questionNumber" class="bg-white p-3 rounded">
+                Q
                 <span>{{i+1}}</span></span>
+            <span *ngIf="i<questionNumber" class="bg-white p-3 rounded">
+                ✓
+            </span>
         </div>
         <div></div>
     </div>
     <div class="relative bg-orange-50 m-5 w-11/12 h-96 justify-center align-middle flex">
         <span class="absolute  right-4 top-4 z-50 bg-white rounded-full p-4">{{lefTime}}</span>
         <div class="flex w-full p-5 justify-center align-middle">
-            <div class="w-2/5 align-middle flex flex-col">
+            <div class="w-2/5 align-middle flex flex-col justify-center">
                 <p class="text-2xl text-center font-bold">{{question.question}}</p>
                 <div>
                     <div *ngFor="let response of question.validations; let i = index">
@@ -19,8 +23,8 @@
                                 (click)="setResponse(response)">
                             <label for="response{{i}}" class="m-2">{{response.response.response}}</label> -->
                             <span (click)="setResponse(response)"
-                                [class.bg-yellow-50]="answers[questionNumber]?.validation?.response?.response === response.response.response"
-                                [class.bg-white]="answers[questionNumber]?.validation?.response?.response !== response.response.response"
+                                [class.bg-yellow-50]="answers[questionNumber] && answers[questionNumber].validation && answers[questionNumber].validation.response && answers[questionNumber].validation.response.response === response.response.response"
+                                [class.bg-white]="!answers[questionNumber] || !answers[questionNumber].validation || !answers[questionNumber].validation.response || answers[questionNumber].validation.response.response !== response.response.response"
                                 class="cursor-pointer my-2 px-10 py-2 rounded-full border">
                                 {{ response.response.response }}
                             </span>
@@ -30,12 +34,12 @@
                 </div>
                 <div class="flex justify-center align-middle">
                     <button type="button" (click)="nextquestion()"
-                        class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                        class="bg-white hover:bg-gray-100 text-black font-semibold py-2 px-4 border border-black rounded shadow">
                         Next
                     </button>
                 </div>
             </div>
-            <div class="w-3/5 border border-black relative flex flex-row justify-center align-middle ">
+            <div class="w-3/5 border rounded-sm border-black relative flex flex-row justify-center align-middle ">
                 <div class="w-full flex justify-center align-middle" *ngFor="let media of question.media; let i = index"
                     [ngClass]="{'hidden': i !== selectedImage}">
                     <img src="{{media.src}}" class="w-full h-auto object-cover">

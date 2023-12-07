@@ -67,7 +67,7 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             level
                         </label>
-                        <select type="number"   
+                        <select    
                             [(ngModel)]="question.level.id"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                             <option *ngFor="let level of levels" value="{{level.id}}">{{level.description}}
@@ -78,7 +78,7 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Subject
                         </label>
-                        <select type="number"   
+                        <select    
                             [(ngModel)]="question.subject.id"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                             <option *ngFor="let subject of subjects" value="{{subject.id}}">{{subject.name}}
