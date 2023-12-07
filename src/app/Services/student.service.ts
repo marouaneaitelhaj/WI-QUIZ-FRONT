@@ -24,6 +24,10 @@ export class StudentService {
     this.http.post<MyResponse<Student>>(this.url, student).subscribe(
       (response) => {
         this.students.next(this.students.getValue().concat([response.data]));
+        this.alertService.showMsg("Student saved successfully");
+      },
+      error => {
+        this.alertService.showMsg("Failed to save student");
       }
     )
   }
@@ -34,6 +38,10 @@ export class StudentService {
         const index = students.findIndex((s) => s.id === student.id);
         students[index] = response.data;
         this.students.next(students);
+        this.alertService.showMsg("Student updated successfully");
+      },
+      (error) => {
+        this.alertService.showMsg("Failed to update student");
       }
     )
   }
@@ -44,6 +52,10 @@ export class StudentService {
         const index = students.findIndex((s) => s.id === id);
         students.splice(index, 1);
         this.students.next(students);
+        this.alertService.showMsg("Student deleted successfully");
+      },
+      (error) => {
+        this.alertService.showMsg("Failed to delete student");
       }
     )
   }

@@ -27,6 +27,10 @@ export class ValidationService {
     this.http.post<MyResponse<Validation>>(this.url, validation).subscribe(
       (response) => {
         this.validations.next(this.validations.getValue().concat([response.data]));
+        this.alertService.showMsg("Validation saved successfully");
+      },
+      (error) => {
+        this.alertService.showMsg("Failed to save validation");
       }
     )
   }
@@ -37,6 +41,10 @@ export class ValidationService {
         const index = validations.findIndex((s) => s.id === validation.id);
         validations[index] = response.data;
         this.validations.next(validations);
+        this.alertService.showMsg("Validation updated successfully");
+      },
+      (error) => {
+        this.alertService.showMsg("Failed to update validation");
       }
     )
   }
@@ -47,6 +55,10 @@ export class ValidationService {
         const index = validations.findIndex((s) => s.id === id);
         validations.splice(index, 1);
         this.validations.next(validations);
+        this.alertService.showMsg("Validation deleted successfully");
+      },
+      (error) => {
+        this.alertService.showMsg("Failed to delete validation");
       }
     )
   }
