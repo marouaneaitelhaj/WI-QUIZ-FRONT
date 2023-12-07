@@ -17,7 +17,7 @@ export class MediaPageComponent {
   showPopup: boolean = false;
   
   medias: Media[] = [];
-  alertprops: AlertProps = new AlertProps();
+  
   media: Media = new Media();
   functionType: FunctionType = FunctionType.save;
   constructor(private service: MediaService) {
@@ -33,8 +33,6 @@ export class MediaPageComponent {
     this.showPopup = !this.showPopup;
   }
   submit(media: Media) {
-    this.alertprops.message = "Please wait...";
-    this.alertprops.showAlert = true;
     this.service.upload(media.src).subscribe((data: any) => {
       this.media.src = data.url;
       if (this.functionType == FunctionType.save) {
@@ -49,12 +47,12 @@ export class MediaPageComponent {
       this.service.delete(media.id)
     } else if (confirmed == null) {
       this.media = media;
-      this.alertprops.showAlert = true;
-      this.alertprops.needConfirm = true;
+      
+      
     } else {
       this.media = media;
-      this.alertprops.showAlert = false;
-      this.alertprops.needConfirm = false;
+      
+      
     }
   }
   ngAfterContentInit() {

@@ -15,7 +15,7 @@ import { QuizService } from 'src/app/Services/quiz.service';
   styleUrls: ['./playquiz.component.css'],
 })
 export class PlayquizComponent {
-  alertprops: AlertProps = new AlertProps();
+  
   id: number = 0;
   questionNumber: number = 0;
   quiz: Quiz = new Quiz();
@@ -43,12 +43,11 @@ export class PlayquizComponent {
   nextquestion() {
     clearInterval(this.interval);
     if (this.questionNumber == this.quiz.questionOfQuizs.length - 1) {
-      this.alertprops.showAlert = true;
+      
       var result = 0;
       this.answers.forEach((answer: Answer) => {
         if (answer.validation.correct == true) {
           result = result + answer.validation.points;
-          this.alertprops.message = "You have " + result + " points";
         }
       });
     } else {
@@ -63,7 +62,7 @@ export class PlayquizComponent {
     this.chrono(this.question.time);
   }
   resest(event: boolean) {
-    this.alertprops.showAlert = event;
+    
     this.questionNumber = 0;
     this.answers = [];
     this.question = this.quiz.questionOfQuizs[this.questionNumber].question;

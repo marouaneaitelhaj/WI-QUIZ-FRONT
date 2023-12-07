@@ -18,7 +18,7 @@ export class ValidationPageComponent {
   showPopup: boolean = false;
   
   validations: Validation[] = [];
-  alertprops: AlertProps = new AlertProps();
+  
   validation: Validation = new Validation();
   functionType: FunctionType = FunctionType.save;
   constructor(private service: ValidationService) {
@@ -45,12 +45,12 @@ export class ValidationPageComponent {
       this.service.delete(validation.id);
     } else if (confirmed == null) {
       this.validation = validation;
-      this.alertprops.showAlert = true;
-      this.alertprops.needConfirm = true;
+      
+      
     } else {
       this.validation = validation;
-      this.alertprops.showAlert = false;
-      this.alertprops.needConfirm = false;
+      
+      
     }
   }
   ngAfterContentInit() {

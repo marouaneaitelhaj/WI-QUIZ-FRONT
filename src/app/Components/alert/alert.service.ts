@@ -6,4 +6,13 @@ import AlertProps from './alertProps';
 })
 export class AlertService {
     public alertprops = new BehaviorSubject<AlertProps>(new AlertProps());
+    public showMsg(msg: string) {
+        this.alertprops.next(new AlertProps(msg, false, true));
+    }
+    public showConfirm(msg: string) {
+        this.alertprops.next(new AlertProps(msg, true, true));
+    }
+    public hide() {
+        this.alertprops.next(new AlertProps());
+    }
 }

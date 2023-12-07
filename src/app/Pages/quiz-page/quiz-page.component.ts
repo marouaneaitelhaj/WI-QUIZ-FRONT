@@ -14,7 +14,7 @@ export class QuizPageComponent {
   showPopup: boolean = false;
   
   quizs: Quiz[] = [];
-  alertprops: AlertProps = new AlertProps();
+  
   quiz: Quiz = new Quiz();
   functionType: FunctionType = FunctionType.save;
   constructor(private service: QuizService) {
@@ -41,12 +41,12 @@ export class QuizPageComponent {
       this.service.delete(quiz.id)
     } else if (confirmed == null) {
       this.quiz = quiz;
-      this.alertprops.showAlert = true;
-      this.alertprops.needConfirm = true;
+      
+      
     } else {
       this.quiz = quiz;
-      this.alertprops.showAlert = false;
-      this.alertprops.needConfirm = false;
+      
+      
     }
   }
   ngAfterContentInit() {

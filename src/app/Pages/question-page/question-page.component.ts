@@ -21,7 +21,7 @@ export class QuestionPageComponent {
   showAlert: boolean = false;
   questions: Question[] = [];
   subjects: Subject[] = [];
-  alertprops: AlertProps = new AlertProps();
+  
   question: Question = new Question();
   functionType: FunctionType = FunctionType.save;
   constructor(private service: QuestionService) {
@@ -48,12 +48,12 @@ export class QuestionPageComponent {
       this.service.delete(question.id)
     } else if (confirmed == null) {
       this.question = question;
-      this.alertprops.showAlert = true;
-      this.alertprops.needConfirm = true;
+      
+      
     } else {
       this.question = question;
-      this.alertprops.showAlert = false;
-      this.alertprops.needConfirm = false;
+      
+      
     }
   }
   ngAfterContentInit() {

@@ -20,7 +20,7 @@ export class QuestionofquizPageComponent {
   questionofquizs: Questionofquiz[] = [];
   questions : Question[] = [];
   quizzes : Quiz[] = [];
-  alertprops: AlertProps = new AlertProps();
+  
   questionofquiz: Questionofquiz = new Questionofquiz();
   functionType: FunctionType = FunctionType.save;
   constructor(private service: QuestionofquizService) {
@@ -50,12 +50,12 @@ export class QuestionofquizPageComponent {
       this.service.delete(questionofquiz.id)
     } else if (confirmed == null) {
       this.questionofquiz = questionofquiz;
-      this.alertprops.showAlert = true;
-      this.alertprops.needConfirm = true;
+      
+      
     } else {
       this.questionofquiz = questionofquiz;
-      this.alertprops.showAlert = false;
-      this.alertprops.needConfirm = false;
+      
+      
     }
   }
   ngAfterContentInit() {

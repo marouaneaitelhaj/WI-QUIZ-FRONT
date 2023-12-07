@@ -12,7 +12,8 @@ import { AlertService } from 'src/app/Components/alert/alert.service';
   styleUrls: ['./level-page.component.css'],
 })
 export class LevelPageComponent {
-  alertprops: AlertProps = new AlertProps();
+  
+  
   showPopup: boolean = false;
   levels: Level[] = [];
   level: Level = new Level();
@@ -41,15 +42,8 @@ export class LevelPageComponent {
       this.service.delete(level.id)
     } else if (confirmed == null) {
       this.level = level;
-      this.alertprops.message = "Are you sure you want to delete this level?";
-      this.alertprops.showAlert = true;
-      this.alertprops.needConfirm = true;
-      this.alertService.alertprops.next(this.alertprops);
     } else {
       this.level = level;
-      this.alertprops.showAlert = false;
-      this.alertprops.needConfirm = false;
-      this.alertService.alertprops.next(this.alertprops);
     }
   }
   ngAfterContentInit() {

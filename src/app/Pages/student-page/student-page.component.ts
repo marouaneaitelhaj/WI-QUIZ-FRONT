@@ -14,7 +14,7 @@ export class StudentPageComponent {
   showPopup: boolean = false;
   
   students: Student[] = [];
-  alertprops: AlertProps = new AlertProps();
+  
   student: Student = new Student();
   functionType: FunctionType = FunctionType.save;
   constructor(private service: StudentService) {
@@ -41,12 +41,12 @@ export class StudentPageComponent {
       this.service.delete(student.id)
     } else if (confirmed == null) {
       this.student = student;
-      this.alertprops.showAlert = true;
-      this.alertprops.needConfirm = true;
+      
+      
     } else {
       this.student = student;
-      this.alertprops.showAlert = false;
-      this.alertprops.needConfirm = false;
+      
+      
     }
   }
   ngAfterContentInit() {

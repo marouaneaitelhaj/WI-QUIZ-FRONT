@@ -14,7 +14,7 @@ export class ResponsePageComponent {
   showPopup: boolean = false;
   
   responses: Response[] = [];
-  alertprops: AlertProps = new AlertProps();
+  
   response: Response = new Response();
   functionType: FunctionType = FunctionType.save;
   constructor(private service: ResponseService) {
@@ -41,12 +41,12 @@ export class ResponsePageComponent {
       this.service.delete(response.id);
     } else if (confirmed == null) {
       this.response = response;
-      this.alertprops.showAlert = true;
-      this.alertprops.needConfirm = true;
+      
+      
     } else {
       this.response = response;
-      this.alertprops.showAlert = false;
-      this.alertprops.needConfirm = false;
+      
+      
     }
   }
   ngAfterContentInit() {
