@@ -5,6 +5,7 @@ import { MediaService } from 'src/app/Services/media.service';
 import { QuestionService } from 'src/app/Services/question.service';
 import Media from 'src/app/Models/Media';
 import Question from 'src/app/Models/Question';
+import { AlertService } from 'src/app/Components/alert/alert.service';
 
 @Component({
   selector: 'app-media-page',
@@ -19,7 +20,7 @@ export class MediaPageComponent {
   
   media: Media = new Media();
   functionType: FunctionType = FunctionType.save;
-  constructor(private service: MediaService) {
+  constructor(private service: MediaService, private alertService: AlertService) {
   }
   togglePopUp(media?: Media) {
     if (media) {
@@ -46,12 +47,10 @@ export class MediaPageComponent {
       this.service.delete(media.id)
     } else if (confirmed == null) {
       this.media = media;
-      
-      
+      this.alertService.showMsg("Are you sure you want to delete this media?");
     } else {
       this.media = media;
-      
-      
+      this.alertService.hide()
     }
   }
   ngAfterContentInit() {

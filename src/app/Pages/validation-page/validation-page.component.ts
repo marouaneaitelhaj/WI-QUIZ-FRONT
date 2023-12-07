@@ -8,6 +8,7 @@ import { ResponseService } from 'src/app/Services/response.service';
 import Question from 'src/app/Models/Question';
 import Response from 'src/app/Models/Response';
 import AlertProps from 'src/app/Components/alert/alertProps';
+import { AlertService } from 'src/app/Components/alert/alert.service';
 
 @Component({
   selector: 'app-validation-page',
@@ -16,12 +17,12 @@ import AlertProps from 'src/app/Components/alert/alertProps';
 })
 export class ValidationPageComponent {
   showPopup: boolean = false;
-  
+
   validations: Validation[] = [];
-  
+
   validation: Validation = new Validation();
   functionType: FunctionType = FunctionType.save;
-  constructor(private service: ValidationService) {
+  constructor(private service: ValidationService, private alertService: AlertService) {
   }
   togglePopUp(validation?: Validation) {
     if (validation) {
@@ -45,12 +46,10 @@ export class ValidationPageComponent {
       this.service.delete(validation.id);
     } else if (confirmed == null) {
       this.validation = validation;
-      
-      
+      this.alertService.showMsg("Are you sure you want to delete this validation?");
     } else {
       this.validation = validation;
-      
-      
+      this.alertService.hide()
     }
   }
   ngAfterContentInit() {

@@ -8,6 +8,7 @@ import { LevelService } from 'src/app/Services/level.service';
 import { QuestionService } from 'src/app/Services/question.service';
 import { SubjectService } from 'src/app/Services/subject.service';
 import AlertProps from 'src/app/Components/alert/alertProps';
+import { AlertService } from 'src/app/Components/alert/alert.service';
 
 @Component({
   selector: 'app-question-page',
@@ -21,10 +22,10 @@ export class QuestionPageComponent {
   showAlert: boolean = false;
   questions: Question[] = [];
   subjects: Subject[] = [];
-  
+
   question: Question = new Question();
   functionType: FunctionType = FunctionType.save;
-  constructor(private service: QuestionService) {
+  constructor(private service: QuestionService, private alertService: AlertService) {
   }
   togglePopUp(question?: Question) {
     if (question) {
@@ -44,16 +45,14 @@ export class QuestionPageComponent {
     }
   }
   delete(question: Question, confirmed?: boolean) {
-    if (confirmed ) {
+    if (confirmed) {
       this.service.delete(question.id)
     } else if (confirmed == null) {
       this.question = question;
-      
-      
+      this.alertService.showMsg("Are you sure you want to delete this question?");
     } else {
       this.question = question;
-      
-      
+      this.alertService.hide()
     }
   }
   ngAfterContentInit() {

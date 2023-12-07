@@ -8,6 +8,7 @@ import Quiz from 'src/app/Models/Quiz';
 import { QuestionService } from 'src/app/Services/question.service';
 import { QuizService } from 'src/app/Services/quiz.service';
 import AlertProps from 'src/app/Components/alert/alertProps';
+import { AlertService } from 'src/app/Components/alert/alert.service';
 
 @Component({
   selector: 'app-questionofquiz-page',
@@ -23,7 +24,7 @@ export class QuestionofquizPageComponent {
   
   questionofquiz: Questionofquiz = new Questionofquiz();
   functionType: FunctionType = FunctionType.save;
-  constructor(private service: QuestionofquizService) {
+  constructor(private service: QuestionofquizService, private alertService: AlertService) {
   }
   togglePopUp(questionofquiz?: Questionofquiz) {
     if (questionofquiz) {
@@ -50,12 +51,10 @@ export class QuestionofquizPageComponent {
       this.service.delete(questionofquiz.id)
     } else if (confirmed == null) {
       this.questionofquiz = questionofquiz;
-      
-      
+      this.alertService.showMsg("Are you sure you want to delete this questionofquiz?");
     } else {
       this.questionofquiz = questionofquiz;
-      
-      
+      this.alertService.hide()
     }
   }
   ngAfterContentInit() {

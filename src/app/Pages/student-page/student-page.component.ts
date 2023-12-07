@@ -4,6 +4,7 @@ import { MyResponse } from 'src/app/Response/Response';
 import { StudentService } from 'src/app/Services/student.service';
 import Student from 'src/app/Models/Student';
 import AlertProps from 'src/app/Components/alert/alertProps';
+import { AlertService } from 'src/app/Components/alert/alert.service';
 
 @Component({
   selector: 'app-student-page',
@@ -17,7 +18,7 @@ export class StudentPageComponent {
   
   student: Student = new Student();
   functionType: FunctionType = FunctionType.save;
-  constructor(private service: StudentService) {
+  constructor(private service: StudentService, private alertService: AlertService) {
   }
   togglePopUp(student?: Student) {
     if (student) {
@@ -41,12 +42,10 @@ export class StudentPageComponent {
       this.service.delete(student.id)
     } else if (confirmed == null) {
       this.student = student;
-      
-      
+      this.alertService.showMsg("Are you sure you want to delete this student?");
     } else {
       this.student = student;
-      
-      
+      this.alertService.hide()
     }
   }
   ngAfterContentInit() {

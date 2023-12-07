@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AlertService } from 'src/app/Components/alert/alert.service';
 import AlertProps from 'src/app/Components/alert/alertProps';
 import { FunctionType } from 'src/app/Enums/FunctionType';
 import Response from 'src/app/Models/Response';
@@ -17,7 +18,7 @@ export class ResponsePageComponent {
   
   response: Response = new Response();
   functionType: FunctionType = FunctionType.save;
-  constructor(private service: ResponseService) {
+  constructor(private service: ResponseService, private alertService: AlertService) {
   }
   togglePopUp(response?: Response) {
     if (response) {
@@ -41,12 +42,10 @@ export class ResponsePageComponent {
       this.service.delete(response.id);
     } else if (confirmed == null) {
       this.response = response;
-      
-      
+      this.alertService.showMsg("Are you sure you want to delete this response?");
     } else {
       this.response = response;
-      
-      
+      this.alertService.hide()
     }
   }
   ngAfterContentInit() {

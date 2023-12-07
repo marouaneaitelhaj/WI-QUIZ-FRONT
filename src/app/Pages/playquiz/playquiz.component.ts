@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AlertService } from 'src/app/Components/alert/alert.service';
 import AlertProps from 'src/app/Components/alert/alertProps';
 import Answer from 'src/app/Models/Answer';
 import Question from 'src/app/Models/Question';
@@ -24,7 +25,7 @@ export class PlayquizComponent {
   answers: Answer[] = [];
   lefTime: number = 0;
   interval: any;
-  constructor(private route: ActivatedRoute, private quizService: QuizService) { }
+  constructor(private route: ActivatedRoute, private quizService: QuizService, private alertService: AlertService) { }
   playAudio(): void {
     const audio = new Audio();
     audio.src = "http://res.cloudinary.com/dvr7oyo77/video/upload/v1701783476/uhpikguqvmlfwtey5pyt.mp3";
