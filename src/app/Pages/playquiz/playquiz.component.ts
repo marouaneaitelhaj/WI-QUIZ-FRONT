@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertService } from 'src/app/Components/alert/alert.service';
 import AlertProps from 'src/app/Components/alert/alertProps';
+import { QuestionType } from 'src/app/Enums/QuestionType';
 import Answer from 'src/app/Models/Answer';
 import AssignQuiz from 'src/app/Models/AssignQuiz';
 import Question from 'src/app/Models/Question';
@@ -25,6 +26,7 @@ export class PlayquizComponent {
   question: Question = new Question();
   answers: Answer[] = [];
   lefTime: number = 0;
+  multipleResponse: Validation[] = [];
   assignedQuiz: AssignQuiz = new AssignQuiz();
   interval: any;
   constructor(private route: ActivatedRoute, private assignQuizService: AssignQuizService, private quizService: QuizService, private answerService: AnswerService, private alertService: AlertService) { }
@@ -68,10 +70,22 @@ export class PlayquizComponent {
     )
   }
   setResponse(response: Validation) {
-    this.answers[this.questionNumber] = new Answer();
-    this.answers[this.questionNumber].validation = response;
-    this.answers[this.questionNumber].assignQuiz = this.assignedQuiz;
-    console.log(this.answers[this.questionNumber].validation.response.response);
+    if (this.question.questionType == QuestionType.SINGLE_CHOICE) {
+      this.answers[this.questionNumber] = new Answer();
+      this.answers[this.questionNumber].validation = response;
+      this.answers[this.questionNumber].assignQuiz = this.assignedQuiz;
+    } else {
+      if (this.multipleResponse.length == 0) {
+        this.multipleResponse.push(response);
+      } else {
+        var index = this.multipleResponse.indexOf(response);
+        if (index == -1) {
+          this.multipleResponse.push(response);
+        } else {
+          this.multipleResponse.splice(index, 1);
+        }
+      }
+    }
   }
   resest(event: boolean) {
     this.questionNumber = 0;

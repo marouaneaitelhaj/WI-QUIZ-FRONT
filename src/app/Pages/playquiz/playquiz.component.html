@@ -22,6 +22,8 @@
                             <span (click)="setResponse(response)"
                                 [class.bg-yellow-50]="answers[questionNumber] && answers[questionNumber].validation && answers[questionNumber].validation.response && answers[questionNumber].validation.response.response === response.response.response"
                                 [class.bg-white]="!answers[questionNumber] || !answers[questionNumber].validation || !answers[questionNumber].validation.response || answers[questionNumber].validation.response.response !== response.response.response"
+                                [class.bg-yellow-50]="multipleResponse.indexOf(response) !== -1"
+                                [class.bg-white]="multipleResponse.indexOf(response) === -1"
                                 class="cursor-pointer my-2 px-10 py-2 rounded-full border">
                                 {{ response.response.response }}
                             </span>
@@ -29,7 +31,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex justify-center align-middle">
+                <div *ngIf="answers[questionNumber]" class="flex justify-center align-middle">
                     <button type="button" (click)="nextquestion()"
                         class="bg-white hover:bg-gray-100 text-black font-semibold py-2 px-4 border border-black rounded shadow">
                         Next
