@@ -80,6 +80,7 @@ export class PlayquizComponent {
       } else {
         var index = this.multipleResponse.indexOf(response);
         if (index == -1) {
+          this.multipleResponse.splice(index, 0);
           this.multipleResponse.push(response);
         } else {
           this.multipleResponse.splice(index, 1);
