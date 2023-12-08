@@ -77,13 +77,18 @@ export class PlayquizComponent {
     } else {
       if (this.multipleResponse.length == 0) {
         this.multipleResponse.push(response);
-      } else {
-        var index = this.multipleResponse.indexOf(response);
-        if (index == -1) {
-          this.multipleResponse.splice(index, 0);
-          this.multipleResponse.push(response);
+      } else if (this.multipleResponse.length == 1) {
+        if (this.multipleResponse[0].id == response.id) {
+          this.multipleResponse = [];
         } else {
-          this.multipleResponse.splice(index, 1);
+          this.multipleResponse.push(response);
+        }
+      } else {
+        if (this.multipleResponse[0].id == response.id) {
+          this.multipleResponse.splice(0, 1);
+        } else {
+          this.multipleResponse.splice(1, 1);
+          this.multipleResponse.push(response);
         }
       }
     }
