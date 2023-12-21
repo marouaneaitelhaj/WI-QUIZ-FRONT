@@ -19,7 +19,7 @@ import { QuizService } from 'src/app/Services/quiz.service';
   templateUrl: './playquiz.component.html',
   styleUrls: ['./playquiz.component.css'],
 })
-export class PlayquizComponent {
+export class PlayquizComponent implements OnChanges {
   quiz: Quiz = new Quiz();
   questionNumber: number = 0;
   selectedImage: number = 0;
@@ -37,7 +37,7 @@ export class PlayquizComponent {
         this.quizService.findById(this.quiz.id).subscribe((quiz: Quiz) => {
           this.quiz = quiz;
           console.log(this.quiz.numberOfChances, assignQuiz.chance, this.quiz.numberOfChances <= assignQuiz.chance);
-          if (this.quiz.numberOfChances <= assignQuiz.chance) {
+          if (this.quiz.numberOfChances <= assignQuiz.chance || this.assignedQuiz.played) {
             this.alertService.showWarning("you have no more chances", "/assignquiz")
           } else {
             this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
@@ -47,8 +47,15 @@ export class PlayquizComponent {
       });
     });
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+  }
   nextquestion() {
     this.alertService.showMsg("saving .....!")
+    if (this.questionNumber == 0) {
+      this.assignedQuiz.played = true;
+      this.assignQuizService.update(this.assignedQuiz)
+    }
     this.answers[this.questionNumber].forEach((answer: Answer, index: number) => {
       this.answerService.save(this.answers[this.questionNumber][index]).subscribe(
         (response: MyResponse<Answer>) => {
@@ -57,8 +64,6 @@ export class PlayquizComponent {
           if (this.questionNumber == this.quiz.questionOfQuizs.length - 1) {
             var result = 0;
             this.answers.forEach((answers: Answer[]) => {
-              // console.log(answer.validation.points);
-              // result += answer.validation.points
               answers.forEach((answer: Answer) => {
                 result += answer.validation.points
               });
@@ -73,31 +78,25 @@ export class PlayquizComponent {
       )
     });
   }
-  setResponse(response: Validation) {
-    if (this.question.questionType == QuestionType.SINGLE_CHOICE) {
-      if (!this.answers[this.questionNumber]) {
-        this.answers[this.questionNumber] = [];
-      }
-      this.answers[this.questionNumber].push(new Answer());
-      this.answers[this.questionNumber][0].validation = response;
-      this.answers[this.questionNumber][0].assignQuiz = this.assignedQuiz;
-    } else if (this.question.questionType == QuestionType.MULTIPLE_CHOICE) {
-      if (this.answers[this.questionNumber].length == 0) {
-        this.answers[this.questionNumber] = [];
-        this.answers[this.questionNumber][0] = new Answer();
-        this.answers[this.questionNumber][0].validation = response;
-        this.answers[this.questionNumber][0].assignQuiz = this.assignedQuiz;
-      } else {
-        if (this.answers[this.questionNumber].find((answer: Answer) => answer.validation.id == response.id)) {
-          this.answers[this.questionNumber] = this.answers[this.questionNumber].filter((answer: Answer) => answer.validation.id != response.id);
-        } else {
-          this.answers[this.questionNumber][this.answers[this.questionNumber].length] = new Answer();
-          this.answers[this.questionNumber][this.answers[this.questionNumber].length - 1].validation = response;
-          this.answers[this.questionNumber][this.answers[this.questionNumber].length - 1].assignQuiz = this.assignedQuiz;
-        }
-      }
+  setValidation(validation: Validation) {
+    this.isEnough();
+
+    if (!this.answers[this.questionNumber]) {
+      this.answers[this.questionNumber] = [];
+    }
+
+    const isDuplicate = this.answers[this.questionNumber].some((existingAnswer: Answer) => {
+      return existingAnswer.validation === validation;
+    });
+
+    if (!isDuplicate) {
+      const answer: Answer = new Answer();
+      answer.validation = validation;
+      answer.assignQuiz = this.assignedQuiz;
+      this.answers[this.questionNumber].push(answer);
     }
   }
+
   resest(event: boolean) {
     this.questionNumber = 0;
     this.answers = [];
@@ -115,6 +114,17 @@ export class PlayquizComponent {
       }
     }, 1000);
   }
+  isEnough() {
+    if (this.question.questionType == QuestionType.MULTIPLE_CHOICE) {
+      if (this.question.numberOfCorrectAnswers == this.answers[this.questionNumber]?.length) {
+        this.answers[this.questionNumber].splice(0, 1)
+      }
+    } else {
+      if (this.answers[this.questionNumber]?.length >= 1) {
+        this.answers[this.questionNumber].pop();
+      }
+    }
+  }
   nextImage() {
     if (this.selectedImage == this.question.media.length - 1) {
       this.selectedImage = 0;
@@ -122,10 +132,9 @@ export class PlayquizComponent {
       this.selectedImage++;
     }
   }
-  isResponseSelected(response: Validation): boolean {
-    this.answers[this.questionNumber]?.forEach((answer: Answer) => {
-      console.log(answer.validation.id, response.id);
-    });
-    return false;
+  isResponseSelected(validation: Validation): boolean {
+    return this.answers[this.questionNumber]?.some((answer: Answer) => {
+      return answer.validation === validation;
+    }) || false;
   }
 }

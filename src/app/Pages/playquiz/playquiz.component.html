@@ -17,13 +17,13 @@
             <div class="w-2/5 align-middle flex flex-col justify-center">
                 <p class="text-2xl text-center font-bold">{{question.question}}</p>
                 <div>
-                    <div *ngFor="let response of question.validations; let i = index">
+                    <div *ngFor="let validation of question.validations; let i = index">
                         <div class="flex justify-center align-middle">
-                            <span (click)="setResponse(response)"
-                                [class.bg-white]="isResponseSelected(response)"
-                                [class.bg-gray-100]="!isResponseSelected(response)"
+                            <span (click)="setValidation(validation)"
+                                [class.bg-white]="isResponseSelected(validation)"
+                                [class.bg-gray-100]="!isResponseSelected(validation)"
                                 class="cursor-pointer my-2 px-10 py-2 rounded-full border">
-                                {{ response.response.response }}
+                                {{ validation.response.response }}
                             </span>
 
                         </div>

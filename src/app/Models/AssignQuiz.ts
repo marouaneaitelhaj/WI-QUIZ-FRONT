@@ -9,4 +9,5 @@ export default class AssignQuiz {
     chance : number = 0;
     notes : string = "";
     date : Date = new Date();
+    played : boolean = false;
 }
