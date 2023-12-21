@@ -24,9 +24,8 @@ export class PlayquizComponent {
   questionNumber: number = 0;
   selectedImage: number = 0;
   question: Question = new Question();
-  answers: Answer[] = [];
+  answers: Answer[][] = [];
   lefTime: number = 0;
-  multipleResponse: Validation[] = [];
   assignedQuiz: AssignQuiz = new AssignQuiz();
   interval: any;
   constructor(private route: ActivatedRoute, private assignQuizService: AssignQuizService, private quizService: QuizService, private answerService: AnswerService, private alertService: AlertService) { }
@@ -50,45 +49,51 @@ export class PlayquizComponent {
   }
   nextquestion() {
     this.alertService.showMsg("saving .....!")
-    this.answerService.save(this.answers[this.questionNumber]).subscribe(
-      (response: MyResponse<Answer>) => {
-        this.alertService.hide();
-        this.answers[this.questionNumber] = response.data;
-        if (this.questionNumber == this.quiz.questionOfQuizs.length - 1) {
-          var result = 0;
-          this.answers.forEach((answer: Answer) => {
-            console.log(answer.validation.points);
-            result += answer.validation.points
-          });
-          this.alertService.showMsg("your score is " + result);
-        } else {
-          this.questionNumber++;
-          this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
-          this.chrono(this.question.time);
+    this.answers[this.questionNumber].forEach((answer: Answer, index: number) => {
+      this.answerService.save(this.answers[this.questionNumber][index]).subscribe(
+        (response: MyResponse<Answer>) => {
+          this.alertService.hide();
+          this.answers[this.questionNumber][index] = response.data;
+          if (this.questionNumber == this.quiz.questionOfQuizs.length - 1) {
+            var result = 0;
+            this.answers.forEach((answers: Answer[]) => {
+              // console.log(answer.validation.points);
+              // result += answer.validation.points
+              answers.forEach((answer: Answer) => {
+                result += answer.validation.points
+              });
+            });
+            this.alertService.showMsg("your score is " + result);
+          } else {
+            this.questionNumber++;
+            this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
+            this.chrono(this.question.time);
+          }
         }
-      }
-    )
+      )
+    });
   }
   setResponse(response: Validation) {
     if (this.question.questionType == QuestionType.SINGLE_CHOICE) {
-      this.answers[this.questionNumber] = new Answer();
-      this.answers[this.questionNumber].validation = response;
-      this.answers[this.questionNumber].assignQuiz = this.assignedQuiz;
-    } else {
-      if (this.multipleResponse.length == 0) {
-        this.multipleResponse.push(response);
-      } else if (this.multipleResponse.length == 1) {
-        if (this.multipleResponse[0].id == response.id) {
-          this.multipleResponse = [];
-        } else {
-          this.multipleResponse.push(response);
-        }
+      if (!this.answers[this.questionNumber]) {
+        this.answers[this.questionNumber] = [];
+      }
+      this.answers[this.questionNumber].push(new Answer());
+      this.answers[this.questionNumber][0].validation = response;
+      this.answers[this.questionNumber][0].assignQuiz = this.assignedQuiz;
+    } else if (this.question.questionType == QuestionType.MULTIPLE_CHOICE) {
+      if (this.answers[this.questionNumber].length == 0) {
+        this.answers[this.questionNumber] = [];
+        this.answers[this.questionNumber][0] = new Answer();
+        this.answers[this.questionNumber][0].validation = response;
+        this.answers[this.questionNumber][0].assignQuiz = this.assignedQuiz;
       } else {
-        if (this.multipleResponse[0].id == response.id) {
-          this.multipleResponse.splice(0, 1);
+        if (this.answers[this.questionNumber].find((answer: Answer) => answer.validation.id == response.id)) {
+          this.answers[this.questionNumber] = this.answers[this.questionNumber].filter((answer: Answer) => answer.validation.id != response.id);
         } else {
-          this.multipleResponse.splice(1, 1);
-          this.multipleResponse.push(response);
+          this.answers[this.questionNumber][this.answers[this.questionNumber].length] = new Answer();
+          this.answers[this.questionNumber][this.answers[this.questionNumber].length - 1].validation = response;
+          this.answers[this.questionNumber][this.answers[this.questionNumber].length - 1].assignQuiz = this.assignedQuiz;
         }
       }
     }
@@ -116,5 +121,11 @@ export class PlayquizComponent {
     } else {
       this.selectedImage++;
     }
+  }
+  isResponseSelected(response: Validation): boolean {
+    this.answers[this.questionNumber]?.forEach((answer: Answer) => {
+      console.log(answer.validation.id, response.id);
+    });
+    return false;
   }
 }

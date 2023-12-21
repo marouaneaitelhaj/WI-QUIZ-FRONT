@@ -20,8 +20,8 @@
                     <div *ngFor="let response of question.validations; let i = index">
                         <div class="flex justify-center align-middle">
                             <span (click)="setResponse(response)"
-                                [class.bg-yellow-50]="answers[questionNumber] && answers[questionNumber].validation && answers[questionNumber].validation.response && answers[questionNumber].validation.response.response === response.response.response  || multipleResponse.indexOf(response) !== -1"
-                                [class.bg-white]="!answers[questionNumber] || !answers[questionNumber].validation || !answers[questionNumber].validation.response || answers[questionNumber].validation.response.response !== response.response.response || multipleResponse.indexOf(response) === -1"
+                                [class.bg-white]="isResponseSelected(response)"
+                                [class.bg-gray-100]="!isResponseSelected(response)"
                                 class="cursor-pointer my-2 px-10 py-2 rounded-full border">
                                 {{ response.response.response }}
                             </span>
