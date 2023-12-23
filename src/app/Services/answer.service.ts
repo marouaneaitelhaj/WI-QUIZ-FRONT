@@ -20,8 +20,8 @@ export class AnswerService {
       }
     )
   }
-  public save(answer: Answer): Observable<MyResponse<Answer>> {
-    return this.http.post<MyResponse<Answer>>(this.url, answer);
+  public save(answer: Answer[]): Observable<MyResponse<Answer[]>> {
+    return this.http.post<MyResponse<Answer[]>>(this.url, answer);
   }
   public update(answer: Answer): void {
     this.http.put<MyResponse<Answer>>(this.url + "/" + answer.id, answer).subscribe(

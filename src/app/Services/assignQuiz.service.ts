@@ -29,6 +29,9 @@ export class AssignQuizService {
       }
     )
   }
+  public getScore(id: number): Observable<any> {
+    return this.http.get<any>(this.url + "/score/" + id);
+  }
   public update(assignQuiz: AssignQuiz): void {
     this.http.put<MyResponse<AssignQuiz>>(this.url + "/" + assignQuiz.id, assignQuiz).subscribe(
       (response) => {

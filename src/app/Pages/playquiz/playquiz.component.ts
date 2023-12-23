@@ -19,7 +19,7 @@ import { QuizService } from 'src/app/Services/quiz.service';
   templateUrl: './playquiz.component.html',
   styleUrls: ['./playquiz.component.css'],
 })
-export class PlayquizComponent implements OnChanges {
+export class PlayquizComponent {
   quiz: Quiz = new Quiz();
   questionNumber: number = 0;
   selectedImage: number = 0;
@@ -47,28 +47,17 @@ export class PlayquizComponent implements OnChanges {
       });
     });
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-  }
   nextquestion() {
     this.alertService.showMsg("saving .....!")
-    if (this.questionNumber == 0) {
-      this.assignedQuiz.played = true;
-      this.assignQuizService.update(this.assignedQuiz)
-    }
-    this.answers[this.questionNumber].forEach((answer: Answer, index: number) => {
-      this.answerService.save(this.answers[this.questionNumber][index]).subscribe(
-        (response: MyResponse<Answer>) => {
+    // this.answers[this.questionNumber].forEach((answer: Answer, index: number) => {
+      this.answerService.save(this.answers[this.questionNumber]).subscribe(
+        (response: MyResponse<Answer[]>) => {
           this.alertService.hide();
-          this.answers[this.questionNumber][index] = response.data;
+          this.answers[this.questionNumber] = response.data;
           if (this.questionNumber == this.quiz.questionOfQuizs.length - 1) {
-            var result = 0;
-            this.answers.forEach((answers: Answer[]) => {
-              answers.forEach((answer: Answer) => {
-                result += answer.validation.points
-              });
+            this.assignQuizService.getScore(this.assignedQuiz.id).subscribe((response: any) => {
+              this.alertService.showMsg("your score is " + response.data);
             });
-            this.alertService.showMsg("your score is " + result);
           } else {
             this.questionNumber++;
             this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
@@ -76,7 +65,7 @@ export class PlayquizComponent implements OnChanges {
           }
         }
       )
-    });
+    // });
   }
   setValidation(validation: Validation) {
     this.isEnough();
@@ -88,6 +77,15 @@ export class PlayquizComponent implements OnChanges {
     const isDuplicate = this.answers[this.questionNumber].some((existingAnswer: Answer) => {
       return existingAnswer.validation === validation;
     });
+
+    if(isDuplicate){
+      this.answers[this.questionNumber].map((existingAnswer: Answer, index: number) => {
+        if(existingAnswer.validation === validation){
+          this.answers[this.questionNumber].splice(index, 1);
+          console.log(existingAnswer, existingAnswer.validation, validation)
+        }
+      });
+    }
 
     if (!isDuplicate) {
       const answer: Answer = new Answer();
