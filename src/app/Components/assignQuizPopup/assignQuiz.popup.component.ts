@@ -1,8 +1,11 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { FunctionType } from 'src/app/Enums/FunctionType';
 import AssignQuiz from 'src/app/Models/AssignQuiz';
 import Quiz from 'src/app/Models/Quiz';
 import Student from 'src/app/Models/Student';
+import { AssignQuizService } from 'src/app/Services/assignQuiz.service';
 import { QuizService } from 'src/app/Services/quiz.service';
 import { StudentService } from 'src/app/Services/student.service';
 @Component({
@@ -10,27 +13,37 @@ import { StudentService } from 'src/app/Services/student.service';
   templateUrl: './assignQuiz.popup.component.html',
   styleUrls: ['./assignQuiz.popup.component.css']
 })
-export class AssignQuizPopupComponent {
+export class AssignQuizPopupComponent implements OnChanges {
   @Output() show = new EventEmitter<boolean>();
-  @Output() submitEvent = new EventEmitter<AssignQuiz>();
-  @Input() assignQuizs: AssignQuiz[] = [];
   @Input() assignQuiz: AssignQuiz = new AssignQuiz();
-  students : Student[] = [];
-  quizes : Quiz[] = [];
+  students : Observable<Student[]> = this.studentService.students;
+  quizes : Observable<Quiz[]> = this.quizService.quizzes;
+  constructor(private studentService : StudentService, private quizService : QuizService, private assignQuizService : AssignQuizService) {}
+  assignQuizPopupForm : FormGroup = new FormBuilder().group({
+    student : [this.assignQuiz.student.id || '', Validators.required],
+    quiz : [this.assignQuiz.quiz.id || '', Validators.required],
+    score : [this.assignQuiz.score || '', Validators.required],
+    chance : [this.assignQuiz.chance || '', Validators.required],
+    notes : [this.assignQuiz.notes || '', Validators.required],
+  });
+  ngOnChanges() {
+    this.assignQuizPopupForm = new FormBuilder().group({
+      student : [this.assignQuiz.student.id || '', Validators.required],
+      quiz : [this.assignQuiz.quiz.id || '', Validators.required],
+      score : [this.assignQuiz.score || '', Validators.required],
+      chance : [this.assignQuiz.chance || '', Validators.required],
+      notes : [this.assignQuiz.notes || '', Validators.required],
+    });
+  }
   togglePopUp() {
     this.show.emit(false);
   }
   submit() {
-    this.submitEvent.emit(this.assignQuiz);
+    if(this.assignQuiz.id == 0) {
+      this.assignQuizService.save(this.assignQuizPopupForm.value);
+    }else{
+      this.assignQuizService.update(this.assignQuizPopupForm.value);
+    }
     this.togglePopUp();
-  }
-  constructor(private studentService : StudentService, private quizService : QuizService) {}
-  ngAfterViewInit() {
-    this.studentService.students.subscribe((data : Student[]) => {
-      this.students = data;
-    });
-    this.quizService.quizzes.subscribe((data : Quiz[]) => {
-      this.quizes = data;
-    });
   }
 }

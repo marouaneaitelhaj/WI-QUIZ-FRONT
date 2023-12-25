@@ -11,7 +11,7 @@ import { LevelPopupComponent } from './Components/levelPopup/level.popup.compone
 import { MediaPopupComponent } from './Components/mediaPopup/media.popup.component';
 import { ResponsePopupComponent } from './Components/responsePopup/response.popup.component';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertComponent } from './Components/alert/alert.component';
 import { QuestionPopupComponent } from './Components/questionPopup/question.popup.component';
 import { QuestionPageComponent } from './Pages/question-page/question-page.component';
@@ -69,6 +69,7 @@ import { AssignQuizPopupComponent } from './Components/assignQuizPopup/assignQui
     HttpClientModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     // StoreModule.forRoot({message : myReducer})
   ],
   providers: [],

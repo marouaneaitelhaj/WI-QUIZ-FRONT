@@ -23,7 +23,8 @@
                                 </th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-black">Quiz
                                 </th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-black">Quiz max chances
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-black">Quiz max
+                                    chances
                                 </th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-black">Score
                                 </th>
@@ -45,7 +46,8 @@
                                     {{assignQuiz.student.firstName + " "+assignQuiz.student.lastName }}</td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-black">{{assignQuiz.quiz.comment}}
                                 </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-black">{{assignQuiz.quiz.numberOfChances}}
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-black">
+                                    {{assignQuiz.quiz.numberOfChances}}
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-black">{{assignQuiz.score}}</td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-black">{{assignQuiz.chance}}</td>
@@ -77,6 +79,5 @@
         </div>
     </div>
 </div>
-<app-assignQuiz-popup *ngIf="showPopup" [assignQuiz]="assignQuiz" (submitEvent)="submit($event)"
-    (show)="showPopup=!showPopup" [assignQuizs]="assignQuizs"></app-assignQuiz-popup>
+<app-assignQuiz-popup *ngIf="showPopup" [assignQuiz]="assignQuiz" (show)="showPopup=!showPopup"></app-assignQuiz-popup>
 <app-alert (confirmed)="delete(assignQuiz, $event)"></app-alert>

@@ -10,7 +10,7 @@
             <div class="border-t border-orange-500"></div>
         </div>
     </div>
-    <div>
+    <form [formGroup]="assignQuizPopupForm" (ngSubmit)="submit()">
         <div class="overflow-hidden sm:rounded-md">
             <div class="px-4 py-5">
                 <div class="flex w-full flex-col">
@@ -18,9 +18,9 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Student
                         </label>
-                        <select     [(ngModel)]="assignQuiz.student.id"
+                        <select     formControlName="student"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
-                            <option *ngFor="let student of students" value="{{student.id}}">{{student.firstName + " "+student.lastName}}
+                            <option *ngFor="let student of students | async" value="{{student.id}}">{{student.firstName + " "+student.lastName}}
                             </option>
                         </select>
                     </div>
@@ -28,9 +28,9 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Quiz
                         </label>
-                        <select     [(ngModel)]="assignQuiz.quiz.id"
+                        <select     formControlName="quiz"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
-                            <option *ngFor="let quiz of quizes" value="{{quiz.id}}">{{quiz.comment}}
+                            <option *ngFor="let quiz of quizes | async" value="{{quiz.id}}">{{quiz.comment}}
                             </option>
                         </select>
                     </div>
@@ -39,7 +39,7 @@
                             Score
                         </label>
                         <input type="number"   
-                            [(ngModel)]="assignQuiz.score"
+                            formControlName="score"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                     </div>
                     <div class="w-full px-2 py-2">
@@ -47,7 +47,7 @@
                             Chance
                         </label>
                         <input type="number"   
-                            [(ngModel)]="assignQuiz.chance"
+                            formControlName="chance"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                     </div>
                     <div class="w-full px-2 py-2">
@@ -55,7 +55,7 @@
                             Notes
                         </label>
                         <input type="text"   
-                            [(ngModel)]="assignQuiz.notes"
+                            formControlName="notes"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                     </div>
                 </div>
@@ -70,11 +70,11 @@
                     class="inline-flex justify-center rounded-md border border-transparent bg-white py-2 px-4 text-sm font-medium text-black shadow-sm ">
                     Cancel
                 </button>
-                <button type="submit" (click)="submit()"
+                <button type="submit"
                     class="inline-flex justify-center rounded-md border border-transparent bg-orange-500 py-2 px-4 text-sm font-medium text-black shadow-sm ">
                     Save
                 </button>
             </div>
         </div>
-    </div>
+    </form>
 </app-modal>
