@@ -38,7 +38,9 @@ export class PlayquizComponent {
           this.quiz = quiz;
           console.log(this.quiz.numberOfChances, assignQuiz.chance, this.quiz.numberOfChances <= assignQuiz.chance);
           if (this.quiz.numberOfChances <= assignQuiz.chance || this.assignedQuiz.played) {
-            this.alertService.showWarning("you have no more chances", "/assignquiz")
+            this.assignQuizService.getScore(this.assignedQuiz.id).subscribe((response: any) => {
+              this.alertService.showWarning("your score is " + response.data, "/assignquiz")
+            });
           } else {
             this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
             this.chrono(this.question.time);
@@ -48,24 +50,22 @@ export class PlayquizComponent {
     });
   }
   nextquestion() {
-    this.alertService.showMsg("saving .....!")
-    // this.answers[this.questionNumber].forEach((answer: Answer, index: number) => {
-      this.answerService.save(this.answers[this.questionNumber]).subscribe(
-        (response: MyResponse<Answer[]>) => {
-          this.alertService.hide();
-          this.answers[this.questionNumber] = response.data;
-          if (this.questionNumber == this.quiz.questionOfQuizs.length - 1) {
-            this.assignQuizService.getScore(this.assignedQuiz.id).subscribe((response: any) => {
-              this.alertService.showMsg("your score is " + response.data);
-            });
-          } else {
-            this.questionNumber++;
-            this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
-            this.chrono(this.question.time);
-          }
+    // this.alertService.showMsg("saving .....!")
+    this.answerService.save(this.answers[this.questionNumber]).subscribe(
+      (response: MyResponse<Answer[]>) => {
+        this.alertService.hide();
+        this.answers[this.questionNumber] = response.data;
+        if (this.questionNumber == this.quiz.questionOfQuizs.length - 1) {
+          this.assignQuizService.getScore(this.assignedQuiz.id).subscribe((response: any) => {
+            this.alertService.showWarning("your score is " + response.data, "/assignquiz")
+          });
+        } else {
+          this.questionNumber++;
+          this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
+          this.chrono(this.question.time);
         }
-      )
-    // });
+      }
+    )
   }
   setValidation(validation: Validation) {
     this.isEnough();
@@ -78,9 +78,9 @@ export class PlayquizComponent {
       return existingAnswer.validation === validation;
     });
 
-    if(isDuplicate){
+    if (isDuplicate) {
       this.answers[this.questionNumber].map((existingAnswer: Answer, index: number) => {
-        if(existingAnswer.validation === validation){
+        if (existingAnswer.validation === validation) {
           this.answers[this.questionNumber].splice(index, 1);
           console.log(existingAnswer, existingAnswer.validation, validation)
         }

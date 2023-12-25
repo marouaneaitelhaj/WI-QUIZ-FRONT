@@ -19,19 +19,18 @@
                 <div>
                     <div *ngFor="let validation of question.validations; let i = index">
                         <div class="flex justify-center align-middle">
-                            <span (click)="setValidation(validation)"
-                                [class.bg-white]="isResponseSelected(validation)"
+                            <span (click)="setValidation(validation)" [class.bg-white]="isResponseSelected(validation)"
                                 [class.bg-gray-100]="!isResponseSelected(validation)"
-                                class="cursor-pointer my-2 px-10 py-2 rounded-full border">
+                                class="cursor-pointer my-2 px-10 py-2 rounded-full border w-full">
                                 {{ validation.response.response }}
                             </span>
 
                         </div>
                     </div>
                 </div>
-                <div *ngIf="answers[questionNumber]" class="flex justify-center align-middle">
-                    <button type="button" (click)="nextquestion()"
-                        class="bg-white hover:bg-gray-100 text-black font-semibold py-2 px-4 border border-black rounded shadow">
+                <div class="flex justify-center align-middle">
+                    <button type="button" (click)="nextquestion()" [disabled]="!answers[questionNumber]"
+                        class="bg-white hover:bg-gray-100 text-black font-semibold py-1 px-5 border border-black rounded shadow">
                         Next
                     </button>
                 </div>
