@@ -20,6 +20,7 @@ export class AssignQuizPopupComponent implements OnChanges {
   quizes : Observable<Quiz[]> = this.quizService.quizzes;
   constructor(private studentService : StudentService, private quizService : QuizService, private assignQuizService : AssignQuizService) {}
   assignQuizPopupForm : FormGroup = new FormBuilder().group({
+    id : [this.assignQuiz.id || 0],
     student : [this.assignQuiz.student.id || '', Validators.required],
     quiz : [this.assignQuiz.quiz.id || '', Validators.required],
     score : [this.assignQuiz.score || '', Validators.required],
@@ -28,6 +29,7 @@ export class AssignQuizPopupComponent implements OnChanges {
   });
   ngOnChanges() {
     this.assignQuizPopupForm = new FormBuilder().group({
+      id : [this.assignQuiz.id || 0],
       student : [this.assignQuiz.student.id || '', Validators.required],
       quiz : [this.assignQuiz.quiz.id || '', Validators.required],
       score : [this.assignQuiz.score || '', Validators.required],

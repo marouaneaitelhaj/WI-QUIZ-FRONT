@@ -26,6 +26,10 @@ export class AssignQuizService {
         const assignQuizs = this.assignQuizs.getValue();
         assignQuizs.push(response.data);
         this.assignQuizs.next(assignQuizs);
+        this.alertService.showMsg(response.message);
+      },
+      (error) => {
+        this.alertService.showMsg(error.error.error);
       }
     )
   }
@@ -39,6 +43,10 @@ export class AssignQuizService {
         const index = assignQuizs.findIndex((s) => s.id === assignQuiz.id);
         assignQuizs[index] = response.data;
         this.assignQuizs.next(assignQuizs);
+        this.alertService.showMsg(response.message);
+      },
+      (error) => {
+        this.alertService.showMsg(error.error.error);
       }
     )
   }
