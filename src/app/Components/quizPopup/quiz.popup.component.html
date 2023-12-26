@@ -10,7 +10,7 @@
             <div class="border-t border-orange-500"></div>
         </div>
     </div>
-    <div>
+    <form [formGroup]="quizPopupForm" (ngSubmit)="submit()">
         <div class="overflow-hidden sm:rounded-md">
             <div class="px-4 py-5">
                 <div class="flex w-full flex-col">
@@ -18,17 +18,17 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Success Result
                         </label>
-                        <input type="number" [(ngModel)]="quiz.successResult"
+                        <input type="number" formControlName="successResult"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                     </div>
                     <div class="w-full px-2 py-2">
-                        <input id="default-checkbox" type="checkbox" [(ngModel)]="quiz.answerAccess"
+                        <input id="default-checkbox" type="checkbox" formControlName="answerAccess"
                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="default-checkbox"
                             class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Answers access</label>
                     </div>
                     <div class="w-full px-2 py-2">
-                        <input id="default-checkbox" type="checkbox" [(ngModel)]="quiz.resultAccess"
+                        <input id="default-checkbox" type="checkbox" formControlName="resultAccess"
                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="default-checkbox"
                             class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Result access after test</label>
@@ -39,23 +39,23 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Chances
                         </label>
-                        <input type="number" [(ngModel)]="quiz.numberOfChances"
+                        <input type="number" formControlName="numberOfChances"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                     </div>
                     <div class="w-full px-2 py-2">
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Comments
                         </label>
-                        <input type="text" [(ngModel)]="quiz.comment"
+                        <input type="text" formControlName="comment"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                     </div>
                     <div class="w-full px-2 py-2">
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Teacher
                         </label>
-                        <select  [(ngModel)]="quiz.teacher.id"
+                        <select  formControlName="teacher_id"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
-                            <option *ngFor="let teacher of teachers" value="{{teacher.id}}">{{teacher.lastName + ' ' +
+                            <option *ngFor="let teacher of teachers | async" value="{{teacher.id}}">{{teacher.lastName + ' ' +
                                 teacher.firstName}}
                             </option>
                         </select>
@@ -72,11 +72,14 @@
                     class="inline-flex justify-center rounded-md border border-transparent bg-white py-2 px-4 text-sm font-medium text-black shadow-sm ">
                     Cancel
                 </button>
-                <button type="submit" (click)="submit()"
+                <button type="submit"
+                    [class.bg-orange-500]="quizPopupForm.valid"
+                    [class.bg-gray-300]="!quizPopupForm.valid"
+                    [disabled]="!quizPopupForm.valid"
                     class="inline-flex justify-center rounded-md border border-transparent bg-orange-500 py-2 px-4 text-sm font-medium text-black shadow-sm ">
                     Save
                 </button>
             </div>
         </div>
-    </div>
+    </form>
 </app-modal>
