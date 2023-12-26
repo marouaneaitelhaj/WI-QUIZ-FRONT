@@ -13,16 +13,31 @@ export class LevelPopupComponent implements OnChanges {
   @Input() level: Level = new Level();
   levelPopupForm: FormGroup = new FormBuilder().group({
     id: [this.level.id || 0],
-    description: [this.level.description, Validators.required],
+    description: [this.level.description || '', Validators.required],
     maxPoints: [this.level.maxPoints, Validators.required],
     minPoints: [this.level.minPoints, Validators.required],
+  }, {
+    validators: [this.maxPointsValidator]
   });
+  // validator for maxPoints and minPoints
+  maxPointsValidator(form: FormGroup) {
+    const maxPoints = form.get('maxPoints')?.value;
+    const minPoints = form.get('minPoints')?.value;
+    if (maxPoints < minPoints) {
+      form.get('maxPoints')?.setErrors({ maxPointsLessThanMinPoints: true });
+    } else {
+      form.get('maxPoints')?.setErrors(null);
+    }
+    return null;
+  }
   ngOnChanges(changes: SimpleChanges): void {
     this.levelPopupForm = new FormBuilder().group({
       id: [this.level.id || 0],
-      description: [this.level.description, Validators.required],
+      description: [this.level.description || '', Validators.required],
       maxPoints: [this.level.maxPoints, Validators.required],
       minPoints: [this.level.minPoints, Validators.required],
+    }, {
+      validators: [this.maxPointsValidator]
     });
   }
   constructor(private levelService: LevelService) { }

@@ -10,7 +10,7 @@
             <div class="border-t border-orange-500"></div>
         </div>
     </div>
-    <div>
+    <form [formGroup]="levelPopupForm" (ngSubmit)="submit()">
         <div class="overflow-hidden sm:rounded-md">
             <div class="px-4 py-5">
                 <div class="flex w-full flex-col">
@@ -18,25 +18,28 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Description
                         </label>
-                        <input type="text"   
-                            [(ngModel)]="level.description"
+                        <input type="text" formControlName="description"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                     </div>
                     <div class="w-full px-2 py-2">
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Max Points
                         </label>
-                        <input type="number"   
-                            [(ngModel)]="level.maxPoints" min="0" max="100"
+                        <input type="number" formControlName="maxPoints" min="0" max="100"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
+                        <small
+                            *ngIf="levelPopupForm.get('maxPoints')?.hasError('maxPointsLessThanMinPoints') && levelPopupForm.get('maxPoints')?.touched"
+                            class="text-red-500">
+                            Max Points must be greater than Min Points
+                        </small>
                     </div>
                     <div class="w-full px-2 py-2">
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Min Points
                         </label>
-                        <input type="number"   
-                            [(ngModel)]="level.minPoints" min="0" max="100"
+                        <input type="number" formControlName="minPoints" min="0" max="100"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
+
                     </div>
                 </div>
             </div>
@@ -50,11 +53,12 @@
                     class="inline-flex justify-center rounded-md border border-transparent bg-white py-2 px-4 text-sm font-medium text-black shadow-sm ">
                     Cancel
                 </button>
-                <button type="submit" (click)="submit()"
+                <button type="submit" [class.bg-orange-500]="levelPopupForm.valid"
+                    [class.bg-gray-300]="!levelPopupForm.valid" [disabled]="!levelPopupForm.valid"
                     class="inline-flex justify-center rounded-md border border-transparent bg-orange-500 py-2 px-4 text-sm font-medium text-black shadow-sm ">
                     Save
                 </button>
             </div>
         </div>
-    </div>
+    </form>
 </app-modal>
