@@ -9,7 +9,7 @@
             <div class="border-t border-orange-500"></div>
         </div>
     </div>
-    <div>
+    <form [formGroup]="questionPopupForm" (ngSubmit)="submit()">
         <div class="overflow-hidden sm:rounded-md">
             <div class="px-4 py-5">
                 <div class="flex w-full flex-col">
@@ -17,32 +17,28 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Question
                         </label>
-                        <input type="text"   
-                            [(ngModel)]="question.question"
+                        <input type="text" formControlName="question"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                     </div>
                     <div class="w-full px-2 py-2">
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Number of answers
                         </label>
-                        <input type="number"   
-                            [(ngModel)]="question.numberOfAnswers"
+                        <input type="number" formControlName="numberOfAnswers"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                     </div>
                     <div class="w-full px-2 py-2">
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Number of correct answers
                         </label>
-                        <input type="number"   
-                            [(ngModel)]="question.numberOfCorrectAnswers"
+                        <input type="number" formControlName="numberOfCorrectAnswers"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                     </div>
                     <div class="w-full px-2 py-2">
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Question type
                         </label>
-                        <select type="text"   
-                            [(ngModel)]="question.questionType"
+                        <select type="text" formControlName="questionType"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                             <option *ngFor="let questionType of keysOfQuestionTypes" value="{{questionType}}">
                                 {{questionType}}</option>
@@ -52,25 +48,23 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             points
                         </label>
-                        <input type="number"   
-                            [(ngModel)]="question.points"
+                        <input type="number" formControlName="points"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                     </div>
                     <div class="w-full px-2 py-2">
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Time
                         </label>
-                        <input type="number"    [(ngModel)]="question.time"
+                        <input type="number" formControlName="time"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                     </div>
                     <div class="w-full px-2 py-2">
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             level
                         </label>
-                        <select    
-                            [(ngModel)]="question.level.id"
+                        <select formControlName="level_id"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
-                            <option *ngFor="let level of levels" value="{{level.id}}">{{level.description}}
+                            <option *ngFor="let level of levels | async" value="{{level.id}}">{{level.description}}
                             </option>
                         </select>
                     </div>
@@ -78,10 +72,9 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Subject
                         </label>
-                        <select    
-                            [(ngModel)]="question.subject.id"
+                        <select formControlName="subject_id"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
-                            <option *ngFor="let subject of subjects" value="{{subject.id}}">{{subject.name}}
+                            <option *ngFor="let subject of subjects | async" value="{{subject.id}}">{{subject.name}}
                             </option>
                         </select>
                     </div>
@@ -98,10 +91,11 @@
                 class="inline-flex justify-center rounded-md border border-transparent bg-white py-2 px-4 text-sm font-medium text-black shadow-sm ">
                 Cancel
             </button>
-            <button type="submit" (click)="submit()"
+            <button type="submit" [class.bg-orange-500]="questionPopupForm.valid"
+                [class.bg-gray-300]="!questionPopupForm.valid" [disabled]="!questionPopupForm.valid"
                 class="inline-flex justify-center rounded-md border border-transparent bg-orange-500 py-2 px-4 text-sm font-medium text-black shadow-sm ">
                 Save
             </button>
         </div>
-    </div>
+    </form>
 </app-modal>
