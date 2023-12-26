@@ -27,7 +27,7 @@
                             Max Points
                         </label>
                         <input type="number"   
-                            [(ngModel)]="level.maxPoints"
+                            [(ngModel)]="level.maxPoints" min="0" max="100"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                     </div>
                     <div class="w-full px-2 py-2">
@@ -35,7 +35,7 @@
                             Min Points
                         </label>
                         <input type="number"   
-                            [(ngModel)]="level.minPoints"
+                            [(ngModel)]="level.minPoints" min="0" max="100"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                     </div>
                 </div>

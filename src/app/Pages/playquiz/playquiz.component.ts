@@ -38,7 +38,11 @@ export class PlayquizComponent {
           this.quiz = quiz;
           if (this.quiz.numberOfChances <= assignQuiz.chance || this.assignedQuiz.played) {
             this.assignQuizService.getScore(this.assignedQuiz.id).subscribe((response: any) => {
-              this.alertService.showWarning("your score is " + response.data, "/assignquiz")
+              if (this.assignedQuiz.score <= response.data) {
+                this.alertService.showWarning("Congratulation you have passed this quiz with score " + response.data, "/assignquiz")
+              } else {
+                this.alertService.showWarning("Sorry you have failed this quiz with score " + response.data, "/assignquiz")
+              }
             });
           } else {
             this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
@@ -56,7 +60,11 @@ export class PlayquizComponent {
         this.answers[this.questionNumber] = response.data;
         if (this.questionNumber == this.quiz.questionOfQuizs.length - 1) {
           this.assignQuizService.getScore(this.assignedQuiz.id).subscribe((response: any) => {
-            this.alertService.showWarning("your score is " + response.data, "/assignquiz")
+            if (this.assignedQuiz.score <= response.data) {
+              this.alertService.showWarning("Congratulation you have passed this quiz with score " + response.data, "/assignquiz")
+            } else {
+              this.alertService.showWarning("Sorry you have failed this quiz with score " + response.data, "/assignquiz")
+            }
           });
         } else {
           this.questionNumber++;
@@ -99,16 +107,16 @@ export class PlayquizComponent {
     this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
   }
   chrono(time: number) {
-    clearInterval(this.interval);
-    this.lefTime = time;
-    this.interval = setInterval(() => {
-      this.lefTime--;
+    // clearInterval(this.interval);
+    // this.lefTime = time;
+    // this.interval = setInterval(() => {
+    //   this.lefTime--;
 
-      if (this.lefTime == 0) {
-        this.nextquestion();
-        clearInterval(this.interval);
-      }
-    }, 1000);
+    //   if (this.lefTime == 0) {
+    //     this.nextquestion();
+    //     clearInterval(this.interval);
+    //   }
+    // }, 1000);
   }
   isEnough() {
     if (this.question.questionType == QuestionType.MULTIPLE_CHOICE) {
