@@ -23,7 +23,7 @@ export class PlayquizComponent {
   quiz: Quiz = new Quiz();
   questionNumber: number = 0;
   selectedImage: number = 0;
-  question: Question = new Question();
+  question: Question = {} as Question;
   answers: Answer[][] = [];
   lefTime: number = 0;
   assignedQuiz: AssignQuiz = new AssignQuiz();
@@ -36,7 +36,6 @@ export class PlayquizComponent {
         this.quiz = assignQuiz.quiz;
         this.quizService.findById(this.quiz.id).subscribe((quiz: Quiz) => {
           this.quiz = quiz;
-          console.log(this.quiz.numberOfChances, assignQuiz.chance, this.quiz.numberOfChances <= assignQuiz.chance);
           if (this.quiz.numberOfChances <= assignQuiz.chance || this.assignedQuiz.played) {
             this.assignQuizService.getScore(this.assignedQuiz.id).subscribe((response: any) => {
               this.alertService.showWarning("your score is " + response.data, "/assignquiz")
@@ -75,22 +74,21 @@ export class PlayquizComponent {
     }
 
     const isDuplicate = this.answers[this.questionNumber].some((existingAnswer: Answer) => {
-      return existingAnswer.validation === validation;
+      return existingAnswer.validation_id === validation.id;
     });
 
     if (isDuplicate) {
       this.answers[this.questionNumber].map((existingAnswer: Answer, index: number) => {
-        if (existingAnswer.validation === validation) {
+        if (existingAnswer.validation_id === validation.id) {
           this.answers[this.questionNumber].splice(index, 1);
-          console.log(existingAnswer, existingAnswer.validation, validation)
         }
       });
     }
 
     if (!isDuplicate) {
-      const answer: Answer = new Answer();
-      answer.validation = validation;
-      answer.assignQuiz = this.assignedQuiz;
+      const answer: Answer = {} as Answer;
+      answer.validation_id = validation.id;
+      answer.assignQuiz_id = this.assignedQuiz.id;
       this.answers[this.questionNumber].push(answer);
     }
   }
@@ -132,7 +130,7 @@ export class PlayquizComponent {
   }
   isResponseSelected(validation: Validation): boolean {
     return this.answers[this.questionNumber]?.some((answer: Answer) => {
-      return answer.validation === validation;
+      return answer.validation_id === validation.id;
     }) || false;
   }
 }

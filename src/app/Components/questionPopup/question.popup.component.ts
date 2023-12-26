@@ -14,8 +14,7 @@ import { SubjectService } from 'src/app/Services/subject.service';
 })
 export class QuestionPopupComponent {
   @Output() show = new EventEmitter<boolean>();
-  @Output() submitEvent = new EventEmitter<Question>();
-  @Input() question: Question = new Question();
+  @Input() question: Question = {} as Question;
   levels: Level[] = [];
   subjects: Subject[] = [];
   keysOfQuestionTypes = Object.keys(QuestionType);
@@ -23,7 +22,6 @@ export class QuestionPopupComponent {
     this.show.emit(false);
   }
   submit() {
-    this.submitEvent.emit(this.question);
     this.togglePopUp();
   }
   constructor(private levelService: LevelService,private subjectService:SubjectService) {}

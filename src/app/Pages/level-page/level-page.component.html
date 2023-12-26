@@ -55,5 +55,5 @@
         </div>
     </div>
 </div>
-<app-level-popup  *ngIf="showPopup" [level]="level" (submitEvent)="submit($event)" (show)="showPopup=!showPopup" [levels]="levels"></app-level-popup>
+<app-level-popup  *ngIf="showPopup" [level]="level"  (show)="showPopup=!showPopup"></app-level-popup>
 <app-alert (confirmed)="delete(level, $event)"></app-alert>

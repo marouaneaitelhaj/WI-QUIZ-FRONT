@@ -12,7 +12,6 @@ import { ResponseService } from 'src/app/Services/response.service';
 })
 export class ValidationPopupComponent {
   @Output() show = new EventEmitter<boolean>();
-  @Output() submitEvent = new EventEmitter<Validation>();
   @Input() validations: Validation[] = [];
   @Input() validation: Validation = new Validation();
   questions: Question[] = [];
@@ -22,7 +21,6 @@ export class ValidationPopupComponent {
     this.show.emit(false);
   }
   submit() {
-    this.submitEvent.emit(this.validation);
     this.togglePopUp();
   }
   ngAfterContentInit() {

@@ -5,6 +5,6 @@ export default class Validation {
     id : number = 0;
     response : Response = new Response();
     points : number = 0;
-    question : Question = new Question();
+    question : Question = {} as Question;
     correct : boolean = false;
 }

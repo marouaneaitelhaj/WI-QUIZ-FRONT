@@ -4,16 +4,16 @@ import Level from "./Level";
 import Media from "./Media";
 import Validation from "./Validation";
 
-export default class Question {
-    id: number = 0;
-    question: string = "";
-    numberOfAnswers: number = 0;
-    numberOfCorrectAnswers: number = 0;
-    questionType: QuestionType = QuestionType.SINGLE_CHOICE;
-    points: number = 0;
-    time: number = 0;
-    level: Level = new Level();
-    subject: Subject = new Subject();
-    media: Media[] = [];
-    validations: Validation[] = [];
+export default interface Question {
+    id: number;
+    question: string;
+    numberOfAnswers: number;
+    numberOfCorrectAnswers: number;
+    questionType: QuestionType;
+    points: number;
+    time: number;
+    level: Level;
+    subject: Subject;
+    media: Media[];
+    validations: Validation[];
 }

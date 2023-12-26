@@ -12,7 +12,6 @@ import { QuizService } from 'src/app/Services/quiz.service';
 })
 export class QuestionofquizPopupComponent {
   @Output() show = new EventEmitter<boolean>();
-  @Output() submitEvent = new EventEmitter<Questionofquiz>();
   @Input() questionofquiz: Questionofquiz = new Questionofquiz();
   quizzes : Quiz[] = [];
   questions : Question[] = [];
@@ -20,7 +19,6 @@ export class QuestionofquizPopupComponent {
     this.show.emit(false);
   }
   submit() {
-    this.submitEvent.emit(this.questionofquiz);
     this.togglePopUp();
   }
   constructor(private questionService: QuestionService,private quizService: QuizService) { }

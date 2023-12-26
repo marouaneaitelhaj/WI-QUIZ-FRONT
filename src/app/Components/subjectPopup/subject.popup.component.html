@@ -10,7 +10,7 @@
             <div class="border-t border-orange-500"></div>
         </div>
     </div>
-    <div>
+    <form [formGroup]="subjectPopupForm" (ngSubmit)="submit()">
         <div class="overflow-hidden sm:rounded-md">
             <div class="px-4 py-5">
                 <div class="flex w-full flex-col">
@@ -18,7 +18,7 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Write the name of the subject
                         </label>
-                        <input type="text"    [(ngModel)]="subject.name"
+                        <input type="text" formControlName="name"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                     </div>
                 </div>
@@ -29,9 +29,9 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Write the name of the subject
                         </label>
-                        <select [(ngModel)]="top.id"
+                        <select formControlName="top_id"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
-                            <option *ngFor="let top of subjects" value="{{top.id}}">{{top.name}}</option>
+                            <option *ngFor="let top of subjects | async" value="{{top.id}}">{{top.name}}</option>
                         </select>
                     </div>
                 </div>
@@ -46,11 +46,13 @@
                     class="inline-flex justify-center rounded-md border border-transparent bg-white py-2 px-4 text-sm font-medium text-black shadow-sm ">
                     Cancel
                 </button>
-                <button type="submit" (click)="submit()"
-                    class="inline-flex justify-center rounded-md border border-transparent bg-orange-500 py-2 px-4 text-sm font-medium text-black shadow-sm ">
+                <button type="submit" [class.bg-orange-500]="subjectPopupForm.valid"
+                    [class.bg-gray-300]="!subjectPopupForm.valid"
+                    [disabled]="!subjectPopupForm.valid"
+                    class="inline-flex justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-black shadow-sm ">
                     Save
                 </button>
             </div>
         </div>
-    </div>
+    </form>
 </app-modal>

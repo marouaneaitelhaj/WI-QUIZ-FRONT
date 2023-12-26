@@ -8,13 +8,11 @@ import Student from 'src/app/Models/Student';
 })
 export class StudentPopupComponent {
   @Output() show = new EventEmitter<boolean>();
-  @Output() submitEvent = new EventEmitter<Student>();
   @Input() student: Student = new Student();
   togglePopUp() {
     this.show.emit(false);
   }
   submit() {
-    this.submitEvent.emit(this.student);
     this.togglePopUp();
   }
 }

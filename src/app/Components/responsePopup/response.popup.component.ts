@@ -8,13 +8,11 @@ import Response from 'src/app/Models/Response';
 })
 export class ResponsePopupComponent {
   @Output() show = new EventEmitter<boolean>();
-  @Output() submitEvent = new EventEmitter<Response>();
   @Input() response: Response = new Response();
   togglePopUp() {
     this.show.emit(false);
   }
   submit() {
-    this.submitEvent.emit(this.response);
     this.togglePopUp();
   }
 }

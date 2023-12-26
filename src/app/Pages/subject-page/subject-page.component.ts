@@ -48,7 +48,6 @@ export class SubjectPageComponent {
   ngAfterContentInit() {
     this.service.subjects.subscribe(
       (subjects) => {
-        console.log(subjects);
         this.subjects = subjects;
       }
     );

@@ -8,14 +8,12 @@ import Level from 'src/app/Models/Level';
 })
 export class LevelPopupComponent {
   @Output() show = new EventEmitter<boolean>();
-  @Output() submitEvent = new EventEmitter<Level>();
   @Input() levels: Level[] = [];
   @Input() level: Level = new Level();
   togglePopUp() {
     this.show.emit(false);
   }
   submit() {
-    this.submitEvent.emit(this.level);
     this.togglePopUp();
   }
 }

@@ -23,7 +23,7 @@ export class QuestionPageComponent {
   questions: Question[] = [];
   subjects: Subject[] = [];
 
-  question: Question = new Question();
+  question: Question = {} as Question;
   functionType: FunctionType = FunctionType.save;
   constructor(private service: QuestionService, private alertService: AlertService) {
   }
@@ -33,7 +33,7 @@ export class QuestionPageComponent {
       this.question = question;
     } else {
       this.functionType = FunctionType.save;
-      this.question = new Question();
+      this.question = {} as Question;
     }
     this.showPopup = !this.showPopup;
   }

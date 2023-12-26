@@ -4,6 +4,6 @@ import Quiz from "./Quiz";
 export default class Questionofquiz {
     id : number = 0;
     timed : boolean = false;
-    question : Question = new Question();
+    question : Question = {} as Question;
     quiz : Quiz = new Quiz();
 }

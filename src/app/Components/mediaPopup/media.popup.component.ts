@@ -11,7 +11,6 @@ import { QuestionService } from 'src/app/Services/question.service';
 })
 export class MediaPopupComponent {
   @Output() show = new EventEmitter<boolean>();
-  @Output() submitEvent = new EventEmitter<Media>();
   questions: Question[] = [];
   constructor(private questionService : QuestionService){}
   mediasType = MediaType;
@@ -24,7 +23,6 @@ export class MediaPopupComponent {
     this.show.emit(false);
   }
   submit() {
-    this.submitEvent.emit(this.media);
     this.togglePopUp();
   }
   ngAfterContentInit() {

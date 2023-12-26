@@ -10,7 +10,6 @@ import { TeacherService } from 'src/app/Services/teacher.service';
 })
 export class QuizPopupComponent {
   @Output() show = new EventEmitter<boolean>();
-  @Output() submitEvent = new EventEmitter<Quiz>();
   @Input() quizs: Quiz[] = [];
   @Input() quiz: Quiz = new Quiz();
   teachers: Teacher[] = [];
@@ -19,7 +18,6 @@ export class QuizPopupComponent {
     this.show.emit(false);
   }
   submit() {
-    this.submitEvent.emit(this.quiz);
     this.togglePopUp();
   }
   ngAfterContentInit() {

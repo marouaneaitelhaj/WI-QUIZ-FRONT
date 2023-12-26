@@ -70,6 +70,6 @@
         </div>
     </div>
 </div>
-<app-quiz-popup *ngIf="showPopup" [quiz]="quiz" (submitEvent)="submit($event)" (show)="showPopup=!showPopup"
+<app-quiz-popup *ngIf="showPopup" [quiz]="quiz" (show)="showPopup=!showPopup"
     [quizs]="quizs"></app-quiz-popup>
 <app-alert (confirmed)="delete(quiz, $event)"></app-alert>

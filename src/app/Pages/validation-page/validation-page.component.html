@@ -58,5 +58,5 @@
         </div>
     </div>
 </div>
-<app-validation-popup  *ngIf="showPopup" [validation]="validation"  (submitEvent)="submit($event)" (show)="showPopup=!showPopup" [validations]="validations"></app-validation-popup>
+<app-validation-popup  *ngIf="showPopup" [validation]="validation"  (show)="showPopup=!showPopup"></app-validation-popup>
 <app-alert (confirmed)="delete(validation, $event)" ></app-alert>
