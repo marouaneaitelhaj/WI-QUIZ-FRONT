@@ -18,7 +18,7 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Student
                         </label>
-                        <select formControlName="student"
+                        <select formControlName="student_id"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                             <option *ngFor="let student of students | async" value="{{student.id}}">{{student.firstName
                                 + " "+student.lastName}}
@@ -29,7 +29,7 @@
                         <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
                             Quiz
                         </label>
-                        <select formControlName="quiz"
+                        <select formControlName="quiz_id"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                             <option *ngFor="let quiz of quizes | async" value="{{quiz.id}}">{{quiz.comment}}
                             </option>
@@ -40,13 +40,6 @@
                             Score
                         </label>
                         <input type="number" formControlName="score"
-                            class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
-                    </div>
-                    <div class="w-full px-2 py-2">
-                        <label for="name" class="block mb-2 text-sm font-medium text-black dark:text-black">
-                            Chance
-                        </label>
-                        <input type="number" formControlName="chance"
                             class="bg-orange-50 border border-orange-500 text-black text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5 ">
                     </div>
                     <div class="w-full px-2 py-2">
