@@ -35,11 +35,11 @@ export class QuestionPopupComponent implements OnChanges {
   questionPopupForm: FormGroup = new FormBuilder().group({
     id: [this.question.id || 0],
     question: [this.question.question || '', Validators.required],
-    numberOfAnswers: [this.question.numberOfAnswers || 0, Validators.required],
-    numberOfCorrectAnswers: [this.question.numberOfCorrectAnswers || 0, Validators.required],
+    numberOfAnswers: [this.question.numberOfAnswers || '', Validators.required],
+    numberOfCorrectAnswers: [this.question.numberOfCorrectAnswers || '', Validators.required],
     questionType: [this.question.questionType || QuestionType.SINGLE_CHOICE, Validators.required],
-    points: [this.question.points || 0, Validators.required],
-    time: [this.question.time || 0, Validators.required],
+    points: [this.question.points || '', Validators.required],
+    time: [this.question.time || '', Validators.required],
     level_id: [this.question?.level?.id || 0, Validators.required],
     subject_id: [this.question?.subject?.id || 0, Validators.required],
   });
@@ -47,11 +47,11 @@ export class QuestionPopupComponent implements OnChanges {
     this.questionPopupForm = new FormBuilder().group({
       id: [this.question.id || 0],
       question: [this.question.question || '', Validators.required],
-      numberOfAnswers: [this.question.numberOfAnswers || 0, Validators.required],
-      numberOfCorrectAnswers: [this.question.numberOfCorrectAnswers || 0, Validators.required],
+      numberOfAnswers: [this.question.numberOfAnswers || '', Validators.required],
+      numberOfCorrectAnswers: [this.question.numberOfCorrectAnswers || '', Validators.required],
       questionType: [this.question.questionType || QuestionType.SINGLE_CHOICE, Validators.required],
-      points: [this.question.points || 0, Validators.required],
-      time: [this.question.time || 0, Validators.required],
+      points: [this.question.points || '', Validators.required],
+      time: [this.question.time || '', Validators.required],
       level_id: [this.question?.level?.id || 0, Validators.required],
       subject_id: [this.question?.subject?.id || 0, Validators.required],
     });

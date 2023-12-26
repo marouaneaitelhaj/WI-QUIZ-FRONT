@@ -21,8 +21,8 @@ export class AssignQuizPopupComponent implements OnChanges {
   constructor(private studentService : StudentService, private quizService : QuizService, private assignQuizService : AssignQuizService) {}
   assignQuizPopupForm : FormGroup = new FormBuilder().group({
     id : [this.assignQuiz.id || 0],
-    student : [this.assignQuiz.student.id || '', Validators.required],
-    quiz : [this.assignQuiz.quiz.id || '', Validators.required],
+    student : [this.assignQuiz.student.id || 0, Validators.required],
+    quiz : [this.assignQuiz.quiz.id || 0, Validators.required],
     score : [this.assignQuiz.score || '', Validators.required],
     chance : [this.assignQuiz.chance || '', Validators.required],
     notes : [this.assignQuiz.notes || '', Validators.required],
@@ -30,8 +30,8 @@ export class AssignQuizPopupComponent implements OnChanges {
   ngOnChanges() {
     this.assignQuizPopupForm = new FormBuilder().group({
       id : [this.assignQuiz.id || 0],
-      student : [this.assignQuiz.student.id || '', Validators.required],
-      quiz : [this.assignQuiz.quiz.id || '', Validators.required],
+      student : [this.assignQuiz.student.id || 0, Validators.required],
+      quiz : [this.assignQuiz.quiz.id || 0, Validators.required],
       score : [this.assignQuiz.score || '', Validators.required],
       chance : [this.assignQuiz.chance || '', Validators.required],
       notes : [this.assignQuiz.notes || '', Validators.required],

@@ -17,14 +17,14 @@ export class SubjectPopupComponent implements OnChanges {
   subjectPopupForm: FormGroup = new FormBuilder().group({
     id: [this.subject.id || 0],
     name: [this.subject.name || '', Validators.required],
-    top_id: [this.subject.top?.id || ''],
+    top_id: [this.subject.top?.id || 0],
   });
   constructor(private subjectService: SubjectService) { }
   ngOnChanges(changes: SimpleChanges): void {
     this.subjectPopupForm = new FormBuilder().group({
       id: [this.subject.id || 0],
       name: [this.subject.name || '', Validators.required],
-      top_id: [this.subject.top?.id || ''],
+      top_id: [this.subject.top?.id || 0],
     });
   }
   togglePopUp() {
