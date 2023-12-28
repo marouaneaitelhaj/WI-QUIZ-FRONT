@@ -12,9 +12,9 @@ import { MessageService } from 'src/app/Services/message.service';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent {
-  constructor(private messageService : MessageService, private chatService : ChatService) {
+  constructor(private chatService : ChatService) {
   }
-  messages: Observable<Message[]> = this.messageService.messages;
+  messages: Observable<Message[]> = this.chatService.messages;
   message: Message = {} as Message;
   sendMessage() {
     this.message.room_id = 7;
