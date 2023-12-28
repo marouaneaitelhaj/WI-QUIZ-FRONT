@@ -3,6 +3,7 @@ import { Stomp } from '@stomp/stompjs';
 import { BehaviorSubject, Observable } from 'rxjs';
 import * as SockJS from 'sockjs-client';
 import Message from 'src/app/Models/Message';
+import Room from 'src/app/Models/Room';
 import { ChatService } from 'src/app/Services/chat-service.service';
 import { MessageService } from 'src/app/Services/message.service';
 
@@ -12,10 +13,11 @@ import { MessageService } from 'src/app/Services/message.service';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent {
-  constructor(private chatService : ChatService) {
-  }
+  selectedRoom: Room = {} as Room;
   messages: Observable<Message[]> = this.chatService.messages;
   message: Message = {} as Message;
+  constructor(private chatService : ChatService) {
+  }
   sendMessage() {
     this.message.room_id = 7;
     this.message.sender_id = 6;

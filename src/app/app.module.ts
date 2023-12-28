@@ -32,6 +32,8 @@ import { ValidationPopupComponent } from './Components/validationPopup/validatio
 import { AssignQuizPageComponent } from './Pages/assignQuiz-page/assignQuiz-page.component';
 import { AssignQuizPopupComponent } from './Components/assignQuizPopup/assignQuiz.popup.component';
 import { ChatComponent } from './Pages/chat/chat.component';
+import { RoomsComponentComponent } from './Components/rooms-component/rooms-component.component';
+import { ChatComponentComponent } from './Components/chat-component/chat-component.component';
 // import {myReducer} from './ngrx/myreducer.reducer';
 
 
@@ -63,7 +65,9 @@ import { ChatComponent } from './Pages/chat/chat.component';
     ValidationPopupComponent,
     AssignQuizPageComponent,
     AssignQuizPopupComponent,
-    ChatComponent
+    ChatComponent,
+    RoomsComponentComponent,
+    ChatComponentComponent
   ],
   imports: [
     BrowserModule,

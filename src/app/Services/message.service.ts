@@ -10,11 +10,11 @@ import { AlertService } from '../Components/alert/alert.service';
 export class MessageService {
   private url = 'http://localhost:8080/message';
   constructor(private http: HttpClient, private alertService: AlertService) {
-    this.findAll();
+    // this.findAll();
   }
   public messages = new BehaviorSubject<Message[]>([]);
-  public findAll(): void {
-    this.http.get<MyResponse<Message>>(this.url).subscribe(
+  public findAll(room_id: number): void {
+    this.http.get<MyResponse<Message>>(this.url + "/room/" + room_id).subscribe(
       (response) => {
         this.messages.next(response.content);
       }
