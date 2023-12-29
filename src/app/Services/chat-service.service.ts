@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Stomp } from '@stomp/stompjs';
 import * as SockJS from 'sockjs-client';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import Message from '../Models/Message';
 import { MessageService } from './message.service';
 import { AppComponent } from '../app.component';
@@ -12,7 +12,7 @@ import { AppComponent } from '../app.component';
 export class ChatService {
   private stompClient: any
   messages: BehaviorSubject<Message[]> = this.messageService.messages;
-
+  roomID: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   constructor(private messageService: MessageService) {
     this.initConnectionSocket();
   }
@@ -33,9 +33,10 @@ export class ChatService {
     this.stompClient.connect({}, () => {
       console.log('WebSocket connection established');
       var _this = this;
-      this.stompClient.subscribe('/topic/public', function (message: any) {
+      console.log(this.roomID.getValue());
+      this.stompClient.subscribe('/topic/' + this.roomID.getValue(), function (message: any) {
         const data = JSON.parse(message.body);
-        let messageRsp : Message = {} as Message;
+        let messageRsp: Message = {} as Message;
         messageRsp.content = data.content;
         messageRsp.sender_id = data.sender.id;
         messageRsp.room_id = data.room.id;
@@ -46,6 +47,6 @@ export class ChatService {
   }
 
   sendMessage(Message: Message) {
-    this.stompClient.send('/app/chat', {}, JSON.stringify(Message))
+    this.stompClient.send('/app/chat/' + this.roomID.getValue(), {}, JSON.stringify(Message))
   }
 }

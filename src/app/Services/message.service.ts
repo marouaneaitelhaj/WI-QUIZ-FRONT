@@ -10,7 +10,6 @@ import { AlertService } from '../Components/alert/alert.service';
 export class MessageService {
   private url = 'http://localhost:8080/message';
   constructor(private http: HttpClient, private alertService: AlertService) {
-    // this.findAll();
   }
   public messages = new BehaviorSubject<Message[]>([]);
   public findAll(room_id: number): void {
