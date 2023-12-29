@@ -5,7 +5,7 @@
                 {{alertProps.message}}</h1>
         </div>
     </div>
-    <div *ngIf="!alertProps.warning" class="px-4 p-3 text-right sm:px-6 flex justify-around">
+    <div *ngIf="!alertProps.warning" class="px-4 p-3 text-right  flex justify-around">
         <button *ngIf="alertProps.needConfirm" (click)="confirm(true)" type="button" id="closeAddForm"
             class="inline-flex justify-center rounded-md border border-transparent bg-white py-2 px-4 text-sm font-medium text-black shadow-sm ">
             Confirm
@@ -15,7 +15,7 @@
             Close
         </button>
     </div>
-    <div *ngIf="alertProps.warning" class="px-4 p-3 text-right sm:px-6 flex justify-around">
+    <div *ngIf="alertProps.warning" class="px-4 p-3 text-right  flex justify-around">
         <button routerLink="{{alertProps.link}}" (click)="confirm(false)" type="button" id="closeAddForm"
             class="inline-flex justify-center rounded-md border border-transparent bg-white py-2 px-4 text-sm font-medium text-black shadow-sm ">
             Back Stupid
