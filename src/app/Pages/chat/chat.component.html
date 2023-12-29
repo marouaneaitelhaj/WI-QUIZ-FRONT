@@ -1,7 +1,7 @@
 <!-- <input [(ngModel)]="message.content" placeholder="Type your message here..." class="form-control">
 <button (click)="sendMessage()" class="btn btn-primary">Send</button>
 <p *ngFor="let message of messages | async">{{message.content}}</p> -->
-<div class="flex w-full bg-white">
+<div class="flex w-full border rounded bg-white">
     <app-rooms-component class="w-1/4" (selectedRoom)="selectedRoom=$event"></app-rooms-component>
     <app-chat-component class="w-3/4" [selectedRoom]="selectedRoom"></app-chat-component>
 </div>

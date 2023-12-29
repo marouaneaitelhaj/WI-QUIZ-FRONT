@@ -15,7 +15,7 @@ export class MessageService {
   public findAll(room_id: number): void {
     this.http.get<MyResponse<Message>>(this.url + "/room/" + room_id).subscribe(
       (response) => {
-        this.messages.next(response.content);
+        this.messages.next(response.content.reverse());
       }
     );
   }

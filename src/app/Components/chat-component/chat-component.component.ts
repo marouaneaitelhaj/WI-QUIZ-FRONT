@@ -17,7 +17,7 @@ export class ChatComponentComponent implements OnChanges {
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (this.selectedRoom.id) {
-      this.chatService.roomID.next(this.selectedRoom.id);
+      this.chatService.updateRoomID(this.selectedRoom.id);
       this.messageService.findAll(this.selectedRoom.id);
     }
   }

@@ -12,7 +12,7 @@ import { AppComponent } from '../app.component';
 export class ChatService {
   private stompClient: any
   messages: BehaviorSubject<Message[]> = this.messageService.messages;
-  roomID: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  roomID: BehaviorSubject<number> = new BehaviorSubject<number>(1);
   constructor(private messageService: MessageService) {
     this.initConnectionSocket();
   }
@@ -22,31 +22,35 @@ export class ChatService {
     const socket = new SockJS(url);
 
     socket.onopen = () => {
-      console.log('WebSocket connection opened');
+      // console.log('WebSocket connection opened');
     };
 
     socket.onclose = (event: CloseEvent) => {
-      console.error('WebSocket connection closed:', event);
+      // console.error('WebSocket connection closed:', event);
     };
 
     this.stompClient = Stomp.over(socket);
     this.stompClient.connect({}, () => {
       console.log('WebSocket connection established');
-      var _this = this;
-      console.log(this.roomID.getValue());
-      this.stompClient.subscribe('/topic/' + this.roomID.getValue(), function (message: any) {
-        const data = JSON.parse(message.body);
+    });
+  }
+  updateRoomID(newRoomID: number) {
+    this.roomID.next(newRoomID);
+    var _this = this;
+    this.stompClient.subscribe('/topic/' + newRoomID, function (message: any) {
+      const data = JSON.parse(message.body);
         let messageRsp: Message = {} as Message;
         messageRsp.content = data.content;
         messageRsp.sender_id = data.sender.id;
         messageRsp.room_id = data.room.id;
         messageRsp.id = data.id;
-        _this.messages.next(_this.messages.getValue().concat([messageRsp]));
-      });
+        _this.messages.next(_this.messages.getValue().reverse().concat([messageRsp]).reverse());
     });
   }
 
+
   sendMessage(Message: Message) {
     this.stompClient.send('/app/chat/' + this.roomID.getValue(), {}, JSON.stringify(Message))
+    console.log('/topic/' + this.roomID.getValue());
   }
 }
