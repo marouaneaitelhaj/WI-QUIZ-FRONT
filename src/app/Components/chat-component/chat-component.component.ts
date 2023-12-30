@@ -13,12 +13,11 @@ import { MessageService } from 'src/app/Services/message.service';
 export class ChatComponentComponent implements OnChanges {
   @Input() selectedRoom: Room = {} as Room;
   messages : Observable<Message[]> = this.chatService.messages;
-  constructor(private messageService: MessageService, private chatService : ChatService) {
+  constructor(private chatService : ChatService) {
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (this.selectedRoom.id) {
       this.chatService.updateRoomID(this.selectedRoom.id);
-      this.messageService.findAll(this.selectedRoom.id);
     }
   }
   message: Message = {} as Message;

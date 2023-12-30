@@ -37,13 +37,17 @@ export class ChatService {
   updateRoomID(newRoomID: number) {
     this.roomID.next(newRoomID);
     var _this = this;
+    this.messageService.findAll(newRoomID);
     this.stompClient.subscribe('/topic/' + newRoomID, function (message: any) {
       const data = JSON.parse(message.body);
         let messageRsp: Message = {} as Message;
         messageRsp.content = data.content;
         messageRsp.sender_id = data.sender.id;
         messageRsp.room_id = data.room.id;
+        messageRsp.sender = data.sender;
+        messageRsp.time = data.time;
         messageRsp.id = data.id;
+        console.log(messageRsp);
         _this.messages.next(_this.messages.getValue().reverse().concat([messageRsp]).reverse());
     });
   }
@@ -51,6 +55,5 @@ export class ChatService {
 
   sendMessage(Message: Message) {
     this.stompClient.send('/app/chat/' + this.roomID.getValue(), {}, JSON.stringify(Message))
-    console.log('/topic/' + this.roomID.getValue());
   }
 }

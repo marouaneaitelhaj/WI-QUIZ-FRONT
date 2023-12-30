@@ -7,15 +7,19 @@
             <div
                 class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
                 <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                    <span class="text-sm font-semibold text-gray-900 dark:text-white">Bonnie Green</span>
-                    <span class="text-sm font-normal text-gray-500 dark:text-gray-400">11:46</span>
+                    <span class="text-sm font-semibold text-gray-900 dark:text-white">{{message.sender.firstName +' '+
+                        message.sender.lastName}}</span>
+                    <span
+                        class="text-sm font-normal text-gray-500 dark:text-gray-400">{{message.time.split(":").slice(0,
+                        2).join(":")}}</span>
                 </div>
                 <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">{{message.content}}</p>
             </div>
         </div>
     </div>
     <div *ngIf="selectedRoom.id" class="absolute left-0 right-0 bottom-0 w-full bg-orange-50">
-        <input [(ngModel)]="message.content" placeholder="Type your message here..." class="form-control m-1 rounded mb-2 text-sm font-medium w-10/12 text-gray-900 py-1 px-3">
+        <input [(ngModel)]="message.content" placeholder="Type your message here..."
+            class="form-control m-1 rounded mb-2 text-sm font-medium w-10/12 text-gray-900 py-1 px-3">
         <button (click)="sendMessage()" class="text-white bg-orange-400 w-1/12 px-3 rounded">Send</button>
     </div>
 </div>
