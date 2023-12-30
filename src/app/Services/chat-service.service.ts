@@ -56,4 +56,8 @@ export class ChatService {
   sendMessage(Message: Message) {
     this.stompClient.send('/app/chat/' + this.roomID.getValue(), {}, JSON.stringify(Message))
   }
+
+  login(form : any) {
+    
+  }
 }

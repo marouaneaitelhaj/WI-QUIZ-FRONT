@@ -16,6 +16,7 @@ export class ChatComponent {
   selectedRoom: Room = {} as Room;
   messages: Observable<Message[]> = this.chatService.messages;
   message: Message = {} as Message;
+  DisblayLogin: boolean = true;
   constructor(private chatService : ChatService) {
   }
   sendMessage() {

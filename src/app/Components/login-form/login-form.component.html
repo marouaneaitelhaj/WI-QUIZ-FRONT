@@ -1,0 +1,18 @@
+<p-dialog header="Login" [(visible)]="DisblayLogin" [modal]="true" [responsive]="true" [style]="{width: '30vw'}">
+    <form (ngSubmit)="login()" [formGroup]="loginForm">
+        <div class="p-fluid">
+            <div class="p-field">
+                <label for="name">First Name</label>
+                <input type="text" id="name" pInputText class="border" formControlName="firstName">
+            </div>
+            <div class="p-field">
+                <label for="name">Last Name</label>
+                <input type="text" id="name" pInputText class="border" formControlName="lastName">
+            </div>
+        </div>
+        <button pButton type="submit" label="Create" class="border w-full my-2 py-1 px-8" [disabled]="!loginForm.valid"
+        [class.bg-gray-300]="!loginForm.valid" [class.bg-orange-500]="loginForm.valid"
+        >
+            Login</button>
+    </form>
+</p-dialog>

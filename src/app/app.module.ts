@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { SubjectPageComponent } from './Pages/subject-page/subject-page.component';
 import { HttpClientModule } from '@angular/common/http';
+import { DialogModule } from 'primeng/dialog';
 import { SubjectPopupComponent } from './Components/subjectPopup/subject.popup.component';
 import { LevelPopupComponent } from './Components/levelPopup/level.popup.component';
 import { MediaPopupComponent } from './Components/mediaPopup/media.popup.component';
 import { ResponsePopupComponent } from './Components/responsePopup/response.popup.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
 import { AlertComponent } from './Components/alert/alert.component';
 import { QuestionPopupComponent } from './Components/questionPopup/question.popup.component';
 import { QuestionPageComponent } from './Pages/question-page/question-page.component';
@@ -23,7 +25,7 @@ import { StudentPageComponent } from './Pages/student-page/student-page.componen
 import { QuizPageComponent } from './Pages/quiz-page/quiz-page.component';
 import { QuizPopupComponent } from './Components/quizPopup/quiz.popup.component';
 import { StudentPopupComponent } from './Components/studentPopup/student.popup.component';
-import {StoreModule} from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { PlayquizComponent } from './Pages/playquiz/playquiz.component';
 import { QuestionofquizPageComponent } from './Pages/questionofquiz-page/questionofquiz-page.component';
 import { QuestionofquizPopupComponent } from './Components/questionofquizPopup/questionofquiz.popup.component';
@@ -34,6 +36,7 @@ import { AssignQuizPopupComponent } from './Components/assignQuizPopup/assignQui
 import { ChatComponent } from './Pages/chat/chat.component';
 import { RoomsComponentComponent } from './Components/rooms-component/rooms-component.component';
 import { ChatComponentComponent } from './Components/chat-component/chat-component.component';
+import { LoginFormComponent } from './Components/login-form/login-form.component';
 // import {myReducer} from './ngrx/myreducer.reducer';
 
 
@@ -67,14 +70,17 @@ import { ChatComponentComponent } from './Components/chat-component/chat-compone
     AssignQuizPopupComponent,
     ChatComponent,
     RoomsComponentComponent,
-    ChatComponentComponent
+    ChatComponentComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    DialogModule,
     CommonModule,
     FormsModule,
+    InputTextModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     // StoreModule.forRoot({message : myReducer})
