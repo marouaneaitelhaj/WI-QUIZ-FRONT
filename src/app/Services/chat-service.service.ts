@@ -13,9 +13,14 @@ export class ChatService {
   private stompClient: any
   messages: BehaviorSubject<Message[]> = this.messageService.messages;
   roomID: BehaviorSubject<number> = new BehaviorSubject<number>(1);
+  isLogin : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   constructor(private messageService: MessageService) {
     this.initConnectionSocket();
+    if(localStorage.getItem('id')){
+      this.isLogin.next(true);
+    }
   }
+  
 
   initConnectionSocket() {
     const url = 'http://localhost:8080/chat-socket';
@@ -47,7 +52,7 @@ export class ChatService {
         messageRsp.sender = data.sender;
         messageRsp.time = data.time;
         messageRsp.id = data.id;
-        console.log(messageRsp);
+        // console.log(messageRsp);
         _this.messages.next(_this.messages.getValue().reverse().concat([messageRsp]).reverse());
     });
   }
@@ -58,6 +63,17 @@ export class ChatService {
   }
 
   login(form : any) {
-    
+    var _this = this;
+      // console.log(form);
+      this.stompClient.send('/app/login', {}, JSON.stringify(form))
+      this.stompClient.subscribe('/topic/login', function (message: any) {
+        const data = JSON.parse(message.body);
+        if(data.body.login){
+          console.log(data);
+          localStorage.setItem('id', data.body.content.id);
+          _this.isLogin.next(true);
+        }
+      }
+    );
   }
 }
