@@ -13,7 +13,9 @@ import { SubjectService } from 'src/app/Services/subject.service';
 export class SubjectPageComponent {
   showPopup: boolean = false;
   subjects: Subject[] = [];
+  subs : Subject[] = [];
   subject: Subject = new Subject();
+  subsVisible: boolean = false;
   functionType: FunctionType = FunctionType.save;
   constructor(private service: SubjectService, private alertService: AlertService) {
   }

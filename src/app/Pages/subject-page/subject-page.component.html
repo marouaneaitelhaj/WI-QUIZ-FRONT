@@ -36,19 +36,19 @@
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-black">{{subject.name}}</td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-black">{{subject?.top?.name}}</td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-black">
-                                    <ul>
-                                        <li class="text-xs" *ngFor="let sub of subject.subs">{{sub.name}}</li>
-                                    </ul>    
+                                    <ul (click)="subsVisible=true" (click)="subs=subject.subs">
+                                        <p class="cursor-pointer">Show Subs Subject</p>
+                                        <!-- <li class="text-xs" *ngFor="let sub of subject.subs">{{sub.name}}</li> -->
+                                    </ul>
                                 </td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-black">
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-black">
                                     <span>
                                         <button type="button" (click)="togglePopUp(subject)"
                                             class="inline-flex px-5 py-2 mx-2 items-center justify-center rounded-md border ">
                                             Edit</button>
                                     </span>
                                     <span>
-                                        <button type="button"
-                                            (click)="delete(subject)"
+                                        <button type="button" (click)="delete(subject)"
                                             class="inline-flex px-5 py-2 mx-2 items-center justify-center rounded-md border ">
                                             Delete</button>
                                     </span>
@@ -61,5 +61,10 @@
         </div>
     </div>
 </div>
-<app-subject-popup  *ngIf="showPopup" [subject]="subject" (show)="showPopup=!showPopup"></app-subject-popup>
+<p-dialog header="Subs" [(visible)]="subsVisible" [responsive]="true" [style]="{width: '50vw'}" [modal]="true">
+    <ul class="list-disc">
+        <li class="text-xs" *ngFor="let sub of subs">{{sub.name}}</li>
+    </ul>
+</p-dialog>
+<app-subject-popup *ngIf="showPopup" [subject]="subject" (show)="showPopup=!showPopup"></app-subject-popup>
 <app-alert (confirmed)="delete(subject, $event)"></app-alert>
