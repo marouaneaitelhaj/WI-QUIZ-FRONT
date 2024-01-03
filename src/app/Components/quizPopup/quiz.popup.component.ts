@@ -20,8 +20,8 @@ export class QuizPopupComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.quizPopupForm = new FormBuilder().group({
       successResult : [this.quiz?.successResult || '',Validators.required],
-      answerAccess : [this.quiz?.answerAccess || '',Validators.required],
-      resultAccess : [this.quiz?.resultAccess || '',Validators.required],
+      answerAccess : [this.quiz?.answerAccess || ''],
+      resultAccess : [this.quiz?.resultAccess || ''],
       numberOfChances : [this.quiz?.numberOfChances || '',Validators.required],
       comment : [this.quiz?.comment || '',Validators.required],
       teacher_id : [this.quiz?.teacher.id || '',Validators.required],
