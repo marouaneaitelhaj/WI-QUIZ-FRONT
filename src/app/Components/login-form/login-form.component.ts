@@ -11,10 +11,14 @@ export class LoginFormComponent {
   DisblayLogin: boolean = true;
   loginForm: FormGroup = new FormBuilder().group({
     firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
+    lastName: ['' , Validators.required],
   });
-  constructor(private chatService: ChatService) { }
+  constructor(private chatService : ChatService) {
+    this.chatService.isLogin.subscribe((data) => {
+      this.DisblayLogin = !data;
+    })
+  }
   login() {
-    this.chatService.login(this.loginForm.value);
+      this.chatService.login(this.loginForm.value);
   }
 }
