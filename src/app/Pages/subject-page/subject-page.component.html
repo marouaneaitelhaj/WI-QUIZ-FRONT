@@ -36,8 +36,8 @@
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-black">{{subject.name}}</td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-black">{{subject?.top?.name}}</td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-black">
-                                    <ul (click)="subsVisible=true" (click)="subs=subject.subs">
-                                        <p class="cursor-pointer">Show Subs Subject</p>
+                                    <ul class="cursor-pointer" (click)="subsVisible=true" (click)="subs=subject.subs">
+                                        Show Subs Subject
                                         <!-- <li class="text-xs" *ngFor="let sub of subject.subs">{{sub.name}}</li> -->
                                     </ul>
                                 </td>

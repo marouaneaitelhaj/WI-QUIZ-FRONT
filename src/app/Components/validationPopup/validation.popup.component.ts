@@ -22,7 +22,7 @@ export class ValidationPopupComponent implements OnChanges {
     id: [this.validation.id || 0],
     question_id: [this.validation.question.id || 0, Validators.required],
     response_id: [this.validation.response.id || 0, Validators.required],
-    isCorrect: [this.validation.correct || false, Validators.required],
+    correct: [this.validation.correct || false, Validators.required],
     points: [this.validation.points || '', Validators.required],
   });
   ngOnChanges(changes: SimpleChanges): void {
@@ -30,7 +30,7 @@ export class ValidationPopupComponent implements OnChanges {
       id: [this.validation.id || 0],
       question_id: [this.validation?.question?.id || 0, Validators.required],
       response_id: [this.validation?.response?.id || 0, Validators.required],
-      isCorrect: [this.validation.correct || false, Validators.required],
+      correct: [this.validation.correct || false, Validators.required],
       points: [this.validation.points || '', Validators.required],
     });
   }
