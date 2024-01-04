@@ -12,9 +12,9 @@ import { Store } from '@ngrx/store';
 })
 export class ChatService {
   private stompClient: any
-  messages: BehaviorSubject<Message[]> = this.messageService.messages;
+  // messages: BehaviorSubject<Message[]> = this.messageService.messages;
   roomID: BehaviorSubject<number> = new BehaviorSubject<number>(1);
-  isLogin : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  // isLogin : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   constructor(private messageService: MessageService, private store : Store ) {
     this.initConnectionSocket();
     if(localStorage.getItem('id')){

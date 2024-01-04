@@ -7,9 +7,8 @@ export interface LoginState {
 export const initialState: LoginState = {
     id: '',
 };
-export const loginReducer = createReducer(initialState, on(login, (state, { id }) => {
+export const loginReducer = createReducer(initialState, on(login, ({ id }) => {
     return {
-        ...state,
         id: id,
     };
 }));
