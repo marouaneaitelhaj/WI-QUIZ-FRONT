@@ -41,6 +41,7 @@ export class PlayquizComponent {
               if (this.assignedQuiz.score <= response.data) {
                 this.alertService.showWarning("Congratulation you have passed this quiz with score " + response.data, "/assignquiz")
               } else {
+                console.log(response.data, this.assignedQuiz.score);
                 this.alertService.showWarning("Sorry you have failed this quiz with score " + response.data, "/assignquiz")
               }
             });
@@ -63,6 +64,7 @@ export class PlayquizComponent {
             if (this.assignedQuiz.score <= response.data) {
               this.alertService.showWarning("Congratulation you have passed this quiz with score " + response.data, "/assignquiz")
             } else {
+              console.log(response.data, this.assignedQuiz.score);
               this.alertService.showWarning("Sorry you have failed this quiz with score " + response.data, "/assignquiz")
             }
           });
@@ -107,16 +109,16 @@ export class PlayquizComponent {
     this.question = this.quiz.questionOfQuizs[this.questionNumber].question;
   }
   chrono(time: number) {
-    // clearInterval(this.interval);
-    // this.lefTime = time;
-    // this.interval = setInterval(() => {
-    //   this.lefTime--;
+    clearInterval(this.interval);
+    this.lefTime = time;
+    this.interval = setInterval(() => {
+      this.lefTime--;
 
-    //   if (this.lefTime == 0) {
-    //     this.nextquestion();
-    //     clearInterval(this.interval);
-    //   }
-    // }, 1000);
+      if (this.lefTime == 0) {
+        this.nextquestion();
+        clearInterval(this.interval);
+      }
+    }, 1000);
   }
   isEnough() {
     if (this.question.questionType == QuestionType.MULTIPLE_CHOICE) {

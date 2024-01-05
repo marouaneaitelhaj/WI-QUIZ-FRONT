@@ -5,20 +5,19 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import Message from '../Models/Message';
 import { MessageService } from './message.service';
 import { AppComponent } from '../app.component';
-import { Store } from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
   private stompClient: any
-  // messages: BehaviorSubject<Message[]> = this.messageService.messages;
+  messages: BehaviorSubject<Message[]> = this.messageService.messages;
   roomID: BehaviorSubject<number> = new BehaviorSubject<number>(1);
-  // isLogin : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  constructor(private messageService: MessageService, private store : Store ) {
+  isLogin : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  constructor(private messageService: MessageService) {
     this.initConnectionSocket();
     if(localStorage.getItem('id')){
-      this.store.dispatch({type : 'login', payload : {id : localStorage.getItem('id')}});
+      this.isLogin.next(true);
     }
   }
   
@@ -42,7 +41,6 @@ export class ChatService {
   }
   updateRoomID(newRoomID: number) {
     this.roomID.next(newRoomID);
-    this.store.dispatch({type : 'updateRoomID', payload : {roomID : newRoomID}});
     var _this = this;
     this.messageService.findAll(newRoomID);
     this.stompClient.subscribe('/topic/' + newRoomID, function (message: any) {
@@ -55,8 +53,7 @@ export class ChatService {
         messageRsp.time = data.time;
         messageRsp.id = data.id;
         // console.log(messageRsp);
-        // _this.messages.next(_this.messages.getValue().reverse().concat([messageRsp]).reverse());
-        _this.store.dispatch({type : 'receiveMessage', payload : {message : messageRsp}});
+        _this.messages.next(_this.messages.getValue().reverse().concat([messageRsp]).reverse());
     });
   }
 
@@ -74,8 +71,7 @@ export class ChatService {
         if(data.body.login){
           console.log(data);
           localStorage.setItem('id', data.body.content.id);
-          // _this.isLogin.next(true);
-          _this.store.dispatch({type : 'login', payload : {id : data.body.content.id}});
+          _this.isLogin.next(true);
         }
       }
     );
