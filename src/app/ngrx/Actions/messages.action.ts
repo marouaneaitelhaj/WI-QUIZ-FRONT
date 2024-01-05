@@ -4,6 +4,10 @@ export const sendMessage = createAction(
     "[Chat] Send Message",
     props<{ message: string }>()
 );
+export const loadMessages = createAction(
+    "[Chat] Load Messages",
+    props<{ roomID: number }>()
+);
 export const receiveMessage = createAction(
     "[Chat] Receive Message",
     props<{ message: string }>()
