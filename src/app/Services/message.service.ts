@@ -12,12 +12,8 @@ export class MessageService {
   constructor(private http: HttpClient, private alertService: AlertService) {
   }
   public messages = new BehaviorSubject<Message[]>([]);
-  public findAll(room_id: number): void {
-    this.http.get<MyResponse<Message>>(this.url + "/room/" + room_id).subscribe(
-      (response) => {
-        this.messages.next(response.content.reverse());
-      }
-    );
+  public findAll(room_id: number)  : Observable<Message[]> {
+    return this.http.get<Message[]>(this.url + "/room/" + room_id);
   }
   public save(message: Message): void {
     this.http.post<MyResponse<Message>>(this.url, message).subscribe(
