@@ -1,8 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
 import * as ChatActions from '../Actions/messages.action';
+import Message from 'src/app/Models/Message';
 
 export interface ChatState {
-    messages: string[];
+    messages: Message[];
 }
 
 export const initialState: ChatState = {

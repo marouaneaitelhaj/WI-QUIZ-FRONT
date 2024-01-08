@@ -37,6 +37,9 @@ import { ChatComponent } from './Pages/chat/chat.component';
 import { RoomsComponentComponent } from './Components/rooms-component/rooms-component.component';
 import { ChatComponentComponent } from './Components/chat-component/chat-component.component';
 import { LoginFormComponent } from './Components/login-form/login-form.component';
+import { chatReducer } from './ngrx/Reducers/messages.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { MessageEffects } from './ngrx/Effects/message.effects';
 // import {myReducer} from './ngrx/myreducer.reducer';
 
 
@@ -83,7 +86,8 @@ import { LoginFormComponent } from './Components/login-form/login-form.component
     InputTextModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    // StoreModule.forRoot({message : myReducer})
+    StoreModule.forRoot({message : chatReducer}),
+    EffectsModule.forRoot(MessageEffects)
   ],
   providers: [],
   bootstrap: [AppComponent]

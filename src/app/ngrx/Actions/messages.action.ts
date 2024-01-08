@@ -1,8 +1,9 @@
 import { createAction, props } from "@ngrx/store";
+import Message from "src/app/Models/Message";
 
 export const sendMessage = createAction(
     "[Chat] Send Message",
-    props<{ message: string }>()
+    props<{ message: Message }>()
 );
 export const loadMessages = createAction(
     "[Chat] Load Messages",
@@ -10,11 +11,11 @@ export const loadMessages = createAction(
 );
 export const loadMessagesSuccess = createAction(
     "[Chat] Load Messages Success",
-    props<{ messages: string[] }>()
+    props<{ messages: Message[] }>()
 );
 export const receiveMessage = createAction(
     "[Chat] Receive Message",
-    props<{ message: string }>()
+    props<{ message: Message }>()
 );
 export const login = createAction(
     "[Chat] Login",

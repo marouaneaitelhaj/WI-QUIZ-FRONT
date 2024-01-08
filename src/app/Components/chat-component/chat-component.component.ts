@@ -1,10 +1,12 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import Message from 'src/app/Models/Message';
 import Room from 'src/app/Models/Room';
 import { ChatService } from 'src/app/Services/chat-service.service';
-import { Store } from '@ngrx/store';
 import { MessageService } from 'src/app/Services/message.service';
+import { AppState } from 'src/app/ngrx/AppState';
+import { selectMessages } from 'src/app/ngrx/Selectors/messages.selectors';
 
 @Component({
   selector: 'app-chat-component',
@@ -13,13 +15,13 @@ import { MessageService } from 'src/app/Services/message.service';
 })
 export class ChatComponentComponent implements OnChanges {
   @Input() selectedRoom: Room = {} as Room;
-  messages : Observable<Message[]> = this.chatService.messages;
-  constructor(private chatService : ChatService, private store : Store) {
+  messages: Observable<Message[]> = this.store.pipe(select(selectMessages));
+  constructor(private chatService: ChatService, private store: Store<AppState>) {
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (this.selectedRoom.id) {
-      this.chatService.updateRoomID(this.selectedRoom.id);
-      this.store.dispatch({type: '[Chat] Load Messages', roomID: this.selectedRoom.id});
+      // th
+      this.store.dispatch({ type: '[Chat] Load Messages', roomID: this.selectedRoom.id });
     }
   }
   message: Message = {} as Message;
