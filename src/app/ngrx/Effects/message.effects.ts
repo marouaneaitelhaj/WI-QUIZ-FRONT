@@ -9,7 +9,9 @@ export class MessageEffects {
     loadMessages$ = createEffect(() => this.actions$.pipe(
         ofType('[Chat] Load Messages'),
         mergeMap((action : any) => this.messageService.findAll(action.roomID).pipe(
-            map(messages => ({type: '[Chat] Load Messages Success', messages}))
+            map(messages => {
+                return { type: '[Chat] Load Messages Success', messages: messages.content };
+            })
         ))
     ));
 }

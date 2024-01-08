@@ -41,7 +41,6 @@ export class PlayquizComponent {
               if (this.assignedQuiz.score <= response.data) {
                 this.alertService.showWarning("Congratulation you have passed this quiz with score " + response.data, "/assignquiz")
               } else {
-                console.log(response.data, this.assignedQuiz.score);
                 this.alertService.showWarning("Sorry you have failed this quiz with score " + response.data, "/assignquiz")
               }
             });
@@ -64,7 +63,6 @@ export class PlayquizComponent {
             if (this.assignedQuiz.score <= response.data) {
               this.alertService.showWarning("Congratulation you have passed this quiz with score " + response.data, "/assignquiz")
             } else {
-              console.log(response.data, this.assignedQuiz.score);
               this.alertService.showWarning("Sorry you have failed this quiz with score " + response.data, "/assignquiz")
             }
           });

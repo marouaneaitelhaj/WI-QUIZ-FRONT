@@ -5,6 +5,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import Message from '../Models/Message';
 import { MessageService } from './message.service';
 import { AppComponent } from '../app.component';
+import { Store } from '@ngrx/store';
+import { AppState } from '../ngrx/AppState';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,7 @@ export class ChatService {
   messages: BehaviorSubject<Message[]> = this.messageService.messages;
   roomID: BehaviorSubject<number> = new BehaviorSubject<number>(1);
   isLogin : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  constructor(private messageService: MessageService) {
+  constructor(private messageService: MessageService, private store : Store<AppState>) {
     this.initConnectionSocket();
     if(localStorage.getItem('id')){
       this.isLogin.next(true);
@@ -36,13 +38,13 @@ export class ChatService {
 
     this.stompClient = Stomp.over(socket);
     this.stompClient.connect({}, () => {
-      console.log('WebSocket connection established');
+      // console.log('WebSocket connection established');
     });
   }
   updateRoomID(newRoomID: number) {
     this.roomID.next(newRoomID);
     var _this = this;
-    this.messageService.findAll(newRoomID);
+    // this.messageService.findAll(newRoomID);
     this.stompClient.subscribe('/topic/' + newRoomID, function (message: any) {
       const data = JSON.parse(message.body);
         let messageRsp: Message = {} as Message;
@@ -52,8 +54,9 @@ export class ChatService {
         messageRsp.sender = data.sender;
         messageRsp.time = data.time;
         messageRsp.id = data.id;
+        // _this.messages.next(_this.messages.getValue().reverse().concat([messageRsp]).reverse());
         // console.log(messageRsp);
-        _this.messages.next(_this.messages.getValue().reverse().concat([messageRsp]).reverse());
+        // _this.store.dispatch({ type: '[Chat] Receive Message', message: messageRsp });
     });
   }
 
@@ -64,12 +67,10 @@ export class ChatService {
 
   login(form : any) {
     var _this = this;
-      // console.log(form);
       this.stompClient.send('/app/login', {}, JSON.stringify(form))
       this.stompClient.subscribe('/topic/login', function (message: any) {
         const data = JSON.parse(message.body);
         if(data.body.login){
-          console.log(data);
           localStorage.setItem('id', data.body.content.id);
           _this.isLogin.next(true);
         }

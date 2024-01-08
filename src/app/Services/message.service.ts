@@ -4,16 +4,18 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import Message from '../Models/Message';
 import { MyResponse } from '../Response/Response';
 import { AlertService } from '../Components/alert/alert.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../ngrx/AppState';
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
   private url = 'http://localhost:8080/message';
-  constructor(private http: HttpClient, private alertService: AlertService) {
+  constructor(private http: HttpClient, private alertService: AlertService, private store: Store<AppState>) {
   }
   public messages = new BehaviorSubject<Message[]>([]);
-  public findAll(room_id: number)  : Observable<Message[]> {
-    return this.http.get<Message[]>(this.url + "/room/" + room_id);
+  public findAll(room_id: number)  : Observable<any> {
+    return this.http.get<any>(this.url + "/room/" + room_id);
   }
   public save(message: Message): void {
     this.http.post<MyResponse<Message>>(this.url, message).subscribe(
@@ -31,7 +33,8 @@ export class MessageService {
         const messages = this.messages.getValue();
         const index = messages.findIndex((s) => s.id === message.id);
         messages[index] = response.data;
-        this.messages.next(messages);
+        // this.store.dispatch({ type: '[Chat] Receive Message', message: response.data });
+        // this.messages.next(messages);
         this.alertService.showMsg(response.message);
       },
       (error) => {
