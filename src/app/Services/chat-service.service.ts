@@ -42,6 +42,7 @@ export class ChatService {
     });
   }
   updateRoomID(newRoomID: number) {
+    console.log(newRoomID);
     this.roomID.next(newRoomID);
     var _this = this;
     // this.messageService.findAll(newRoomID);

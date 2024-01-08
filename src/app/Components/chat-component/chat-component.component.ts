@@ -20,6 +20,7 @@ export class ChatComponentComponent implements OnChanges {
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (this.selectedRoom.id) {
+      this.chatService.updateRoomID(this.selectedRoom.id);
       this.store.dispatch({ type: '[Chat] Load Messages', roomID: this.selectedRoom.id });
     }
   }
