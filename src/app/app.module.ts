@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { SubjectPageComponent } from './Pages/subject-page/subject-page.component';
@@ -87,6 +88,12 @@ import { MessageEffects } from './ngrx/Effects/message.effects';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     StoreModule.forRoot({message : chatReducer}),
+    StoreModule.forFeature('messages', chatReducer),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: !isDevMode(), // Restrict extension to log-only mode
+      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+    }),
     EffectsModule.forRoot(MessageEffects)
   ],
   providers: [],

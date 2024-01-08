@@ -25,9 +25,10 @@ export const chatReducer = createReducer(
         };
     }),
     on(ChatActions.loadMessagesSuccess, (state, { messages }) => {
+        console.log("messages", messages);  
         return {
             ...state,
             messages: messages,
         };
-    })
+    }),
 );

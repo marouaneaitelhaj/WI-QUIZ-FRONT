@@ -7,5 +7,7 @@ export const selectLevelState = createFeatureSelector<ChatState>('messages');
 
 export const selectMessages = createSelector(
     selectLevelState,
-    (state: ChatState) => state.messages
+    (state: ChatState) => {
+        return state.messages;
+    }
 );
