@@ -57,7 +57,7 @@ export class ChatService {
         messageRsp.id = data.id;
         // _this.messages.next(_this.messages.getValue().reverse().concat([messageRsp]).reverse());
         // console.log(messageRsp);
-        // _this.store.dispatch({ type: '[Chat] Receive Message', message: messageRsp });
+        _this.store.dispatch({ type: '[Chat] Receive Message', message: messageRsp });
     });
   }
 

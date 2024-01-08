@@ -21,7 +21,7 @@ export const chatReducer = createReducer(
     on(ChatActions.receiveMessage, (state, { message }) => {
         return {
             ...state,
-            messages: [...state.messages, message],
+            messages: [message, ...state.messages],
         };
     }),
     on(ChatActions.loadMessagesSuccess, (state, { messages }) => {
