@@ -1,6 +1,10 @@
 import { createAction, props } from "@ngrx/store";
+import Person from "src/app/Models/Person";
 
 export const login = createAction(
     "[Chat] Login",
-    props<{ id: string }>()
+    props<{ user: Person }>()
+);
+export const logout = createAction(
+    "[Chat] Logout"
 );

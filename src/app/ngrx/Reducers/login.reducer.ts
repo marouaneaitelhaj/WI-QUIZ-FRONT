@@ -1,14 +1,18 @@
 import { createReducer, on } from "@ngrx/store";
-import { login } from "../Actions/messages.action";
+import Person from "src/app/Models/Person";
+import { login } from "../Actions/login.action";
 
 export interface LoginState {
-    id: string;
+    user: Person;
 }
 export const initialState: LoginState = {
-    id: '',
+    user: {} as Person
 };
-export const loginReducer = createReducer(initialState, on(login, ({ id }) => {
-    return {
-        id: id,
-    };
-}));
+export const loginReducer = createReducer(
+    initialState,
+    on(login, (state, action) => ({ ...state, user: action.user }))
+);
+export const logoutReducer = createReducer(
+    initialState,
+    on(login, (state, action) => ({ ...state, user: action.user }))
+);

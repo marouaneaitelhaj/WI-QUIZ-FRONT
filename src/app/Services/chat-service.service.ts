@@ -15,14 +15,12 @@ export class ChatService {
   private stompClient: any
   messages: BehaviorSubject<Message[]> = this.messageService.messages;
   roomID: BehaviorSubject<number> = new BehaviorSubject<number>(1);
-  isLogin : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  constructor(private messageService: MessageService, private store : Store<AppState>) {
+  isLogin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  constructor(private messageService: MessageService, private store: Store<AppState>) {
     this.initConnectionSocket();
-    if(localStorage.getItem('id')){
-      this.isLogin.next(true);
-    }
   }
-  
+
+
 
   initConnectionSocket() {
     const url = 'http://localhost:8080/chat-socket';
@@ -39,6 +37,7 @@ export class ChatService {
     this.stompClient = Stomp.over(socket);
     this.stompClient.connect({}, () => {
       // console.log('WebSocket connection established');
+      this.checkLogin();
     });
   }
   updateRoomID(newRoomID: number) {
@@ -48,16 +47,16 @@ export class ChatService {
     // this.messageService.findAll(newRoomID);
     this.stompClient.subscribe('/topic/' + newRoomID, function (message: any) {
       const data = JSON.parse(message.body);
-        let messageRsp: Message = {} as Message;
-        messageRsp.content = data.content;
-        messageRsp.sender_id = data.sender.id;
-        messageRsp.room_id = data.room.id;
-        messageRsp.sender = data.sender;
-        messageRsp.time = data.time;
-        messageRsp.id = data.id;
-        // _this.messages.next(_this.messages.getValue().reverse().concat([messageRsp]).reverse());
-        // console.log(messageRsp);
-        _this.store.dispatch({ type: '[Chat] Receive Message', message: messageRsp });
+      let messageRsp: Message = {} as Message;
+      messageRsp.content = data.content;
+      messageRsp.sender_id = data.sender.id;
+      messageRsp.room_id = data.room.id;
+      messageRsp.sender = data.sender;
+      messageRsp.time = data.time;
+      messageRsp.id = data.id;
+      // _this.messages.next(_this.messages.getValue().reverse().concat([messageRsp]).reverse());
+      // console.log(messageRsp);
+      _this.store.dispatch({ type: '[Chat] Receive Message', message: messageRsp });
     });
   }
 
@@ -66,16 +65,33 @@ export class ChatService {
     this.stompClient.send('/app/chat/' + this.roomID.getValue(), {}, JSON.stringify(Message))
   }
 
-  login(form : any) {
+  login(form: any) {
     var _this = this;
-      this.stompClient.send('/app/login', {}, JSON.stringify(form))
-      this.stompClient.subscribe('/topic/login', function (message: any) {
-        const data = JSON.parse(message.body);
-        if(data.body.login){
-          localStorage.setItem('id', data.body.content.id);
-          _this.isLogin.next(true);
-        }
+    this.stompClient.send('/app/login', {}, JSON.stringify(form))
+    this.stompClient.subscribe('/topic/login', function (message: any) {
+      const data = JSON.parse(message.body);
+      if (data.body.login) {
+        localStorage.setItem('id', data.body.content.id);
+        _this.isLogin.next(true);
+      } else {
+        _this.isLogin.next(false);
+        localStorage.removeItem('id');
       }
+    }
     );
+  }
+  checkLogin() {
+    this.stompClient.send('/app/login/' + localStorage.getItem('id'))
+    var _this = this;
+    this.stompClient.subscribe('/topic/login/' + localStorage.getItem('id'), function (message: any) {
+      const data = JSON.parse(message.body);
+      if (data.body.login) {
+        localStorage.setItem('id', data.body.content.id);
+        _this.isLogin.next(true);
+      } else {
+        localStorage.removeItem('id');
+        _this.isLogin.next(false);
+      }
+    });
   }
 }

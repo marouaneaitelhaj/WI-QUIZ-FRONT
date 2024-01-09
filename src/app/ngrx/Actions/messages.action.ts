@@ -17,10 +17,6 @@ export const receiveMessage = createAction(
     "[Chat] Receive Message",
     props<{ message: Message }>()
 );
-export const login = createAction(
-    "[Chat] Login",
-    props<{ id: string }>()
-);
 export const updateRoomID = createAction(
     "[Chat] Update Room ID",
     props<{ roomID: number }>()

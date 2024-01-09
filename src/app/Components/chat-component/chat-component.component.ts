@@ -27,7 +27,7 @@ export class ChatComponentComponent implements OnChanges {
   message: Message = {} as Message;
   sendMessage() {
     this.message.room_id = this.selectedRoom.id;
-    this.message.sender_id = 6;
+    this.message.sender_id = localStorage.getItem('id') as unknown as number;
     this.chatService.sendMessage(this.message);
     this.message.content = '';
   }

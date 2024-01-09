@@ -41,6 +41,7 @@ import { LoginFormComponent } from './Components/login-form/login-form.component
 import { chatReducer } from './ngrx/Reducers/messages.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { MessageEffects } from './ngrx/Effects/message.effects';
+import { loginReducer } from './ngrx/Reducers/login.reducer';
 // import {myReducer} from './ngrx/myreducer.reducer';
 
 
@@ -89,6 +90,7 @@ import { MessageEffects } from './ngrx/Effects/message.effects';
     BrowserAnimationsModule,
     StoreModule.forRoot({message : chatReducer}),
     StoreModule.forFeature('messages', chatReducer),
+    StoreModule.forFeature('login', loginReducer),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode
