@@ -23,18 +23,18 @@ export class ChatService {
 
 
   initConnectionSocket() {
-    const url = 'http://localhost:8080/chat-socket';
-    const socket = new SockJS(url);
+    const url = 'ws://localhost:8080/chat-socket';
+    // const socket = new SockJS(url);
 
-    socket.onopen = () => {
-      // console.log('WebSocket connection opened');
-    };
+    // socket.onopen = () => {
+    //   // console.log('WebSocket connection opened');
+    // };
 
-    socket.onclose = (event: CloseEvent) => {
-      // console.error('WebSocket connection closed:', event);
-    };
+    // socket.onclose = (event: CloseEvent) => {
+    //   // console.error('WebSocket connection closed:', event);
+    // };
 
-    this.stompClient = Stomp.over(socket);
+    this.stompClient = Stomp.client(url);
     this.stompClient.connect({}, () => {
       // console.log('WebSocket connection established');
       this.checkLogin();
